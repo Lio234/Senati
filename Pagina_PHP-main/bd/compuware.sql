@@ -336,6 +336,7 @@ BEGIN
     order by p.stock_disponible desc;
 END $$
 DELIMITER ;
+drop procedure sp_listar_productos;
 
 
 

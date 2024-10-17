@@ -16,17 +16,17 @@ $(function() {
     })
 
     $(".reg_producto .btn_borrar").click(function(e) {
-        let cod_prod =  $(this).closest(".reg_producto").children(".cod_prod").text();
-        let prod =  $(this).closest(".reg_producto").children(".prod").text();
-
+        let cod_prod = $(this).closest(".reg_producto").children(".cod_prod").text();
+        let prod = $(this).closest(".reg_producto").children(".prod").text();
+    
         $("#md_borrar .lbl_codprod").text(cod_prod);
         $("#md_borrar .lbl_prod").text(prod);
-
+    
         $("#md_borrar .btn_borrar").attr("href", "../controller/ctr_borrar_prod.php?cod_prod=" + cod_prod);
-        
+    
         $("#md_borrar").modal("show");
-    })
-
+    });
+    
 
     $("#frm_consultar_prod #txt_codprod").focusout(function(e){
         // alert("hola");
