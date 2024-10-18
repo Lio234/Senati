@@ -1,5 +1,6 @@
-create database compuware;
-use compuware;
+drop database compuware;
+create database Compuware;
+use Compuware;
 
 CREATE TABLE
     tb_departamento (
@@ -69,6 +70,8 @@ CREATE TABLE
         categoria VARCHAR(30) NOT NULL
     );
 
+    
+
 CREATE TABLE
     tb_producto (
         id_producto CHAR(5) NOT NULL PRIMARY KEY,
@@ -112,8 +115,8 @@ CREATE TABLE
         total FLOAT NOT NULL,
         pedido_id_cliente CHAR(5) NOT NULL,
         pedido_id_trabajador CHAR(5) NOT NULL,
-        FOREIGN KEY (pedido_id_trabajador) REFERENCES tb_trabajador (id_trabajador),
-        FOREIGN KEY (pedido_id_cliente) REFERENCES tb_cliente (id_cliente)
+        FOREIGN KEY (pedido_id_cliente) REFERENCES tb_cliente (id_cliente),
+        FOREIGN KEY (pedido_id_trabajador) REFERENCES tb_trabajador (id_trabajador)
     );
 
 CREATE TABLE
@@ -221,7 +224,7 @@ INSERT INTO tb_envio (id_envio, fecha_envio, fecha_entrega_estimada, envio_id_pe
 ('E001', '2024-10-14', '2024-10-20', 'PED01', 'T002'),
 ('E002', '2024-10-15', '2024-10-22', 'PED02', 'T003');
 
--- Mostrar todos los departamentos
+-- Listar todos los departamentos
 DELIMITER $$
 CREATE PROCEDURE sp_listar_departamentos()
 BEGIN
@@ -230,7 +233,7 @@ END $$
 DELIMITER ;
 
 
--- Mostrar todas las provincias
+-- Listar todas las provincias
 DELIMITER $$
 CREATE PROCEDURE sp_listar_provincias()
 BEGIN
@@ -243,7 +246,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los distritos
+-- Listar todos los distritos
 DELIMITER $$
 CREATE PROCEDURE sp_listar_distritos()
 BEGIN
@@ -256,25 +259,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los clientes
-DELIMITER $$
-CREATE PROCEDURE sp_listar_clientes()
-BEGIN
-    SELECT 
-        c.id_cliente, 
-        c.nombre, 
-        c.ap_paterno, 
-        c.ap_materno, 
-        c.direccion, 
-        c.correo, 
-        c.telefono, 
-        d.distrito AS distrito
-    FROM tb_cliente c
-    INNER JOIN tb_distrito d ON c.cliente_id_distrito = d.id_distrito;
-END $$
-DELIMITER ;
-
--- Mostrar todas las áreas de trabajo
+-- Listar todas las áreas de trabajo
 DELIMITER $$
 CREATE PROCEDURE sp_listar_areas_trabajo()
 BEGIN
@@ -282,42 +267,396 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los trabajadores
+-- Listar Trabajadores
 DELIMITER $$
 CREATE PROCEDURE sp_listar_trabajadores()
 BEGIN
     SELECT 
-        t.id_trabajador, 
-        t.nombre, 
-        t.ap_paterno, 
-        t.ap_materno, 
-        t.direccion, 
-        t.correo, 
-        t.telefono, 
-        t.sueldo, 
-        t.codigo, 
+        t.id_trabajador,
+        t.nombre,
+        t.ap_paterno,
+        t.ap_materno,
+        t.direccion,
+        t.correo,
+        t.telefono,
         a.nombre AS area_trabajo
-    FROM tb_trabajador t
-    INNER JOIN tb_area_trabajo a ON t.trabajador_id_area = a.id_area;
+    FROM 
+        tb_trabajador t
+    JOIN 
+        tb_area_trabajo a ON t.trabajador_id_area = a.id_area
+    ORDER BY t.nombre ASC;
 END $$
 DELIMITER ;
 
--- Mostrar todas las marcas
+-- Mostrar trabajador por ID
+DELIMITER $$
+CREATE PROCEDURE sp_mostrar_trabajador_por_id(
+    IN id_trabajador CHAR(5)
+)
+BEGIN
+    SELECT 
+        t.id_trabajador,
+        t.nombre,
+        t.ap_paterno,
+        t.ap_materno,
+        t.direccion,
+        t.correo,
+        t.telefono,
+        t.sueldo,
+        t.codigo,
+        a.nombre AS area_trabajo
+    FROM 
+        tb_trabajador t
+    JOIN 
+        tb_area_trabajo a ON t.trabajador_id_area = a.id_area
+    WHERE t.id_trabajador = id_trabajador;
+END $$
+DELIMITER ;
+
+
+-- Buscar trabajador por id
+DELIMITER $$
+CREATE PROCEDURE sp_buscar_trabajador_por_id(IN id CHAR(5))
+BEGIN
+    SELECT *
+    FROM tb_trabajador
+    WHERE id_trabajador = id;
+END $$
+DELIMITER ;
+
+-- Filtrar por trabajador
+DELIMITER $$
+CREATE PROCEDURE sp_filtrar_por_trabajador(IN t_nombre_trabajador VARCHAR(40))
+BEGIN
+    SELECT *
+    FROM tb_trabajador
+    WHERE nombre LIKE CONCAT('%', t_nombre_trabajador, '%');
+END $$
+DELIMITER ;
+
+
+-- Registrar trabajador
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_trabajador(
+    IN t_id_trabajador CHAR(5),
+    IN t_nombre VARCHAR(50),
+    IN t_ap_paterno VARCHAR(20),
+    IN t_ap_materno VARCHAR(20),
+    IN t_direccion VARCHAR(50),
+    IN t_correo VARCHAR(50),
+    IN t_telefono VARCHAR(12),
+    IN t_sueldo INT,
+    IN t_codigo INT,
+    IN t_trabajador_id_area CHAR(5)
+)
+BEGIN
+    INSERT INTO tb_trabajador (id_trabajador, nombre, ap_paterno, ap_materno, direccion, correo, telefono, sueldo, codigo, trabajador_id_area)
+    VALUES (t_id_trabajador, t_nombre, t_ap_paterno, t_ap_materno, t_direccion, t_correo, t_telefono, t_sueldo, t_codigo, t_trabajador_id_area);
+END $$
+DELIMITER ;
+
+-- Editar trabajador
+DELIMITER $$
+CREATE PROCEDURE sp_editar_trabajador(
+    IN t_id_trabajador CHAR(5),
+    IN t_nombre VARCHAR(50),
+    IN t_ap_paterno VARCHAR(20),
+    IN t_ap_materno VARCHAR(20),
+    IN t_direccion VARCHAR(50),
+    IN t_correo VARCHAR(50),
+    IN t_telefono VARCHAR(12),
+    IN t_sueldo INT,
+    IN t_codigo INT,
+    IN t_trabajador_id_area CHAR(5)
+)
+BEGIN
+    UPDATE tb_trabajador
+    SET 
+        nombre = t_nombre,
+        ap_paterno = t_ap_paterno,
+        ap_materno = t_ap_materno,
+        direccion = t_direccion,
+        correo = t_correo,
+        telefono = t_telefono,
+        sueldo = t_sueldo,
+        codigo = t_codigo,
+        trabajador_id_area = t_trabajador_id_area
+    WHERE id_trabajador = t_id_trabajador;
+END $$
+DELIMITER ;
+
+
+-- Eliminar Trabajador
+DELIMITER //
+CREATE PROCEDURE sp_borrar_trabajador(IN trabajador_id CHAR(5))
+BEGIN
+    -- Verifica si el trabajador tiene pedidos
+    DECLARE num_pedidos INT;
+    SELECT COUNT(*) INTO num_pedidos
+    FROM tb_pedido
+    WHERE pedido_id_trabajador = trabajador_id;
+
+    -- Si el trabajador tiene pedidos, se detiene el procedimiento
+    IF num_pedidos > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar el trabajador porque tiene pedidos asociados.';
+    ELSE
+        -- Si no tiene pedidos, se procede a eliminar
+        DELETE FROM tb_trabajador WHERE id_trabajador = trabajador_id;
+    END IF;
+END //
+DELIMITER ;
+
+
+-- Listar todas las marcas
 DELIMITER $$
 CREATE PROCEDURE sp_listar_marcas()
 BEGIN
     SELECT * FROM tb_marca order by marca asc;
 END $$
 DELIMITER ;
--- Mostrar todas las categorías
+
+
+-- listar todas las categorías
 DELIMITER $$
 CREATE PROCEDURE sp_listar_categorias()
 BEGIN
-    SELECT * FROM tb_categoria order by categoria asc;
+    SELECT *
+    FROM tb_categoria
+    ORDER BY categoria ASC;
 END $$
 DELIMITER ;
 
--- Mostrar todos los productos completo
+
+-- listar todas las categorías
+DELIMITER $$
+CREATE PROCEDURE sp_buscar_categoria_por_id(IN p_id_categoria char(5))
+BEGIN
+    SELECT *
+    FROM tb_categoria
+    WHERE id_categoria =p_id_categoria;
+END $$
+DELIMITER ;
+
+-- Mostrar la categoria por id
+DELIMITER $$
+CREATE PROCEDURE sp_mostrar_categoria_por_id(
+    IN p_id_categoria CHAR(5)
+)
+BEGIN
+Select
+    c.id_categoria,
+    c.categoria
+    FROM tb_categoria
+    WHERE id_categoria = p_id_categoria;
+END $$
+DELIMITER ;
+
+-- filtrar categoria
+DELIMITER $$
+CREATE PROCEDURE sp_filtrar_categoria(
+    IN p_nombre_categoria VARCHAR(30)
+)
+BEGIN
+    SELECT *
+    FROM tb_categoria
+    WHERE categoria LIKE CONCAT('%', p_nombre_categoria, '%');
+END $$
+DELIMITER ;
+
+--registrar categoria
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_categoria(
+    IN p_id_categoria CHAR(5),
+    IN p_categoria VARCHAR(30)
+)
+BEGIN
+    INSERT INTO tb_categoria (id_categoria, categoria)
+    VALUES (p_id_categoria, p_categoria);
+END $$
+DELIMITER ;
+
+
+-- editar categoria
+DELIMITER $$
+CREATE PROCEDURE sp_editar_categoria(
+    IN p_id_categoria CHAR(5),
+    IN p_categoria VARCHAR(30)
+)
+BEGIN
+    UPDATE tb_categoria
+    SET categoria = p_categoria
+    WHERE id_categoria = p_id_categoria;
+END $$
+DELIMITER ;
+
+
+-- Borrar Categoria
+DELIMITER //
+CREATE PROCEDURE sp_borrar_categoria(
+    IN p_id_categoria CHAR(5)
+)
+BEGIN
+    -- Verifica si la categoría tiene productos asociados
+    DECLARE num_productos INT;
+    SELECT COUNT(*) INTO num_productos
+    FROM tb_producto
+    WHERE producto_id_categoria = p_id_categoria;
+
+    -- Si la categoría tiene productos, se detiene el procedimiento
+    IF num_productos > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar la categoría porque tiene productos asociados.';
+    ELSE
+        -- Si no tiene productos, se procede a eliminar
+        DELETE FROM tb_categoria WHERE id_categoria = p_id_categoria;
+    END IF;
+END //
+DELIMITER ;
+
+
+-- Listar todos los clientes 
+DELIMITER $$
+CREATE PROCEDURE sp_listar_clientes()
+BEGIN
+    SELECT 
+        c.id_cliente,
+        c.nombre,
+        c.ap_paterno,
+        c.ap_materno,
+        c.direccion,
+        c.correo,
+        c.telefono,
+        d.distrito,
+        p.provincia,
+        dep.departamento
+    FROM 
+        tb_cliente c
+    JOIN 
+        tb_distrito d ON c.cliente_id_distrito = d.id_distrito
+    JOIN 
+        tb_provincia p ON d.distrito_id_provincia = p.id_provincia
+    JOIN 
+        tb_departamento dep ON p.provincia_id_departamento = dep.id_departamento
+	order by c.nombre asc;
+END $$
+DELIMITER ;
+
+-- mostrar todos los clientes segun el codigo
+DELIMITER $$
+CREATE PROCEDURE sp_mostrar_cliente_por_id(
+    IN id_cliente CHAR(5)
+)
+BEGIN
+SELECT 
+        c.id_cliente,
+        c.nombre,
+        c.ap_paterno,
+        c.ap_materno,
+        c.direccion,
+        c.correo,
+        c.telefono,
+        d.distrito,
+        p.provincia,
+        dep.departamento
+    FROM 
+        tb_cliente c
+    INNER JOIN tb_distrito d ON c.cliente_id_distrito = d.id_distrito
+	INNER JOIN tb_provincia p ON d.distrito_id_provincia = p.id_provincia
+    INNER JOIN tb_departamento dep ON p.provincia_id_departamento = dep.id_departamento
+    WHERE c.id_cliente = id_cliente;
+END $$
+DELIMITER ;
+
+-- buscar cliente por id
+DELIMITER $$
+CREATE PROCEDURE sp_buscar_cliente_por_id(IN id char(5))
+BEGIN
+    SELECT *
+    FROM tb_cliente
+    WHERE id_cliente =id;
+END $$
+DELIMITER ;
+
+-- filtrar clientes por nombre
+DELIMITER $$
+CREATE PROCEDURE sp_filtrar_por_cliente(IN c_nombre_cliente VARCHAR(40))
+BEGIN
+    SELECT *
+    FROM tb_cliente
+    WHERE nombre LIKE CONCAT('%', c_nombre_cliente, '%');
+END $$
+DELIMITER ;
+
+-- registrar clientes
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_cliente(
+    IN c_id_cliente CHAR(5),
+    IN c_nombre VARCHAR(20),
+    IN c_ap_paterno VARCHAR(20),
+    IN c_ap_materno VARCHAR(20),
+    IN c_direccion VARCHAR(50),
+    IN c_correo VARCHAR(50),
+    IN c_telefono VARCHAR(12),
+    IN c_cliente_id_distrito VARCHAR(5)
+)
+BEGIN
+    INSERT INTO tb_cliente (id_cliente, nombre, ap_paterno, ap_materno, direccion, correo, telefono,cliente_id_distrito)
+    VALUES (c_id_cliente, c_nombre, c_ap_paterno, c_ap_materno, c_direccion, c_correo, c_telefono, c_cliente_id_distrito);
+END $$
+DELIMITER ;
+
+-- editar cliente
+DELIMITER $$
+CREATE PROCEDURE sp_editar_cliente(
+    IN c_id_cliente CHAR(5),
+    IN c_nombre VARCHAR(20),
+    IN c_ap_paterno VARCHAR(20),
+    IN c_ap_materno VARCHAR(20),
+    IN c_direccion VARCHAR(50),
+    IN c_correo VARCHAR(50),
+    IN c_telefono VARCHAR(12),
+    IN c_cliente_id_distrito VARCHAR(5)
+)
+BEGIN
+    UPDATE tb_cliente
+    SET 
+        nombre = c_nombre,
+        ap_paterno= c_ap_paterno,
+        ap_materno= c_ap_materno,
+        direccion = c_direccion,
+        correo = c_correo,
+        telefono = c_telefono,
+        cliente_id_distrito = c_cliente_id_distrito
+    WHERE id_cliente = c_id_cliente;
+END $$
+DELIMITER ;
+
+
+-- Borrar Cliente
+DELIMITER //
+CREATE PROCEDURE sp_borrar_cliente(IN cliente_id CHAR(5))
+BEGIN
+    -- Verifica si el cliente tiene pedidos
+    DECLARE num_pedidos INT;
+    SELECT COUNT(*) INTO num_pedidos
+    FROM tb_pedido
+    WHERE pedido_id_cliente = cliente_id;
+
+    -- Si el cliente tiene pedidos, se detiene el procedimiento
+    IF num_pedidos > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar el cliente porque tiene pedidos asociados.';
+    ELSE
+        -- Si no tiene pedidos, se procede a eliminar
+        DELETE FROM tb_cliente WHERE id_cliente = cliente_id;
+    END IF;
+END //
+DELIMITER ;
+
+
+
+-- Listar todos los productos completo
 DELIMITER $$
 CREATE PROCEDURE sp_listar_productos()
 BEGIN
@@ -336,8 +675,6 @@ BEGIN
     order by p.stock_disponible desc;
 END $$
 DELIMITER ;
-drop procedure sp_listar_productos;
-
 
 
 -- mostrar todos los productos segun el codigo
@@ -377,11 +714,21 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_filtrar_por_producto(IN p_nombre_producto VARCHAR(40))
 BEGIN
-    SELECT *
-    FROM tb_producto
-    WHERE producto LIKE CONCAT('%', p_nombre_producto, '%');
+    SELECT 
+        p.id_producto,
+        p.producto,
+        p.stock_disponible,
+        p.costo,
+        p.ganancia,
+        m.marca,      -- Nombre de la marca
+        c.categoria   -- Nombre de la categoría
+    FROM tb_producto p
+    JOIN tb_marca m ON p.producto_id_marca = m.id_marca
+    JOIN tb_categoria c ON p.producto_id_categoria = c.id_categoria
+    WHERE p.producto LIKE CONCAT('%', p_nombre_producto, '%');
 END $$
 DELIMITER ;
+
 
 
 -- registrar productos
@@ -426,29 +773,26 @@ BEGIN
 END $$
 DELIMITER ;
 
-DELIMITER $$
 
+--Borrar Producto
+DELIMITER $$
 CREATE PROCEDURE sp_borrar_producto(
-    IN p_id_producto CHAR(5)  -- Parámetro de entrada para el ID del producto
+    IN p_id_producto CHAR(5)
 )
 BEGIN
-    -- 1. Eliminar registros relacionados en tb_detalle_pedido
     DELETE FROM tb_detalle_pedido
     WHERE detalle_id_producto = p_id_producto;
 
-    -- 2. Eliminar registros relacionados en tb_producto_proveedor
     DELETE FROM tb_producto_proveedor
     WHERE producto_id_producto = p_id_producto;
 
-    -- 3. Finalmente, eliminar el producto de tb_producto
     DELETE FROM tb_producto
     WHERE id_producto = p_id_producto;
 
 END $$
-
 DELIMITER ;
 
--- Mostrar todos los proveedores
+-- Listar todos los proveedores
 DELIMITER $$
 CREATE PROCEDURE sp_listar_proveedores()
 BEGIN
@@ -456,7 +800,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los productos por proveedor
+-- Listar todos los productos por proveedor
 DELIMITER $$
 CREATE PROCEDURE sp_listar_productos_proveedores()
 BEGIN
@@ -471,23 +815,141 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los pedidos
+-- Listar todos los pedidos
 DELIMITER $$
 CREATE PROCEDURE sp_listar_pedidos()
 BEGIN
     SELECT 
-        p.id_pedido, 
-        p.fecha, 
-        p.estado, 
-        c.nombre AS cliente, 
+        p.id_pedido,
+        p.fecha,
+        p.estado,
+        p.total,
+        c.nombre AS cliente,
         t.nombre AS trabajador
-    FROM tb_pedido p
-    INNER JOIN tb_cliente c ON p.pedido_id_cliente = c.id_cliente
-    INNER JOIN tb_trabajador t ON p.pedido_id_trabajador = t.id_trabajador;
+    FROM 
+        tb_pedido p
+    JOIN 
+        tb_cliente c ON p.pedido_id_cliente = c.id_cliente
+    JOIN 
+        tb_trabajador t ON p.pedido_id_trabajador = t.id_trabajador
+    ORDER BY p.fecha ASC;
 END $$
 DELIMITER ;
 
--- Mostrar todos los detalles de pedidos
+--Mostrar Pedidos
+
+DELIMITER $$
+CREATE PROCEDURE sp_mostrar_pedido_por_id(
+    IN p_id_pedido CHAR(5)
+)
+BEGIN
+    SELECT 
+        p.id_pedido,
+        p.fecha,
+        p.estado,
+        p.total,
+        c.nombre AS cliente,
+        t.nombre AS trabajador
+    FROM 
+        tb_pedido p
+    JOIN 
+        tb_cliente c ON p.pedido_id_cliente = c.id_cliente
+    JOIN 
+        tb_trabajador t ON p.pedido_id_trabajador = t.id_trabajador
+    WHERE p.id_pedido = p_id_pedido;
+END $$
+DELIMITER ;
+
+--Buscar Pedidos
+
+DELIMITER $$
+CREATE PROCEDURE sp_buscar_pedido_por_id(
+    IN p_id_pedido CHAR(5)
+)
+BEGIN
+    SELECT *
+    FROM tb_pedido
+    WHERE id_pedido = p_id_pedido;
+END $$
+DELIMITER ;
+
+
+-- Filtrar Pedidos por estado 
+DELIMITER $$
+CREATE PROCEDURE sp_filtrar_pedidos_por_estado(
+    IN p_estado VARCHAR(20)
+)
+BEGIN
+    SELECT *
+    FROM tb_pedido
+    WHERE estado LIKE CONCAT('%', p_estado, '%');
+END $$
+DELIMITER ;
+
+--Registrar Pedido
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_pedido(
+    IN p_id_pedido CHAR(5),
+    IN p_fecha DATE,
+    IN p_estado VARCHAR(20),
+    IN p_total FLOAT,
+    IN p_id_cliente CHAR(5),
+    IN p_id_trabajador CHAR(5)
+)
+BEGIN
+    INSERT INTO tb_pedido (id_pedido, fecha, estado, total, pedido_id_cliente, pedido_id_trabajador)
+    VALUES (p_id_pedido, p_fecha, p_estado, p_total, p_id_cliente, p_id_trabajador);
+END $$
+DELIMITER ;
+
+--Editar Pedido
+DELIMITER $$
+CREATE PROCEDURE sp_editar_pedido(
+    IN p_id_pedido CHAR(5),
+    IN p_fecha DATE,
+    IN p_estado VARCHAR(20),
+    IN p_total FLOAT,
+    IN p_id_cliente CHAR(5),
+    IN p_id_trabajador CHAR(5)
+)
+BEGIN
+    UPDATE tb_pedido
+    SET 
+        fecha = p_fecha,
+        estado = p_estado,
+        total = p_total,
+        pedido_id_cliente = p_id_cliente,
+        pedido_id_trabajador = p_id_trabajador
+    WHERE id_pedido = p_id_pedido;
+END $$
+DELIMITER ;
+
+
+-- Borrar Pedido
+DELIMITER //
+CREATE PROCEDURE sp_borrar_pedido(
+    IN p_id_pedido CHAR(5)
+)
+BEGIN
+    -- Verifica si el pedido tiene detalles
+    DECLARE num_detalles INT;
+    SELECT COUNT(*) INTO num_detalles
+    FROM tb_detalle_pedido
+    WHERE detalle_id_pedido = p_id_pedido;
+
+    -- Si el pedido tiene detalles, se detiene el procedimiento
+    IF num_detalles > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar el pedido porque tiene detalles asociados.';
+    ELSE
+        -- Si no tiene detalles, se procede a eliminar
+        DELETE FROM tb_pedido WHERE id_pedido = p_id_pedido;
+    END IF;
+END //
+DELIMITER ;
+
+
+-- Listar todos los detalles de pedidos
 DELIMITER $$
 CREATE PROCEDURE sp_listar_detalles_pedidos()
 BEGIN
@@ -503,7 +965,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Mostrar todos los envíos
+-- Listar todos los envíos
 DELIMITER $$
 CREATE PROCEDURE sp_listar_envios()
 BEGIN
@@ -518,23 +980,3 @@ BEGIN
     INNER JOIN tb_trabajador t ON e.envio_id_trabajador = t.id_trabajador;
 END $$
 DELIMITER ;
-
-
--- llamar procedure:
-call sp_mostrar_departamentos;
-call sp_mostrar_provincias;
-call sp_mostrar_distritos;
-call sp_mostrar_clientes;
-call sp_mostrar_areas_trabajo;
-call sp_mostrar_trabajadores;
-call sp_mostrar_marcas;
-call sp_mostrar_categorias;
-call sp_mostrar_productos;
-call sp_mostrar_producto_proveedor;
-call sp_mostrar_pedidos;
-call sp_mostrar_detalle_pedidos;
-call sp_mostrar_envios;
-call sp_mostrar_producto;
-call sp_mostrar_producto_por_id("P001");
-call sp_buscar_producto_por_id("P001");
-call sp_borrar_producto("P006");
