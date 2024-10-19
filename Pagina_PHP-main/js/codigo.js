@@ -1,14 +1,25 @@
 $(function () {
-  // Mostrar producto al hacer clic en el botón de mostrar
-  $(".reg_producto .btn_mostrar").click(function (e) {
-    let cod_prod = $(this)
-      .closest(".reg_producto")
-      .children(".cod_prod")
-      .text();
+  $(document).ready(function() {
+    $(".btn_mostrar").on("click", function(e) {
+        e.preventDefault();  // Evitar la acción por defecto del enlace
+        const cod_prod = $(this).data("cod");
 
-    location.href = "mostrar_producto.php?cod_prod=" + cod_prod;
-    console.log("Código del producto: ", cod_prod);
-  });
+        // Cargar el contenido del archivo mostrar_producto.php
+        $.ajax({
+            url: 'mostrar_producto.php', // Cambia esta línea a la ubicación de tu archivo
+            type: 'GET',
+            data: { cod_prod: cod_prod }, // Envía el código del producto
+            success: function(response) {
+                $("#detalleProducto").html(response); // Inserta el contenido en el contenedor
+            },
+            error: function() {
+                $("#detalleProducto").html('<p class="text-danger">Error al cargar los detalles del producto.</p>');
+            }
+        });
+    });
+});
+
+
 
 // Editar producto al hacer clic en el botón de editar
 $(".reg_producto .btn_editar").click(function (e) {

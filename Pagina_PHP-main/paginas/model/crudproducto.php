@@ -73,29 +73,30 @@ class CRUDProducto extends Conexion
 
 
     public function ConsultarProductoPorCodigo($cod_prod)
-    {
-        $arr_prod = null;
+{
+    $arr_prod = null;
 
-        $cn = $this->Conectar();
+    $cn = $this->Conectar();
 
-        $sql = "call sp_mostrar_producto_por_id(:cod_prod);";
+    $sql = "CALL sp_mostrar_producto_por_id(:cod_prod);";
 
-        $snt = $cn->prepare($sql);
+    $snt = $cn->prepare($sql);
 
-        $snt->bindParam(':cod_prod', $cod_prod, PDO::PARAM_STR, 5);
+    $snt->bindParam(':cod_prod', $cod_prod, PDO::PARAM_STR, 5);
 
-        $snt->execute();
+    $snt->execute();
 
-        $nr = $snt->rowCount();
+    $nr = $snt->rowCount();
 
-        if ($nr > 0) {
-            $arr_prod = $snt->fetch(PDO::FETCH_OBJ);
-        }
-
-        $cn = null;
-
-        echo json_encode($arr_prod);
+    if ($nr > 0) {
+        $arr_prod = $snt->fetch(PDO::FETCH_OBJ); // Guardar el resultado
     }
+
+    $cn = null;
+
+    return $arr_prod; // Retornar el producto
+}
+
 
 
     public function FiltrarProducto($valor)

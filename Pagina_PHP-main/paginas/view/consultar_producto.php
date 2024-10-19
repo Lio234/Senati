@@ -84,7 +84,6 @@ include("../includes/cabecera.php");
                 </div>
             </article>
         </section>
-
         <?php
         include("../includes/pie.php")
         ?>

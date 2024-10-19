@@ -1,114 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
 <?php
-$ruta = "../..";
-$titulo = "Aplicacion de Ventas - Mostrar Producto";
-include("../includes/cabecera.php");
-?>
+include "../includes/cargar_clases.php";
 
-<body>
-    <?php include("../includes/menu.php"); ?>
+$crudproducto = new CRUDProducto();
 
-    <div class="container mt-3">
-        <header>
-            <h1><i class="fas fa-info-circle"></i> Detalle del Producto</h1>
-            <hr />
-        </header>
+if (isset($_GET["cod_prod"])) {
+    $cod_prod = $_GET["cod_prod"];
+    $producto = $crudproducto->ConsultarProductoPorCodigo($cod_prod);
 
-        <section id="productoInfo">
-            <!-- Aquí se cargarán los detalles del producto a través de AJAX -->
-        </section>
-
-        <div class="text-center mt-3">
-            <a href="listar_producto.php" class="btn btn-outline-secondary">Regresar</a>
-        </div>
-    </div>
-
-    <?php include("../includes/pie.php"); ?>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const cod_prod = new URLSearchParams(window.location.search).get('cod_prod');
-
-            if (cod_prod) {
-                $.ajax({
-                    url: "../controller/ctr_consultar_prod.php",
-                    type: "POST",
-                    data: {
-                        cod_prod: cod_prod
-                    },
-                    success: function(rpta) {
-                        let rp = JSON.parse(rpta);
-                        if (rp) {
-                            $("#productoInfo").html(`
- 
-     <article>
-    <div class="row justify-content-center mt-3">
-        <div class="card col-md-6">
-            <div class="card-body">
+    if ($producto) {
+        // Muestra los detalles del producto
+        echo '
+             <div id="detalleProducto">
                     <div class="row g-3">
-                        <div class="col-md-8">
-                            <h5 class="card-title">Codigo</h5>
-                            <p class="prod card-text">${rp.id_producto}</p>
-                        </div>
-                        <div class="col-md-8"></div>
-
-                        <div class="col-md-8">
-                            <h5 class="card-title">Producto</h5>
-                            <p class="prod card-text">${rp.producto}</p>
-                        </div>
-
                         <div class="col-md-4">
-                            <h5 class="card-title">Stock disponible</h5>
-                            <p class="stk card-text">${rp.stock_disponible}</p>
+                            <h6 class="card-title">Código</h6>
+                            <p class="prod card-text">' . $producto->id_producto . '</p>
                         </div>
-
                         <div class="col-md-4">
-                            <h5 class="card-title">Costo</h5>
-                            <p class="cst card-text">${rp.costo}</p>
+                            <h6 class="card-title">Producto</h6>
+                            <p class="prod card-text">' . $producto->producto . '</p>
                         </div>
-
                         <div class="col-md-4">
-                            <h5 class="card-title">% Ganancia</h5>
-                            <p class="gnc card-text">${rp.ganancia}</p>
+                            <h6 class="card-title">Stock disponible</h6>
+                            <p class="stk card-text">' . $producto->stock_disponible . '</p>
                         </div>
-
                         <div class="col-md-4">
-                            <h5 class="card-title">Precio</h5>
-                            <p class="prc card-text">S/${rp.precio}</p>
+                            <h6 class="card-title">Costo</h6>
+                            <p class="cst card-text">S/' . $producto->costo . '</p>
                         </div>
-
+                        <div class="col-md-4">
+                            <h6 class="card-title">% Ganancia</h6>
+                            <p class="gnc card-text">' . $producto->ganancia . '%</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="card-title">Precio</h6>
+                            <p class="prc card-text">S/' . $producto->precio . '</p>
+                        </div>
                         <div class="col-md-6">
-                            <h5 class="card-title">Marca</h5>
-                            <p class="mar card-text">${rp.marca}</p>
+                            <h6 class="card-title">Marca</h6>
+                            <p class="mar card-text">' . $producto->marca . '</p>
                         </div>
-
                         <div class="col-md-6">
-                            <h5 class="card-title">Categoria</h5>
-                            <p class="cat card-text">${rp.categoria}</p>
+                            <h6 class="card-title">Categoría</h6>
+                            <p class="cat card-text">' . $producto->categoria . '</p>
                         </div>
                     </div>
-            </div>
-        </div>
-    </div>
-</article>
-        `);
-                        } else {
-                            $("#productoInfo").html(`<div class="alert alert-danger">El producto no fue encontrado.</div>`);
-                        }
-                    },
-                    error: function() {
-                        $("#productoInfo").html(`<div class="alert alert-danger">Error al consultar el producto.</div>`);
-                    }
-                });
-            } else {
-                $("#productoInfo").html(`<div class="alert alert-warning">Código del producto no especificado.</div>`);
-            }
-        });
-    </script>
-</body>
+                </div>
+        ';
+    } else {
+        echo '<p class="text-danger">Producto no encontrado.</p>';
+    }
+} else {
+    echo '<p class="text-warning">Código del producto no especificado.</p>';
+}
 
 
 
-</html>
