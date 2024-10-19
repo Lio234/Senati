@@ -10,15 +10,20 @@ $(function () {
     console.log("Código del producto: ", cod_prod);
   });
 
-  // Editar producto al hacer clic en el botón de editar
-  $(".reg_producto .btn_editar").click(function (e) {
-    let cod_prod = $(this)
-      .closest(".reg_producto")
-      .children(".cod_prod")
-      .text();
+// Editar producto al hacer clic en el botón de editar
+$(".reg_producto .btn_editar").click(function (e) {
+  e.preventDefault(); // Evita el comportamiento por defecto del botón
+  
+  let cod_prod = $(this)
+    .closest(".reg_producto")
+    .children(".cod_prod")
+    .text();
 
-    location.href = "editar_producto.php?cod_prod=" + cod_prod;
-  });
+  // Solo se imprime el código del producto, no se redirige
+  console.log("Código del producto a editar:", cod_prod);
+
+  // Si deseas realizar alguna acción adicional aquí, como abrir un modal o una función, puedes hacerlo.
+});
 
   // Borrar producto al hacer clic en el botón de borrar
   $(".reg_producto .btn_borrar").click(function (e) {
