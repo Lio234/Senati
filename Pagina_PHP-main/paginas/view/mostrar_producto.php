@@ -10,7 +10,7 @@ if (isset($_GET["cod_prod"])) {
     if ($producto) {
         // Muestra los detalles del producto
         echo '
-             <div id="detalleProducto">
+             <div id="detalle_producto">
                     <div class="row g-3">
                         <div class="col-md-4">
                             <h6 class="card-title">Código</h6>

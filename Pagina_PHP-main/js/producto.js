@@ -1,43 +1,43 @@
 $(function () {
-  $(document).ready(function() {
-    $(".btn_mostrar").on("click", function(e) {
-        e.preventDefault();  // Evitar la acción por defecto del enlace
-        const cod_prod = $(this).data("cod");
+  $(document).ready(function () {
+    $(".btn_mostrar_prod").on("click", function (e) {
+      e.preventDefault(); // Evitar la acción por defecto del enlace
+      const cod_prod = $(this).data("cod");
 
-        // Cargar el contenido del archivo mostrar_producto.php
-        $.ajax({
-            url: 'mostrar_producto.php', // Cambia esta línea a la ubicación de tu archivo
-            type: 'GET',
-            data: { cod_prod: cod_prod }, // Envía el código del producto
-            success: function(response) {
-                $("#detalleProducto").html(response); // Inserta el contenido en el contenedor
-            },
-            error: function() {
-                $("#detalleProducto").html('<p class="text-danger">Error al cargar los detalles del producto.</p>');
-            }
-        });
+      // Cargar el contenido del archivo mostrar_producto.php
+      $.ajax({
+        url: "mostrar_producto.php", // Cambia esta línea a la ubicación de tu archivo
+        type: "GET",
+        data: { cod_prod: cod_prod }, // Envía el código del producto
+        success: function (response) {
+          $("#detalleProducto").html(response); // Inserta el contenido en el contenedor
+        },
+        error: function () {
+          $("#detalleProducto").html(
+            '<p class="text-danger">Error al cargar los detalles del producto.</p>'
+          );
+        },
+      });
     });
-});
+  });
 
+  // Editar producto al hacer clic en el botón de editar
+  $(".reg_producto .btn_editar_prod").click(function (e) {
+    e.preventDefault(); // Evita el comportamiento por defecto del botón
 
+    let cod_prod = $(this)
+      .closest(".reg_producto")
+      .children(".cod_prod")
+      .text();
 
-// Editar producto al hacer clic en el botón de editar
-$(".reg_producto .btn_editar").click(function (e) {
-  e.preventDefault(); // Evita el comportamiento por defecto del botón
-  
-  let cod_prod = $(this)
-    .closest(".reg_producto")
-    .children(".cod_prod")
-    .text();
+    // Solo se imprime el código del producto, no se redirige
+    console.log("Código del producto a editar:", cod_prod);
 
-  // Solo se imprime el código del producto, no se redirige
-  console.log("Código del producto a editar:", cod_prod);
-
-  // Si deseas realizar alguna acción adicional aquí, como abrir un modal o una función, puedes hacerlo.
-});
+    // Si deseas realizar alguna acción adicional aquí, como abrir un modal o una función, puedes hacerlo.
+  });
 
   // Borrar producto al hacer clic en el botón de borrar
-  $(".reg_producto .btn_borrar").click(function (e) {
+  $(".reg_producto .btn_borrar_prod").click(function (e) {
     e.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
 
     let cod_prod = $(this)
@@ -46,15 +46,15 @@ $(".reg_producto .btn_editar").click(function (e) {
       .text();
     let prod = $(this).closest(".reg_producto").children(".prod").text();
 
-    $("#md_borrar .lbl_codprod").text(cod_prod);
-    $("#md_borrar .lbl_prod").text(prod);
+    $("#md_borrar_prod .lbl_codprod").text(cod_prod);
+    $("#md_borrar_prod .lbl_prod").text(prod);
 
-    $("#md_borrar .btn_borrar").attr(
+    $("#md_borrar_prod .btn_borrar_prod").attr(
       "href",
       "../controller/ctr_borrar_prod.php?cod_prod=" + cod_prod
     );
 
-    $("#md_borrar").modal("show");
+    $("#md_borrar_prod").modal("show");
   });
 
   // Consultar producto al perder el foco el campo de código de producto
@@ -69,7 +69,7 @@ $(".reg_producto .btn_editar").click(function (e) {
         type: "POST",
         data: { cod_prod: codprod },
         success: function (rpta) {
-          let rp = JSON.parse(rpta);
+          let rp = JSON.parse(rpta);  
           console.log("Respuesta:", rpta);
 
           if (rp) {
@@ -130,4 +130,5 @@ $(".reg_producto .btn_editar").click(function (e) {
       });
     }
   });
+
 });

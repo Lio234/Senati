@@ -407,13 +407,100 @@ BEGIN
 END //
 DELIMITER ;
 
-
--- Listar todas las marcas
+-- listar todas las marca
 DELIMITER $$
 CREATE PROCEDURE sp_listar_marcas()
 BEGIN
-    SELECT * FROM tb_marca order by marca asc;
+    SELECT *
+    FROM tb_marca
+    ORDER BY marca ASC;
 END $$
+DELIMITER ;
+-- listar todas las marcas
+DELIMITER $$
+CREATE PROCEDURE sp_buscar_marca_por_id(IN p_id_marca char(5))
+BEGIN
+    SELECT *
+    FROM tb_marca
+    WHERE id_marca =p_id_marca;
+END $$
+DELIMITER ;
+
+-- Mostrar la marca por id
+DELIMITER $$
+CREATE PROCEDURE sp_mostrar_marca_por_id(
+    IN p_id_marca CHAR(5)
+)
+BEGIN
+Select
+    id_marca,
+    marca
+    FROM tb_marca
+    WHERE id_marca = p_id_marca;
+END $$
+DELIMITER ;
+
+call sp_mostrar_marca_por_id("M001");
+-- filtrar marca
+DELIMITER $$
+CREATE PROCEDURE sp_filtrar_marca(
+    IN p_nombre_marca VARCHAR(30)
+)
+BEGIN
+    SELECT *
+    FROM tb_marca
+    WHERE marca LIKE CONCAT('%', p_nombre_marca, '%');
+END $$
+DELIMITER ;
+
+-- registrar marca
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_marca(
+    IN p_id_marca CHAR(5),
+    IN p_marca VARCHAR(30)
+)
+BEGIN
+    INSERT INTO tb_marca (id_marca, marca)
+    VALUES (p_id_marca, p_marca);
+END $$
+DELIMITER ;
+
+
+-- editar marca
+DELIMITER $$
+CREATE PROCEDURE sp_editar_marca(
+    IN p_id_marca CHAR(5),
+    IN p_marca VARCHAR(30)
+)
+BEGIN
+    UPDATE tb_marca
+    SET marca = p_marca
+    WHERE id_marca = p_id_marca;
+END $$
+DELIMITER ;
+
+
+-- Borrar marca
+DELIMITER //
+CREATE PROCEDURE sp_borrar_marca(
+    IN p_id_marca CHAR(5)
+)
+BEGIN
+    -- Verifica si la marca tiene productos asociados
+    DECLARE num_productos INT;
+    SELECT COUNT(*) INTO num_productos
+    FROM tb_producto
+    WHERE producto_id_marca = p_id_marca;
+
+    -- Si la categoría tiene productos, se detiene el procedimiento
+    IF num_productos > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede borrar la marca porque tiene productos asociados.';
+    ELSE
+        -- Si no tiene productos, se procede a eliminar
+        DELETE FROM tb_marca WHERE id_marca = p_id_marca;
+    END IF;
+END //
 DELIMITER ;
 
 
@@ -445,12 +532,13 @@ CREATE PROCEDURE sp_mostrar_categoria_por_id(
 )
 BEGIN
 Select
-    c.id_categoria,
-    c.categoria
+    id_categoria,
+    categoria
     FROM tb_categoria
     WHERE id_categoria = p_id_categoria;
 END $$
 DELIMITER ;
+
 
 -- filtrar categoria
 DELIMITER $$
@@ -728,9 +816,7 @@ BEGIN
     WHERE p.producto LIKE CONCAT('%', p_nombre_producto, '%');
 END $$
 DELIMITER ;
-
-
-
+call sp_filtrar_por_producto("t")
 -- registrar productos
 DELIMITER $$
 CREATE PROCEDURE sp_registrar_producto(

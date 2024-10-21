@@ -39,7 +39,7 @@ include("../includes/cabecera.php");
         <article>
             <div class="row justify-content-center mt-3">
                 <div class="col-md-8">
-                    <table class="table table-hover table-sm table-success">
+                    <table class="table table-hover table-sm ">
                         <tr class="table-primary text-center">
                             <th>N°</th>
                             <th>Código</th>
@@ -52,21 +52,21 @@ include("../includes/cabecera.php");
                         foreach ($rs_prod as $prod) {
                             $i++;
                         ?>
-                            <tr class="reg_producto">
+                            <tr class="reg_producto text-center">
                                 <td><?= $i ?></td>
                                 <td class="cod_prod"><?= $prod->id_producto ?></td>
                                 <td class="prod"><?= $prod->producto ?></td>
                                 <td><?= $prod->stock_disponible ?></td>
-                                <td><a href="#" class="btn_mostrar btn btn-outline-info" data-cod="<?= $prod->id_producto ?>" data-bs-toggle="modal" data-bs-target="#modalMostrarProducto"><i class="fas fa-exclamation"></i></a>
+                                <td><a href="#" class="btn_mostrar_prod btn btn-outline-info" data-cod="<?= $prod->id_producto ?>" data-bs-toggle="modal" data-bs-target="#modalMostrarProducto"><i class="fas fa-exclamation"></i></a>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn_editar btn btn-outline-warning" data-bs-toggle="modal"
+                                    <a href="#" class="btn_editar_prod btn btn-outline-warning" data-bs-toggle="modal"
                                         data-bs-target="#modalEditarProducto" data-cod="<?= $prod->id_producto ?>"
                                         onclick="abrirModalEditar(<?= $prod->id_producto ?>)">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
-                                <td><a href="#" class="btn_borrar btn btn-outline-danger"><i
+                                <td><a href="#" class="btn_borrar_prod btn btn-outline-danger"><i
                                             class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         <?php
@@ -119,7 +119,7 @@ include("../includes/cabecera.php");
 
 
     <!-- Modal para Borrar Producto -->
-    <div class="modal fade" id="md_borrar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="md_borrar_prod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -138,7 +138,7 @@ include("../includes/cabecera.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <a href="#" class="btn_borrar btn btn-outline-danger">Borrar</a>
+                    <a href="#" class="btn_borrar_prod btn btn-outline-danger">Borrar</a>
                 </div>
             </div>
         </div>

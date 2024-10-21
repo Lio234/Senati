@@ -118,7 +118,7 @@ class CRUDProducto extends Conexion
         $nr = $snt->rowCount();
 
         if ($nr > 0) {
-            echo "<table class='table table-hover table-sm table-success table-striped'>";
+            echo "<table class='table table-hover table-sm table-striped'>";
             echo "<tr class='table-primary'>";
             echo "<th>N°</th>";
             echo "<th>Código</th>";

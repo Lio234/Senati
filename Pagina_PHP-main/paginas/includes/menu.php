@@ -17,6 +17,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$ruta?>/marca"> Marcas </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/categoria"> Categoria </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/cliente"> Clientes </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/empleado"> Empleados </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/Pedido"> Pedidos </a>
+                </li>                
             </ul>
         </div>
     </div>

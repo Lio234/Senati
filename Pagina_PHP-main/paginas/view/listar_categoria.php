@@ -2,7 +2,7 @@
 <html lang="es">
 <?php
 $ruta = "../..";
-$titulo = "Aplicacion de Ventas - Lista de Marcas";
+$titulo = "Aplicacion de Ventas - Lista de Categorias";
 include("../includes/cabecera.php");
 ?>
 
@@ -11,26 +11,26 @@ include("../includes/cabecera.php");
     include("../includes/menu.php");
     include "../includes/cargar_clases.php";
 
-    $crudmarca = new CRUDMarca();
-    $rs_mar = $crudmarca->ListarMarca();
+    $crudcategoria = new CRUDCategoria();
+    $rs_cat = $crudcategoria->ListarCategoria();
     ?>
     <div class="container mt-3">
         <header>
             <h1>
-                <i class="fas fa-list-alt"></i> Lista de Marcas
+                <i class="fas fa-list-alt"></i> Lista de Categorias
             </h1>
             <hr />
         </header>
     </div>
     <nav>
         <div class="btn-group col-md-5" role="group">
-            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalRegistrarMarca">
+            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalRegistrarCategoria">
                 <i class="fas fa-plus-circle"></i> Registrar
             </a>
-            <a href="consultar_marca.php" class="btn btn-outline-primary ">
+            <a href="consultar_categoria.php" class="btn btn-outline-primary ">
                 <i class="fas fa-search"></i> Consultar
             </a>
-            <a href="filtrar_marca.php" class="btn btn-outline-primary">
+            <a href="filtrar_categoria.php" class="btn btn-outline-primary">
                 <i class="fas fa-search"></i> Filtrar
             </a>
         </div>
@@ -43,28 +43,28 @@ include("../includes/cabecera.php");
                         <tr class="table-primary text-center">
                             <th>N°</th>
                             <th>Código</th>
-                            <th>Marca</th>
+                            <th>Categoria</th>
                             <th colspan="3">Acciones</th>
                         </tr>
                         <?php
                         $i = 0;
-                        foreach ($rs_mar as $mar) {
+                        foreach ($rs_cat as $cat) {
                             $i++;
                         ?>
-                            <tr class="reg_marca text-center">
+                            <tr class="reg_categoria text-center">
                                 <td><?= $i ?></td>
-                                <td class="cod_mar"><?= $mar->id_marca ?></td>
-                                <td class="mar"><?= $mar->marca ?></td>
-                                <td><a href="#" class="btn_mostrar_mar btn btn-outline-info" data-cod="<?= $mar->id_marca ?>" data-bs-toggle="modal" data-bs-target="#modalMostrarMarca"><i class="fas fa-exclamation"></i></a>
+                                <td class="cod_cat"><?= $cat->id_categoria ?></td>
+                                <td class="cat"><?= $cat->categoria ?></td>
+                                <td><a href="#" class="btn_mostrar_cat btn btn-outline-info" data-cod="<?= $cat->id_categoria ?>" data-bs-toggle="modal" data-bs-target="#modalMostrarCategoria"><i class="fas fa-exclamation"></i></a>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn_editar_mar btn btn-outline-warning" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditarMarca" data-cod="<?= $mar->id_marca ?>"
-                                        onclick="abrirModalEditar(<?= $mar->id_marca ?>)">
+                                    <a href="#" class="btn_editar_cat btn btn-outline-warning" data-bs-toggle="modal"
+                                        data-bs-target="#modalEditarCategoria" data-cod="<?= $cat->id_categoria ?>"
+                                        onclick="abrirModalEditar(<?= $cat->id_categoria ?>)">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
-                                <td><a href="#" class="btn_borrar_mar btn btn-outline-danger"><i
+                                <td><a href="#" class="btn_borrar_cat btn btn-outline-danger"><i
                                             class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         <?php
@@ -79,33 +79,33 @@ include("../includes/cabecera.php");
     include("../includes/pie.php");
     ?>
 
-    <!-- Modal para Registrar Marca -->
-    <div class="modal fade" id="modalRegistrarMarca" tabindex="-1" aria-labelledby="modalRegistrarMarcaLabel"
+    <!-- Modal para Registrar Categoria -->
+    <div class="modal fade" id="modalRegistrarCategoria" tabindex="-1" aria-labelledby="modalRegistrarCategoriaLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalRegistrarMarcaLabel">Registrar Marca</h5>
+                    <h5 class="modal-title" id="modalRegistrarCategoriaLabel">Registrar Categoria</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Aquí se cargará el contenido de registrar_marca.php -->
+                    <!-- Aquí se cargará el contenido de registrar_categoria.php -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal para mostrar detalles del marca -->
-    <div class="modal fade" id="modalMostrarMarca" tabindex="-1" aria-labelledby="modalMostrarMarcaLabel" aria-hidden="true">
+    <!-- Modal para mostrar detalles del categoria -->
+    <div class="modal fade" id="modalMostrarCategoria" tabindex="-1" aria-labelledby="modalMostrarCategoriaLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalMostrarMarcaLabel">Detalle del Marca</h5>
+                    <h5 class="modal-title" id="modalMostrarCategoriaLabel">Detalle del Categoria</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Aquí se cargará el contenido de mostrar_marca.php -->
-                    <div id="detalleMarca">
-                        <!-- Este contenedor se llenará con el contenido de mostrar_marca.php -->
+                    <!-- Aquí se cargará el contenido de mostrar_categoria.php -->
+                    <div id="detalleCategoria">
+                        <!-- Este contenedor se llenará con el contenido de mostrar_categoria.php -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -115,38 +115,38 @@ include("../includes/cabecera.php");
         </div>
     </div>
 
-    <!-- Modal para Borrar Marca -->
-<div class="modal fade" id="md_borrar_mar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Modal para Borrar Categoria -->
+<div class="modal fade" id="md_borrar_cat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-danger" id="staticBackdropLabel"><i class="fas fa-trash-alt"></i> Borrar
-                    Marca</h4>
+                    Categoria</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <h5 class="card-title">¿Seguro de borrar el registro?</h5>
                     <p class="card-text">
-                        <span class="lbl_mar"></span> (<span class="lbl_codmar"></span>)
+                        <span class="lbl_cat"></span> (<span class="lbl_codcat"></span>)
                     </p>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn_borrar_mar btn btn-outline-danger" id="confirm_borrar">Borrar</button>
+                <button type="button" class="btn_borrar_cat btn btn-outline-danger" id="confirm_borrar">Borrar</button>
             </div>
         </div>
     </div>
 </div>
 
     <!-- Modal para mostrar errores -->
-    <div class="modal fade" id="md_error_mar" tabindex="-1" aria-labelledby="md_error_mar_label" aria-hidden="true">
+    <div class="modal fade" id="md_error_cat" tabindex="-1" aria-labelledby="md_error_cat_label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-danger" id="md_error_mar_label"><i class="fas fa-exclamation-triangle"></i> Error al Borrar</h4>
+                    <h4 class="modal-title text-danger" id="md_error_cat_label"><i class="fas fa-exclamation-triangle"></i> Error al Borrar</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -164,27 +164,27 @@ include("../includes/cabecera.php");
 
 
 
-    <!-- Modal para Editar Marca -->
-    <div class="modal fade" id="modalEditarMarca" tabindex="-1" aria-labelledby="modalEditarMarcaLabel"
+    <!-- Modal para Editar Categoria -->
+    <div class="modal fade" id="modalEditarCategoria" tabindex="-1" aria-labelledby="modalEditarCategoriaLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarMarcaLabel">Editar Marca</h5>
+                    <h5 class="modal-title" id="modalEditarCategoriaLabel">Editar Categoria</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Aquí se cargará el contenido de editar_marca.php -->
+                    <!-- Aquí se cargará el contenido de editar_categoria.php -->
                 </div>
             </div>
         </div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Cargar el contenido de registrar_marca.php solo una vez
-            let modalBodyRegistrar = $('#modalRegistrarMarca .modal-body');
+            // Cargar el contenido de registrar_categoria.php solo una vez
+            let modalBodyRegistrar = $('#modalRegistrarCategoria .modal-body');
             $.ajax({
-                url: 'registrar_marca.php', // Cargar el contenido de registrar_marca.php
+                url: 'registrar_categoria.php', // Cargar el contenido de registrar_categoria.php
                 method: 'GET',
                 success: function(response) {
                     modalBodyRegistrar.html(response); // Insertar el contenido en el modal
@@ -194,14 +194,14 @@ include("../includes/cabecera.php");
                 }
             });
 
-            // Cargar el contenido de editar_marca.php al abrir el modal
-            $('#modalEditarMarca').on('show.bs.modal', function(event) {
+            // Cargar el contenido de editar_categoria.php al abrir el modal
+            $('#modalEditarCategoria').on('show.bs.modal', function(event) {
                 let button = $(event.relatedTarget); // Botón que activó el modal
-                let codMar = button.data('cod'); // Extraer la información del atributo data-cod
+                let codCat = button.data('cod'); // Extraer la información del atributo data-cod
 
                 let modalBodyEditar = $(this).find('.modal-body');
                 $.ajax({
-                    url: 'editar_marca.php?cod_mar=' + codMar, // Cargar el contenido de editar_marca.php
+                    url: 'editar_categoria.php?cod_cat=' + codCat, // Cargar el contenido de editar_categoria.php
                     method: 'GET',
                     success: function(response) {
                         modalBodyEditar.html(response); // Insertar el contenido en el modal
