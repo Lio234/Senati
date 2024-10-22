@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enviar Correo</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/4pc5JO2d4G5lFy3sz8iZ9fY0CAY/qeVjLL/+Xc" crossorigin="anonymous">
+    <!-- Integrar Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap/css/bootstrap.css">
 </head>
 <body class="bg-light">
 
@@ -31,8 +31,5 @@
             </div>
         </div>
     </div>
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-2CM2vH8Mt3srHwpooxMkxVmCEJcnxvMzhUyZdYs1dSvvttVrG9xk8aIHLYKSjMVm" crossorigin="anonymous"></script>
 </body>
 </html>

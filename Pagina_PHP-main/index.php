@@ -82,6 +82,8 @@
         <li>Compromiso</li>
         <li>Confianza</li>
         <li>Seguridad</li>
+        <li><a href="formulario.php">Enviar Correo</a></li>
+
     </ul>
 </section>
 
