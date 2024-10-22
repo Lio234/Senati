@@ -15,7 +15,7 @@ if (isset($_GET["cod_prod"])) {
         $crudcategoria = new CRUDCategoria();
 
         $rs_mar = $crudmarca->ListarMarca();
-        $rs_cat = $crudcategoria->ListarCategoria();
+        $rs_cat =$crudcategoria->ListarCategoria();
     } else {
         header("location: listar_producto.php");
         exit;

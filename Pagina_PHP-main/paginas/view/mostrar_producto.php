@@ -34,7 +34,7 @@ if (isset($_GET["cod_prod"])) {
                         </div>
                         <div class="col-md-4">
                             <h6 class="card-title">Precio</h6>
-                            <p class="prc card-text">S/' . $producto->precio . '</p>
+                            <p class="prc card-text">S/ ' . number_format($producto->precio, 2) . '</p>
                         </div>
                         <div class="col-md-6">
                             <h6 class="card-title">Marca</h6>
