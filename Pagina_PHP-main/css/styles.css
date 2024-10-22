@@ -1,0 +1,269 @@
+/* Estilos del cuerpo */
+body {
+    background: linear-gradient(135deg, #f0f4f7 0%, #d9e0e7 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos del menú personalizado */
+.custom-navbar {
+    background-color: transparent; /* O el color que prefieras */
+}
+
+.custom-navbar .navbar-brand {
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente si deseas */
+    margin-right: 30px; /* Ajusta este valor para más o menos espacio */
+    font-weight: bold;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: #0056b3;
+}
+
+.custom-navbar .navbar-nav .nav-link {
+    margin-right: 15px; /* Ajusta el espacio entre los enlaces del menú */
+    font-weight: bold;
+    transition: color 0.3s ease;
+    color: #343a40; /* Color de los enlaces */
+    font-size: 1.1rem; /* Aumenta el tamaño de fuente para mayor atractivo */
+}
+
+.custom-navbar .navbar-nav .nav-link:hover {
+    color: #0056b3;
+}
+
+/* Espaciado adicional en el contenedor del menú si es necesario */
+.custom-navbar .navbar-collapse {
+    margin-left: 20px; /* Separa el menú del título */
+}
+
+/* Eliminar estilos de Bootstrap en el menú */
+.no-bootstrap-styles {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.no-bootstrap-styles .navbar-nav .nav-link {
+    color: inherit !important; /* Hereda el color definido */
+    background-color: transparent !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+}
+
+.no-bootstrap-styles .navbar-nav .nav-item {
+    list-style: none !important;
+}
+
+.no-bootstrap-styles .navbar-collapse {
+    border: none !important;
+}
+
+.no-bootstrap-styles .navbar-toggler {
+    border: none !important;
+    background: none !important;
+}
+
+.no-bootstrap-styles .navbar-toggler-icon {
+    font-size: inherit !important;
+    color: inherit !important;
+}
+
+/* Resto de estilos generales (sin cambios) */
+h2 {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra para texto */
+}
+
+/* Estilo de las secciones */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.service-container, .location-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-item, .location-item {
+    background: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: calc(25% - 40px); /* Ajusta el tamaño para 4 columnas */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-item img, .location-item img {
+    width: 100%; /* Las imágenes ocuparán el 100% de su contenedor */
+    height: 150px; /* Fija la altura para que todas tengan el mismo tamaño */
+    object-fit: cover; /* Mantiene la proporción */
+    border-radius: 8px;
+    transition: transform 0.3s; /* Agrega animación a las imágenes */
+}
+
+/* Animación de imágenes */
+.service-item:hover img, .location-item:hover img {
+    transform: scale(1.05); /* Aumenta el tamaño de la imagen al pasar el ratón */
+}
+
+.service-item:hover, .location-item:hover {
+    transform: translateY(-5px); /* Levanta el elemento al pasar el ratón */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Agrega sombra */
+}
+
+/* Estilos para imágenes en otras secciones */
+section img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción */
+    border-radius: 8px;
+    margin: 20px 0; /* Espaciado vertical para las imágenes */
+}
+
+/* Estilo del footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    font-size: 1rem;
+}
+
+/* Estilos de secciones y otros elementos */
+section {
+    padding: 40px 0; /* Espaciado interno en las secciones */
+}
+
+/* Estilo de las listas */
+ul {
+    padding: 0;
+    list-style-type: none; /* Elimina los puntos de las listas */
+    text-align: center; /* Centra el texto de las listas */
+}
+
+li {
+    font-size: 1.2rem; /* Tamaño de fuente */
+    margin: 10px 0; /* Espaciado entre elementos de la lista */
+}
+
+/* Sección de valores */
+#values ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#values li {
+    background: #ffffff;
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    margin: 10px; /* Espaciado entre elementos */
+    width: calc(30% - 20px); /* Ajuste responsivo */
+    text-align: center; /* Centra el texto */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animación */
+}
+
+/* Efecto hover para los valores */
+#values li:hover {
+    transform: translateY(-5px); /* Levanta el elemento al pasar el ratón */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+}
+/* Estilo para las imágenes de las sedes */
+.location-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.location-item {
+    background: #ffffff; /* Fondo blanco para los elementos */
+    border-radius: 10px; /* Bordes redondeados */
+    margin: 15px; /* Margen entre elementos */
+    padding: 20px; /* Espacio interno */
+    width: calc(45% - 30px); /* Ajusta el ancho de los elementos */
+    text-align: center; /* Centra el texto */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+}
+
+/* Efecto hover para las sedes */
+.location-item:hover {
+    transform: translateY(-5px); /* Levanta el elemento al pasar el ratón */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+}
+
+/* Estilo de las imágenes de las sedes */
+.location-img {
+    width: 100%; /* Las imágenes ocupan todo el ancho */
+    height: 150px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Mantiene la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: transform 0.3s; /* Transición suave */
+}
+
+/* Efecto hover en imágenes */
+.location-img:hover {
+    transform: scale(1.05); /* Aumenta el tamaño de la imagen */
+}
+
+/* Estilo de los títulos y descripciones */
+.location-title {
+    font-size: 1.5rem; /* Tamaño de fuente para los títulos */
+    color: #343a40; /* Color del texto */
+    margin: 15px 0; /* Espacio superior e inferior */
+}
+
+.location-description {
+    font-size: 1rem; /* Tamaño de fuente para las descripciones */
+    color: #6c757d; /* Color gris claro */
+    line-height: 1.5; /* Espaciado entre líneas */
+}
+
+/* Resto de estilos generales */
+h2 {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra para texto */
+}
+
+/* Estilos para las imágenes en otras secciones */
+.history-img, .mission-img, .vision-img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción */
+    border-radius: 8px;
+    margin: 20px 0; /* Espaciado vertical para las imágenes */
+}
+
+/* Estilo de los valores */
+#values ul {
+    padding: 0;
+    list-style-type: none; /* Elimina los puntos de las listas */
+    text-align: center; /* Centra el texto de las listas */
+}
+
+#values li {
+    font-size: 1.2rem; /* Tamaño de fuente */
+    margin: 10px 0; /* Espaciado entre elementos de la lista */
+}
