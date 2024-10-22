@@ -4,7 +4,7 @@
     
     <link rel="stylesheet" type="text/css" href="<?=$ruta?>/css/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="<?=$ruta?>/css/fontawesome/css/all.css"/>
-    <link rel="stylesheet" type="text/css" header="<?=$tuta?>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?=$ruta?>/css/style.css">
 
     <script src="<?=$ruta?>/css/bootstrap/js/bootstrap.js"></script>
     <script src="<?=$ruta?>/js/jquery.js"></script>
