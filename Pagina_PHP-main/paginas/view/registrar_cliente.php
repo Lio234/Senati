@@ -103,7 +103,7 @@ $rs_dist = $cruddistrito->ListarDistrito();
         });
             
             
-            var token = "GA241022155934";
+            var token = "GA241023070425";
             var api = "https://script.google.com/macros/s/AKfycbyoBhxuklU5D3LTguTcYAS85klwFINHxxd-FroauC4CmFVvS0ua/exec";
 
             // Función para enviar la notificación
