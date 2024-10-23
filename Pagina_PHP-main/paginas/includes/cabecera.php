@@ -11,9 +11,6 @@
     <script src="<?=$ruta?>/js/categoria.js"></script>
     <script src="<?=$ruta?>/js/producto.js"></script>
     <script src="<?=$ruta?>/js/marca.js"></script>
-    <script src="<?=$ruta?>/js/empleado.js"></script>
     <script src="<?=$ruta?>/js/cliente.js"></script>
-    <script src="<?=$ruta?>/js/pedido.js"></script>
-
     <title><?=$titulo?></title>
 </head>

@@ -22,13 +22,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$ruta?>/cliente">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$ruta?>/empleado">Empleados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$ruta?>/pedido">Pedidos</a>
-                </li>                
+                </li>              
             </ul>
         </div>
     </div>
