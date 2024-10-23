@@ -22,7 +22,18 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$ruta?>/cliente">Clientes</a>
-                </li>              
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/departamento">Departamentos</a>
+                </li>
+<!--
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/provincias">Provincias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=$ruta?>/distrito">Distrito</a>
+                </li>      
+                -->        
             </ul>
         </div>
     </div>
