@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `compuware`
+
+CREATE PROCEDURE obtener_clientes_con_distrito()
+BEGIN
+    SELECT 
+        c.id_cliente,
+        c.nombre,
+        c.ap_paterno,
+        c.ap_materno,
+        c.direccion,
+        c.correo,
+        c.telefono,
+d.distrito
+    FROM 
+        tb_cliente c
+    INNER JOIN 
+        tb_distrito d ON c.cliente_id_distrito = d.id_distrito;
+END $$
+
+DELIMITER ;
+
 --
 
 DELIMITER $$

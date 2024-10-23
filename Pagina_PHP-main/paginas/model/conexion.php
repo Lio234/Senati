@@ -1,7 +1,7 @@
 <?php
     class Conexion{
         private $usuario="root";
-        private $password="";
+        private $password="root";
         private $servidor="localhost";
         private $base="compuware";
 
