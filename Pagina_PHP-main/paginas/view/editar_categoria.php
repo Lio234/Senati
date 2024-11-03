@@ -28,13 +28,14 @@ if (isset($_GET["cod_cat"])) {
                     <label for="txt_cat" class="form-label">Nombre del Categoria:</label>
                     <input type="text" class="form-control" id="txt_cat" name="txt_cat" placeholder="Nombre de Categoria" maxlength="40" value="<?= htmlspecialchars($rs_cat->categoria) ?>" autofocus>
                 </div
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-outline-primary" id="btn_registrar_cat" name="btn_registrar_cat">
-                    <i class="fas fa-save"></i> Actualizar Categoria
-                </button>
-            </div>
+                    </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary" id="btn_registrar_cat" name="btn_registrar_cat">
+                        <i class="fas fa-save"></i> Actualizar Categoria
+                    </button>
+                </div>
         </form>
     </div>
 </body>
+
 </html>
