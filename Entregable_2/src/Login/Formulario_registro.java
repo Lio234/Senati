@@ -65,7 +65,7 @@ public class Formulario_registro extends JFrame {
     private void registerUser(String username, String email, String password) {
         try (Connection connection = conexion.Conectar()) {
             // Llamada al procedimiento almacenado
-            String query = "{ CALL register_user(?, ?, ?) }";
+            String query = "{CALL register_user(?, ?, ?)}";
             CallableStatement stmt = connection.prepareCall(query);
             stmt.setString(1, username);
             stmt.setString(2, email);
