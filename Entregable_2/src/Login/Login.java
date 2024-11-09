@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Login extends JFrame {
-    private JTextField txt_Email;  // Cambiamos el nombre para mayor claridad
+    private JTextField txt_Email;  
     private JPasswordField txt_Password;
     private JButton btn_Login, btn_Registrar;
     
