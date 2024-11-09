@@ -8,24 +8,29 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Formulario_registro extends JFrame {
+    // Atributos de los componentes
     private JTextField usernameField;
     private JTextField emailField;
     private JPasswordField passwordField;
     private JLabel statusLabel;
+    private JButton btn_registrar, btn_iniciar_secion;
     private conexionMYSQL conexion;
 
     public Formulario_registro() {
         setTitle("Registro de Usuario");
-        setSize(400, 250);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
         conexion = new conexionMYSQL();
-
-        // Panel principal
-        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         
-        // Campos de entrada para el registro
+        inicializarComponentes();
+    }
+
+    private void inicializarComponentes() {
+        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
+
+        // Configurar campos
         panel.add(new JLabel("Nombre de Usuario:"));
         usernameField = new JTextField();
         panel.add(usernameField);
@@ -33,23 +38,34 @@ public class Formulario_registro extends JFrame {
         panel.add(new JLabel("Correo Electrónico:"));
         emailField = new JTextField();
         panel.add(emailField);
-        
+
         panel.add(new JLabel("Contraseña:"));
         passwordField = new JPasswordField();
         panel.add(passwordField);
 
-        // Botón de registro
-        JButton registerButton = new JButton("Registrar");
-        registerButton.addActionListener(new RegisterActionListener());
-        panel.add(registerButton);
+        // Configurar botón de registro
+        btn_registrar = new JButton("Registrar");
+        btn_registrar.addActionListener(new RegisterActionListener());
+        panel.add(btn_registrar);
+        
+        // Configurar botón para ir al login
+        btn_iniciar_secion = new JButton("Login");
+        btn_iniciar_secion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirLogin(); // Abrir la ventana de login al presionar el botón
+            }
+        });
+        panel.add(btn_iniciar_secion);
 
-        // Etiqueta de estado para mensajes
+        // Configurar etiqueta de estado
         statusLabel = new JLabel("", SwingConstants.CENTER);
         panel.add(statusLabel);
 
-        add(panel);
+        this.add(panel);
     }
 
+    // Clase interna para manejar la acción de registro
     private class RegisterActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -57,7 +73,6 @@ public class Formulario_registro extends JFrame {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
 
-            // Asegúrate de hashear la contraseña antes de enviarla (hazlo aquí si es necesario)
             registerUser(username, email, password);
         }
     }
@@ -69,7 +84,7 @@ public class Formulario_registro extends JFrame {
             CallableStatement stmt = connection.prepareCall(query);
             stmt.setString(1, username);
             stmt.setString(2, email);
-            stmt.setString(3, password); // Enviar la contraseña encriptada si es necesario
+            stmt.setString(3, password);
 
             stmt.executeUpdate();
             statusLabel.setText("Registro exitoso");
@@ -82,6 +97,13 @@ public class Formulario_registro extends JFrame {
             }
             ex.printStackTrace();
         }
+    }
+
+    // Método para abrir la ventana de login
+    private void abrirLogin() {
+        this.setVisible(false); // Oculta la ventana actual
+        Login loginForm = new Login(); // Crea una instancia de la ventana de Login
+        loginForm.setVisible(true); // Muestra la ventana de Login
     }
 
     public static void main(String[] args) {
