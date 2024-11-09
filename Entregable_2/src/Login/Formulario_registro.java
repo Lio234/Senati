@@ -22,10 +22,10 @@ public class Formulario_registro extends JFrame {
         
         conexion = new conexionMYSQL();
 
-        // Panel principal
+        
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         
-        // Campos de entrada para el registro
+        
         panel.add(new JLabel("Nombre de Usuario:"));
         usernameField = new JTextField();
         panel.add(usernameField);
@@ -38,12 +38,12 @@ public class Formulario_registro extends JFrame {
         passwordField = new JPasswordField();
         panel.add(passwordField);
 
-        // Botón de registro
+        
         JButton registerButton = new JButton("Registrar");
         registerButton.addActionListener(new RegisterActionListener());
         panel.add(registerButton);
 
-        // Etiqueta de estado para mensajes
+        
         statusLabel = new JLabel("", SwingConstants.CENTER);
         panel.add(statusLabel);
 
@@ -57,19 +57,19 @@ public class Formulario_registro extends JFrame {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
 
-            // Asegúrate de hashear la contraseña antes de enviarla (hazlo aquí si es necesario)
+            
             registerUser(username, email, password);
         }
     }
 
     private void registerUser(String username, String email, String password) {
         try (Connection connection = conexion.Conectar()) {
-            // Llamada al procedimiento almacenado
+            
             String query = "{ CALL register_user(?, ?, ?) }";
             CallableStatement stmt = connection.prepareCall(query);
             stmt.setString(1, username);
             stmt.setString(2, email);
-            stmt.setString(3, password); // Enviar la contraseña encriptada si es necesario
+            stmt.setString(3, password); 
 
             stmt.executeUpdate();
             statusLabel.setText("Registro exitoso");

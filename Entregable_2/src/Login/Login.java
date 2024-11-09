@@ -1,26 +1,16 @@
 package Login;
 
-
 import CRUD.prueba;
 import Conexion.conexionMYSQL;
-import java.sql.Connection;
-import java.sql.CallableStatement;
-import java.sql.SQLException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class Login extends JFrame {
-    private JTextField txt_Username;
+    private JTextField txt_Email;  // Cambiamos el nombre para mayor claridad
     private JPasswordField txt_Password;
-    private JButton btn_Login;
-    
+    private JButton btn_Login, btn_Registrar;
     
     public Login() {
         super();
@@ -39,13 +29,13 @@ public class Login extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel lblUsername = new JLabel("Usuario:");
-        lblUsername.setBounds(50, 30, 80, 25);
-        panel.add(lblUsername);
+        JLabel lblEmail = new JLabel("Correo:");
+        lblEmail.setBounds(50, 30, 80, 25);
+        panel.add(lblEmail);
 
-        txt_Username = new JTextField();
-        txt_Username.setBounds(150, 30, 150, 25);
-        panel.add(txt_Username);
+        txt_Email = new JTextField();
+        txt_Email.setBounds(150, 30, 150, 25);
+        panel.add(txt_Email);
 
         JLabel lblPassword = new JLabel("Contraseña:");
         lblPassword.setBounds(50, 70, 80, 25);
@@ -56,9 +46,14 @@ public class Login extends JFrame {
         panel.add(txt_Password);
 
         btn_Login = new JButton("Iniciar Sesión");
-        btn_Login.setBounds(150, 110, 150, 25);
+        btn_Login.setBounds(150, 110, 100, 20);
         panel.add(btn_Login);
+        
+        btn_Registrar = new JButton("Registrar usuario");
+        btn_Registrar.setBounds(270, 110, 100, 20);
+        panel.add(btn_Registrar);
 
+        // Listener para el botón de iniciar sesión
         btn_Login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,11 +61,19 @@ public class Login extends JFrame {
             }
         });
 
+        // Listener para el botón de registrar usuario
+        btn_Registrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirFormularioRegistro();
+            }
+        });
+
         this.add(panel);
     }
 
     private void autenticarUsuario() {
-        String username = txt_Username.getText();
+        String email = txt_Email.getText();
         String password = new String(txt_Password.getPassword());
         conexionMYSQL cn = new conexionMYSQL();
 
@@ -79,7 +82,7 @@ public class Login extends JFrame {
         try {
             cnx = cn.Conectar();
             stmt = cnx.prepareCall("{call sp_verificar_usuario(?, ?, ?)}");
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             stmt.setString(2, password);
             stmt.registerOutParameter(3, java.sql.Types.INTEGER);
 
@@ -108,8 +111,15 @@ public class Login extends JFrame {
 
     private void abrirDashboard() {
         this.setVisible(false);
-        prueba marca = new prueba();
-        marca.setVisible(true);
+        prueba pr = new prueba ();
+        pr.setVisible(true);
+        JOptionPane.showMessageDialog(this, "Bienvenido al Dashboard");
+    }
+    
+    private void abrirFormularioRegistro() {
+        this.setVisible(false);
+        Formulario_registro formularioRegistro = new Formulario_registro();
+        formularioRegistro.setVisible(true);
     }
 
     public static void main(String[] args) {
