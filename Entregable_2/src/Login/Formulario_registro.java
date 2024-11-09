@@ -28,28 +28,43 @@ public class Formulario_registro extends JFrame {
     }
 
     private void inicializarComponentes() {
-        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
+        JPanel panel = new JPanel();
+        panel.setLayout(null); // Layout nulo para posicionar los componentes manualmente
 
-        // Configurar campos
-        panel.add(new JLabel("Nombre de Usuario:"));
+        // Configurar y posicionar campos y etiquetas
+        JLabel lblUsername = new JLabel("Nombre de Usuario:");
+        lblUsername.setBounds(50, 30, 120, 25);
+        panel.add(lblUsername);
+        
         usernameField = new JTextField();
+        usernameField.setBounds(180, 30, 150, 25);
         panel.add(usernameField);
 
-        panel.add(new JLabel("Correo Electrónico:"));
+        JLabel lblEmail = new JLabel("Correo Electrónico:");
+        lblEmail.setBounds(50, 70, 120, 25);
+        panel.add(lblEmail);
+
         emailField = new JTextField();
+        emailField.setBounds(180, 70, 150, 25);
         panel.add(emailField);
 
-        panel.add(new JLabel("Contraseña:"));
+        JLabel lblPassword = new JLabel("Contraseña:");
+        lblPassword.setBounds(50, 110, 120, 25);
+        panel.add(lblPassword);
+
         passwordField = new JPasswordField();
+        passwordField.setBounds(180, 110, 150, 25);
         panel.add(passwordField);
 
         // Configurar botón de registro
         btn_registrar = new JButton("Registrar");
+        btn_registrar.setBounds(70, 160, 100, 30);
         btn_registrar.addActionListener(new RegisterActionListener());
         panel.add(btn_registrar);
-        
+
         // Configurar botón para ir al login
         btn_iniciar_secion = new JButton("Login");
+        btn_iniciar_secion.setBounds(220, 160, 100, 30);
         btn_iniciar_secion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +75,7 @@ public class Formulario_registro extends JFrame {
 
         // Configurar etiqueta de estado
         statusLabel = new JLabel("", SwingConstants.CENTER);
+        statusLabel.setBounds(50, 210, 300, 25);
         panel.add(statusLabel);
 
         this.add(panel);
