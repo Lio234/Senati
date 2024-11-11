@@ -8,15 +8,13 @@ create database Compuware;
 use Compuware;
 
 -- Crear la tabla de Departamentos
-CREATE TABLE
-    tb_departamento (
+CREATE TABLE tb_departamento(
         id_departamento CHAR(5) NOT NULL PRIMARY KEY,
         departamento VARCHAR(25) NOT NULL
     );
 
 -- Crear la tabla de Provincia
-CREATE TABLE
-    tb_provincia (
+CREATE TABLE tb_provincia (
         id_provincia CHAR(5) NOT NULL PRIMARY KEY,
         provincia VARCHAR(50) NOT NULL,
         id_departamento CHAR(5) NOT NULL,
@@ -24,8 +22,7 @@ CREATE TABLE
     );
     
 -- Crear la tabla de Distrito
-CREATE TABLE
-    tb_distrito (
+CREATE TABLE tb_distrito (
         id_distrito CHAR(5) NOT NULL PRIMARY KEY,
         distrito VARCHAR(50) NOT NULL,
         id_provincia CHAR(5) NOT NULL,
@@ -33,8 +30,7 @@ CREATE TABLE
     );
 
 -- Crear la tabla de Cliente
-CREATE TABLE
-    tb_cliente (
+CREATE TABLE tb_cliente (
         id_cliente CHAR(5) NOT NULL PRIMARY KEY,
         nombre VARCHAR(20) NOT NULL,
         ap_paterno VARCHAR(20) NOT NULL,
