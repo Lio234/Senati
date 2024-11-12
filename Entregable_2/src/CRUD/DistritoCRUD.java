@@ -41,7 +41,7 @@ public class DistritoCRUD extends JFrame implements ActionListener {
     }
 
     private void IniciarControles() {
-        lbl_titulo = new JLabel("Gestionar Distritos");
+        lbl_titulo = new JLabel("CRUD Distritos");
         lbl_titulo.setFont(new Font("Arial", Font.BOLD, 24));
         lbl_titulo.setForeground(Color.BLUE);
         lbl_titulo.setBounds(160, 20, 300, 30);
