@@ -15,7 +15,6 @@ END$$
 
 DELIMITER ;
 
-call sp_listar_pedidos()
 
 -- FILTRADO DE PEDIDOS POR CLIENTE
 DELIMITER $$
@@ -34,7 +33,6 @@ END$$
 
 DELIMITER ;
 
- call sp_filtrar_pedidos_por_cliente("C001");
 -- AGREGAR DATOS DE PEDIDO
 DELIMITER //
 
@@ -52,7 +50,6 @@ END //
 DELIMITER ;
 
 
-CALL sp_insertar_pedido('PE004','2023-11-10', 500.00, 'C002');
 
 -- EDITAR PEDIDO
 
@@ -71,7 +68,7 @@ BEGIN
 END$$
 
 DELIMITER ;
-CALL sp_actualizar_pedido('PE003', '2023-11-15', 600.00, 'C001');
+
 
 
 -- ELIMINAR PEDIDO
@@ -88,5 +85,5 @@ END$$
 
 DELIMITER ;
 
-CALL sp_eliminar_pedido('');
+
 

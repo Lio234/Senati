@@ -213,24 +213,74 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
     }
 
     private void MostrarDatos() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[] {"ID Categoría", "Categoría"});
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+
         modelo.setRowCount(0);
 
-        try (Connection cnx = cn.Conectar(); 
-             CallableStatement cstmt = cnx.prepareCall("{CALL sp_obtener_categorias()}")) {
-            ResultSet rs = cstmt.executeQuery();
-            while (rs.next()) {
-                modelo.addRow(new Object[] { rs.getString("id_categoria"), rs.getString("categoria") });
+        Connection cnx = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        try {
+            cnx = cn.Conectar();
+            stm = cnx.createStatement();
+
+            rs = stm.executeQuery("call sp_obtener_clientes();");
+
+            int nc = rs.getMetaData().getColumnCount();
+
+            for (int i = 1; i <= nc; i++) {
+                modelo.addColumn(rs.getMetaData().getColumnName(i));
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los datos: " + e.getMessage());
+
+            while (rs.next()) {
+                Object[] arr_filas = new Object[nc];
+
+                for (int i = 0; i < nc; i++) {
+                    arr_filas[i] = rs.getObject(i + 1);
+                }
+
+                modelo.addRow(arr_filas);
+            }
+
+        } catch (SQLException e1) {
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (cnx != null) {
+                    cnx.close();
+                }
+            } catch (SQLException e2) {
+
+            }
         }
 
         tb_cliente.setModel(modelo);
+        tb_cliente.setRowHeight(22);
+
+        DefaultTableCellRenderer alinearCentro = new DefaultTableCellRenderer();
+
+        alinearCentro.setHorizontalAlignment(SwingConstants.CENTER);
+
+        TableColumnModel arr_col = tb_cliente.getColumnModel();
+
+        arr_col.getColumn(0).setPreferredWidth(50);
+        arr_col.getColumn(0).setCellRenderer(alinearCentro);
+
+        arr_col.getColumn(1).setPreferredWidth(120);
     }
 
-        
     private ArrayList<String[]> ObtenerDistrito() {
         ArrayList<String[]> arr_lista = new ArrayList<>();
 
@@ -352,62 +402,34 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         }
     }
 
+    private boolean validarCampos() {
+        if (txt_id.getText().isEmpty() || txt_nombre.getText().isEmpty() || txt_ap_paterno.getText().isEmpty() || txt_ap_materno.getText().isEmpty() || txt_direccion.getText().isEmpty() || txt_correo.getText().isEmpty() || txt_telefono.getText().isEmpty()|| cbo_id_distrito.getSelectedIndex()==0) {
+            JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos.");
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-            int op = JOptionPane.showConfirmDialog(null,
-                    "¿Seguro de cerrar?",
-                    "Información",
-                    JOptionPane.YES_NO_OPTION);
+            if (e.getSource() == btn_cerrar) {
+                int op = JOptionPane.showConfirmDialog(null,
+                        "¿Seguro de cerrar?",
+                        "Marca",
+                        JOptionPane.YES_NO_OPTION);
 
-            if (op == JOptionPane.YES_OPTION) {
-                dispose();
+                if (op == JOptionPane.YES_OPTION) {
+                    dispose();
+                }
             }
-        }
-        if (e.getSource() == btn_nuevo) {
+        } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
-
-            if (txt_id.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese el ID Correctamente");
-                txt_id.requestFocus();
+            if (!validarCampos()) {
                 return;
             }
 
-            if (txt_nombre.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese Nombre");
-                txt_nombre.requestFocus();
-                return;
-            }
-
-            if (txt_ap_paterno.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese Apellido Paterno");
-                txt_ap_paterno.requestFocus();
-                return;
-            }
-
-            if (txt_direccion.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese su Dirección");
-                txt_direccion.requestFocus();
-                return;
-            }
-            if (txt_correo.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese su Correo");
-                txt_correo.requestFocus();
-                return;
-            }
-
-            if (txt_telefono.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Ingrese su Telefono");
-                txt_telefono.requestFocus();
-                return;
-            }
-
-            if (cbo_id_distrito.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione un Distrito.");
-                cbo_id_distrito.requestFocus();
-                return;
-            }
             Cliente cliente = new Cliente();
             cliente.setId(txt_id.getText());
             cliente.setNombre(txt_nombre.getText());
@@ -428,87 +450,54 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
 
             cliente.setIdDistrito(cc);
 
-            Connection cnx = null;
-
-            java.sql.PreparedStatement pstm = null;
-
-            try {
-                cnx = cn.Conectar();
-
+            try (Connection cnx = cn.Conectar()) {
                 String cad_sql;
+                CallableStatement cstmt;
 
                 if (e.getSource() == btn_agregar) {
-                    cad_sql = "CALL sp_agregar_cliente(?, ?, ?, ?, ?, ?, ?, ?)";
-
-                    pstm = cnx.prepareStatement(cad_sql);
-
-                    pstm.setString(1, cliente.getId());
-                    pstm.setString(2, cliente.getNombre());
-                    pstm.setString(3, cliente.getApPaterno());
-                    pstm.setString(4, cliente.getApMaterno());
-                    pstm.setString(4, cliente.getDireccion());
-                    pstm.setString(4, cliente.getCorreo());
-                    pstm.setString(4, cliente.getTelefono());
-                    pstm.setString(8, cliente.getIdDistrito());
-
-                    pstm.executeUpdate();
-
-                    JOptionPane.showMessageDialog(null, "Cliente Registrado");
+                    cad_sql = "{CALL sp_agregar_cliente( ?, ? , ? , ? , ? , ?, ? , ?)}";
+                    cstmt = cnx.prepareCall(cad_sql);
+                    cstmt.setString(1, cliente.getId());
+                    cstmt.setString(2, cliente.getNombre());
+                    cstmt.setString(3, cliente.getApPaterno());
+                    cstmt.setString(4, cliente.getApMaterno());
+                    cstmt.setString(5, cliente.getDireccion());
+                    cstmt.setString(6, cliente.getCorreo());
+                    cstmt.setString(7, cliente.getTelefono());
+                    cstmt.setString(8, cliente.getIdDistrito());
+                    cstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Cliente Registrada");
 
                 } else if (e.getSource() == btn_editar) {
-                    cad_sql = "CALL sp_actualizar_cliente(?, ?, ?, ?, ?, ?, ?, ?)";
-
-                    pstm = cnx.prepareStatement(cad_sql);
-
-                    pstm.setString(1, cliente.getId());
-                    pstm.setString(2, cliente.getNombre());
-                    pstm.setString(3, cliente.getApPaterno());
-                    pstm.setString(4, cliente.getApMaterno());
-                    pstm.setString(4, cliente.getDireccion());
-                    pstm.setString(4, cliente.getCorreo());
-                    pstm.setString(4, cliente.getTelefono());
-                    pstm.setString(8, cliente.getIdDistrito());
-
-                    pstm.executeUpdate();
-
-                    JOptionPane.showMessageDialog(null, "Cliente Actualizado");
+                    cad_sql = "{CALL sp_actualizar_cliente(?, ? , ? , ? , ? , ?, ? , ?)}";
+                    cstmt = cnx.prepareCall(cad_sql);
+                    cstmt.setString(1, cliente.getId());
+                    cstmt.setString(2, cliente.getNombre());
+                    cstmt.setString(3, cliente.getApPaterno());
+                    cstmt.setString(4, cliente.getApMaterno());
+                    cstmt.setString(5, cliente.getDireccion());
+                    cstmt.setString(6, cliente.getCorreo());
+                    cstmt.setString(7, cliente.getTelefono());
+                    cstmt.setString(8, cliente.getIdDistrito());
+                    cstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Cliente Actualizado");
 
                 } else if (e.getSource() == btn_borrar) {
-                    int opc = JOptionPane.showConfirmDialog(null,
-                            "Seguro de borrar el registro?",
-                            "Cliente", JOptionPane.YES_NO_OPTION);
-
+                    int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de borrar el registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opc == JOptionPane.YES_OPTION) {
-                        cad_sql = "CALL sp_eliminar_cliente(?)";
-
-                        pstm = cnx.prepareStatement(cad_sql);
-
-                        pstm.setString(1, cliente.getId());
-
-                        pstm.executeUpdate();
-
-                        JOptionPane.showMessageDialog(null, "Cliente Eliminado");
+                        cad_sql = "{CALL sp_eliminar_cliente(?)}";
+                        cstmt = cnx.prepareCall(cad_sql);
+                        cstmt.setString(1, cliente.getId());
+                        cstmt.executeUpdate();
+                        JOptionPane.showMessageDialog(this, "Cliente Eliminada");
                     }
                 }
 
                 MostrarDatos();
-            } catch (SQLException e1) {
-
-            } finally {
-                try {
-                    if (pstm != null) {
-                        pstm.close();
-                    }
-                    if (cnx != null) {
-                        cnx.close();
-                    }
-
-                } catch (SQLException e2) {
-
-                }
+                LimpiarDatos();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error al realizar la operación: " + ex.getMessage());
             }
-
-            LimpiarDatos();
         }
     }
 
