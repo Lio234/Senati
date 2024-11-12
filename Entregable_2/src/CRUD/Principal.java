@@ -129,7 +129,7 @@ public class Principal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mi_clie) {
-            cliente cliente = new cliente();
+            ClienteCRUD cliente = new ClienteCRUD();
             AbrirFormulario(cliente);
         } else if (e.getSource() == mi_prod) {
             Producto producto = new Producto();
@@ -138,7 +138,7 @@ public class Principal extends JFrame implements ActionListener {
             CategoriaCRUD categoria = new CategoriaCRUD();
             AbrirFormulario(categoria);
         } else if (e.getSource() == mi_marc) {
-            Marca marca = new Marca();
+            MarcaCRUD marca = new MarcaCRUD();
             AbrirFormulario(marca);
         }  else if (e.getSource() == mi_dep) {
             DepartamentoCRUD departamento = new DepartamentoCRUD();
