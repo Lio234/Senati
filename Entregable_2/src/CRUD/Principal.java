@@ -16,7 +16,7 @@ public class Principal extends JFrame implements ActionListener {
     private JDesktopPane dsk_principal;
     private JMenuBar mb_principal;
     private JMenu mn_clientes, mn_productos, mn_pedido, mn_lugares, mn_reportes, mn_opciones;
-    private JMenuItem mi_clie,mi_prod, mi_marc, mi_cat, mi_dep, mi_dist, mi_prov,mi_pedi,mi_report, mi_info, mi_salir;
+    private JMenuItem mi_clie, mi_prod, mi_marc, mi_cat, mi_dep, mi_dist, mi_prov, mi_pedi, mi_report1, mi_report2, mi_info, mi_salir;
     private JSeparator sep_opc;
 
     private Principal() {
@@ -60,12 +60,12 @@ public class Principal extends JFrame implements ActionListener {
         mn_pedido = new JMenu("Pedido");
         mi_pedi = new JMenuItem("Pedido");
         mi_pedi.addActionListener(this);
-       
 
         mn_reportes = new JMenu("Reportes");
-        mi_report = new JMenuItem("Reportes");
-        mi_report.addActionListener(this);
-        
+        mi_report1 = new JMenuItem("Reporte de Ventas");
+        mi_report1.addActionListener(this);
+        mi_report2 = new JMenuItem("Reporte de Sucursales");
+        mi_report2.addActionListener(this);
 
         mn_opciones = new JMenu("Opciones");
 
@@ -78,19 +78,20 @@ public class Principal extends JFrame implements ActionListener {
         sep_opc = new JSeparator();
 
         mn_clientes.add(mi_clie);
-        
+
         mn_productos.add(mi_prod);
         mn_productos.add(mi_marc);
         mn_productos.add(mi_cat);
-        
+
         mn_lugares.add(mi_dep);
         mn_lugares.add(mi_prov);
         mn_lugares.add(mi_dist);
-        
+
         mn_pedido.add(mi_pedi);
-        
-        mn_reportes.add(mi_report);
-        
+
+        mn_reportes.add(mi_report1);
+        mn_reportes.add(mi_report2);
+
         mn_opciones.add(mi_info);
         mn_opciones.add(sep_opc);
         mn_opciones.add(mi_salir);
@@ -140,7 +141,7 @@ public class Principal extends JFrame implements ActionListener {
         } else if (e.getSource() == mi_marc) {
             MarcaCRUD marca = new MarcaCRUD();
             AbrirFormulario(marca);
-        }  else if (e.getSource() == mi_dep) {
+        } else if (e.getSource() == mi_dep) {
             DepartamentoCRUD departamento = new DepartamentoCRUD();
             AbrirFormulario(departamento);
         } else if (e.getSource() == mi_prov) {
@@ -149,20 +150,21 @@ public class Principal extends JFrame implements ActionListener {
         } else if (e.getSource() == mi_dist) {
             DistritoCRUD distrito = new DistritoCRUD();
             AbrirFormulario(distrito);
-        }else if (e.getSource() == mi_pedi) {
+        } else if (e.getSource() == mi_pedi) {
             Pedido pedido = new Pedido();
             AbrirFormulario(pedido);
-        }else if (e.getSource() == mi_report) {
-            Reporte reporte = new Reporte();
-            AbrirFormulario(reporte);
-        }else if (e.getSource() == mi_info) {
+        } else if (e.getSource() == mi_report1) {
+            ReporteVentas reporte_ventas = new ReporteVentas();
+            AbrirFormulario(reporte_ventas);
+        } else if (e.getSource() == mi_report2) {
+            ReporteSucursales reporte_sucursales = new ReporteSucursales();
+            AbrirFormulario(reporte_sucursales);
+        } else if (e.getSource() == mi_info) {
             Informacion informacion = new Informacion();
             AbrirFormulario(informacion);
         } else if (e.getSource() == mi_salir) {
             System.exit(0);
         }
-     
-
 
     }
 
