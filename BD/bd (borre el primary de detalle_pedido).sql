@@ -2,10 +2,10 @@
 drop database compuware;
 
 -- En caso de de no tener una bd
-create database Compuware;
+create database compuware;
 
 -- Usar la bd
-use Compuware;
+use compuware;
 
 -- Crear la tabla de Departamentos
 CREATE TABLE
@@ -22,7 +22,7 @@ CREATE TABLE
         id_departamento CHAR(5) NOT NULL,
         FOREIGN KEY (id_departamento) REFERENCES tb_departamento (id_departamento)
     );
-
+    
 -- Crear la tabla de Distrito
 CREATE TABLE
     tb_distrito (
@@ -86,7 +86,6 @@ CREATE TABLE
 -- Crear la tabla de Detalle_Pedido
 CREATE TABLE
     tb_detalle_pedido (
-        id_detalle_pedido CHAR(5) NOT NULL PRIMARY KEY,
         cantidad INT NOT NULL,
         precio_unitario FLOAT NOT NULL,
         precio_subtotal FLOAT NOT NULL,
@@ -95,14 +94,14 @@ CREATE TABLE
         FOREIGN KEY (id_producto) REFERENCES tb_producto (id_producto),
         FOREIGN KEY (id_pedido) REFERENCES tb_pedido (id_pedido)
     );
+    
+-- Tabla de Usuarios
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+); 
 
---Tabla de Usuarios
-CREATE TABLE
-    users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50) NOT NULL,
-        email VARCHAR(100) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );

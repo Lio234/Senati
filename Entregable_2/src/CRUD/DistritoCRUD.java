@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.HashMap;
 
-public class DistritoCRUD extends JFrame implements ActionListener {
+public class DistritoCRUD extends JInternalFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_id_distrito, lbl_distrito, lbl_departamento, lbl_provincia;
     private JTextField txt_id_distrito, txt_distrito;
     private JComboBox<String> cb_departamento, cb_provincia;
@@ -35,7 +35,7 @@ public class DistritoCRUD extends JFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(600, 500);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false); // Para evitar que el usuario cambie el tamaño de la ventana
@@ -225,6 +225,28 @@ private void LlenarComboDepartamentos() {
     }
 }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btn_cerrar) {
+            if (e.getSource() == btn_cerrar) {
+            int op = JOptionPane.showConfirmDialog(null,
+                    "¿Seguro de cerrar?",
+                    "Distrito",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (op == JOptionPane.YES_OPTION) {
+                dispose();
+            }
+        }
+        } else if (e.getSource() == btn_nuevo) {
+            LimpiarDatos();
+        } else if (e.getSource() == btn_agregar) {
+            if (validarCampos()) {
+                String id_Provincia = provinciaMap.get(cb_provincia.getSelectedItem());
+                String id_Departamento = departamentoMap.get(cb_departamento.getSelectedItem());
+>>>>>>> 224bb7453fe9abaec916c71e024d12dbd467f3fe
 
     // Validar campos antes de insertar
     private boolean validarCampos() {

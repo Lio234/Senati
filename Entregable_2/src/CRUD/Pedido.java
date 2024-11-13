@@ -1,7 +1,6 @@
 package CRUD;
 
 import Conexion.conexionMYSQL;
-import Modelos.MPedido;
 import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.PreparedStatement;
 
