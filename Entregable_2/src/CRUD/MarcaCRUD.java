@@ -1,5 +1,5 @@
 package CRUD;
-
+import Conexion.conexionSQL;
 import Conexion.conexionMYSQL;
 import Modelos.Marca;
 import java.awt.Color;
@@ -12,7 +12,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-public class MarcaCRUD extends JInternalFrame implements ActionListener {
+public class MarcaCRUD extends JFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_1, lbl_2;
     private JTextField txt_id_marca, txt_marca;
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
@@ -20,6 +20,7 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
     private JScrollPane scr_marca;
 
     private final conexionMYSQL cn = new conexionMYSQL();
+    //private final conexionSQL cn  =new conexionMYSQL();
 
     public MarcaCRUD() {
         super("CRUD Marca");
@@ -31,7 +32,7 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(430, 430); 
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -123,7 +124,8 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
         modelo.setRowCount(0);
 
         try (Connection cnx = cn.Conectar(); 
-             CallableStatement cstmt = cnx.prepareCall("{CALL sp_obtener_marcas()}")) {
+             CallableStatement cstmt = cnx.prepareCall("CALL sp_obtener_marcas()")) {
+           //CallableStatement cstmt = cnx.prepareCall("{CALL sp_obtener_marcas()}")) {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
                 modelo.addRow(new Object[] { rs.getString("id_marca"), rs.getString("marca") });
@@ -146,16 +148,7 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-            if (e.getSource() == btn_cerrar) {
-            int op = JOptionPane.showConfirmDialog(null,
-                    "¿Seguro de cerrar?",
-                    "Marca",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (op == JOptionPane.YES_OPTION) {
-                dispose();
-            }
-        }
+            dispose();
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
@@ -170,7 +163,8 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
                 CallableStatement cstmt;
 
                 if (e.getSource() == btn_agregar) {
-                    cad_sql = "{CALL sp_agregar_marca(?, ?)}";
+                    cad_sql = "CALL sp_agregar_marca(?, ?)";
+                  //cad_sql = "{CALL sp_agregar_marca(?, ?)}";  
                     cstmt = cnx.prepareCall(cad_sql);
                     cstmt.setString(1, marca.getIdMarca());
                     cstmt.setString(2, marca.getMarca());
@@ -178,7 +172,8 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Marca Registrada");
 
                 } else if (e.getSource() == btn_editar) {
-                    cad_sql = "{CALL sp_actualizar_marca(?, ?)}";
+                    cad_sql = "CALL sp_actualizar_marca(?, ?)";
+                  //cad_sql = "{CALL sp_actualizar_marca(?, ?)}";  
                     cstmt = cnx.prepareCall(cad_sql);
                     cstmt.setString(1, marca.getIdMarca());
                     cstmt.setString(2, marca.getMarca());
@@ -188,7 +183,8 @@ public class MarcaCRUD extends JInternalFrame implements ActionListener {
                 } else if (e.getSource() == btn_borrar) {
                     int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de borrar el registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opc == JOptionPane.YES_OPTION) {
-                        cad_sql = "{CALL sp_eliminar_marca(?)}";
+                        cad_sql = "CALL sp_eliminar_marca(?)";
+                      //cad_sql = "{CALL sp_eliminar_marca(?)}";  
                         cstmt = cnx.prepareCall(cad_sql);
                         cstmt.setString(1, marca.getIdMarca());
                         cstmt.executeUpdate();

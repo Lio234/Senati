@@ -1,16 +1,18 @@
 package CRUD;
 
 import Conexion.conexionMYSQL;
+import Conexion.conexionSQL;
 import Modelos.Provincia;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
+public class ProvinciaCRUD extends JFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_id_provincia, lbl_provincia, lbl_departamento;
     private JTextField txt_id_provincia, txt_provincia;
     private JComboBox<String> cb_departamento;
@@ -19,6 +21,7 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
     private JScrollPane scr_provincia;
 
     private final conexionMYSQL cn = new conexionMYSQL();
+  //private final conexionSQL cn  =new conexionMYSQL();
     private final HashMap<String, String> departamentoMap = new HashMap<>(); // Almacenar id y nombre del departamento
 
     public ProvinciaCRUD() {
@@ -32,9 +35,9 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(500, 450);
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null); // Centrar la ventana
         this.setLayout(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar la aplicación al cerrar la ventana
     }
 
     private void IniciarControles() {
@@ -84,7 +87,6 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
         tb_provincia = new JTable();
         scr_provincia = new JScrollPane(tb_provincia);
         scr_provincia.setBounds(10, 200, 450, 110);
-        
 
         this.add(lbl_titulo);
         this.add(lbl_id_provincia);
@@ -99,10 +101,32 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
         this.add(btn_borrar);
         this.add(btn_cerrar);
         this.add(scr_provincia);
+
+
+        tb_provincia.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && tb_provincia.getSelectedRow() != -1) {
+                    int selectedRow = tb_provincia.getSelectedRow();
+                    String idProvincia = tb_provincia.getValueAt(selectedRow, 0).toString();
+                    String provincia = tb_provincia.getValueAt(selectedRow, 1).toString();
+                    String idDepartamento = tb_provincia.getValueAt(selectedRow, 2).toString();
+                    txt_id_provincia.setText(idProvincia);
+                    txt_provincia.setText(provincia);
+                    for (String nombreDepartamento : departamentoMap.keySet()) {
+                        if (departamentoMap.get(nombreDepartamento).equals(idDepartamento)) {
+                            cb_departamento.setSelectedItem(nombreDepartamento);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void LlenarComboDepartamentos() {
-        try (Connection cnx = cn.Conectar(); Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery("SELECT id_departamento, departamento FROM tb_departamento")) {
+        try (Connection cnx = cn.Conectar(); Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery("CALL sp_obtener_departamentos()")) {
+      //try (Connection cnx = cn.Conectar(); Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery("{CALL sp_obtener_departamentos()}")) {     
             while (rs.next()) {
                 String id = rs.getString("id_departamento");
                 String nombre = rs.getString("departamento");
@@ -127,6 +151,7 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
         modelo.setRowCount(0);
 
         try (Connection cnx = cn.Conectar(); Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery("CALL sp_obtener_provincias()")) {
+      //try (Connection cnx = cn.Conectar(); Statement stm = cnx.createStatement(); ResultSet rs = stm.executeQuery("{CALL sp_obtener_provincias()}")) {
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getString("id_provincia"), rs.getString("provincia"), rs.getString("id_departamento")});
             }
@@ -148,7 +173,6 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-            if (e.getSource() == btn_cerrar) {
             int op = JOptionPane.showConfirmDialog(null,
                     "¿Seguro de cerrar?",
                     "Provincia",
@@ -157,7 +181,6 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
             if (op == JOptionPane.YES_OPTION) {
                 dispose();
             }
-        }
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
@@ -173,7 +196,8 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
                 CallableStatement cs;
 
                 if (e.getSource() == btn_agregar) {
-                    sql = "{CALL sp_agregar_provincia(?, ?, ?)}";
+                    sql = "CALL sp_agregar_provincia(?, ?, ?)";
+                  //sql = "{CALL sp_agregar_provincia(?, ?, ?)}";  
                     cs = cnx.prepareCall(sql);
                     cs.setString(1, provincia.getIdProvincia());
                     cs.setString(2, provincia.getProvincia());
@@ -182,7 +206,8 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Provincia Registrada");
 
                 } else if (e.getSource() == btn_editar) {
-                    sql = "{CALL sp_actualizar_provincia(?, ?, ?)}";
+                    sql = "CALL sp_actualizar_provincia(?, ?, ?)";
+                  //sql = "{CALL sp_actualizar_provincia(?, ?, ?)}";
                     cs = cnx.prepareCall(sql);
                     cs.setString(1, provincia.getIdProvincia());
                     cs.setString(2, provincia.getProvincia());
@@ -193,7 +218,8 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
                 } else if (e.getSource() == btn_borrar) {
                     int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de borrar el registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opc == JOptionPane.YES_OPTION) {
-                        sql = "{CALL sp_eliminar_provincia(?)}";
+                        sql = "CALL sp_eliminar_provincia(?)";
+                      //sql = "{CALL sp_eliminar_provincia(?)}";
                         cs = cnx.prepareCall(sql);
                         cs.setString(1, provincia.getIdProvincia());
                         cs.executeUpdate();

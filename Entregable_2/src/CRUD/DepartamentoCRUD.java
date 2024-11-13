@@ -1,6 +1,7 @@
 package CRUD;
 
 import Conexion.conexionMYSQL;
+import Conexion.conexionSQL;
 import Modelos.Departamento;
 import java.awt.Color;
 import java.awt.Font;
@@ -12,7 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
+public class DepartamentoCRUD extends JFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_1, lbl_2;
     private JTextField txt_id_departamento, txt_departamento;
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
@@ -20,6 +21,8 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
     private JScrollPane scr_departamento;
 
     private final conexionMYSQL cn = new conexionMYSQL();
+  //private final conexionSQL cn = new conexionSQL();
+  
 
     public DepartamentoCRUD() {
         super("CRUD Departamento");
@@ -31,7 +34,7 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(430, 430); 
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -122,7 +125,8 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
         modelo.setRowCount(0);
 
         try (Connection cnx = cn.Conectar();
-             CallableStatement cstm = cnx.prepareCall("{CALL sp_obtener_departamentos()}");
+             CallableStatement cstm = cnx.prepareCall("CALL sp_obtener_departamentos()");
+           //CallableStatement cstm = cnx.prepareCall("{CALL sp_obtener_departamentos()}");  
              ResultSet rs = cstm.executeQuery()) {
 
             while (rs.next()) {
@@ -146,16 +150,7 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-            if (e.getSource() == btn_cerrar) {
-            int op = JOptionPane.showConfirmDialog(null,
-                    "¿Seguro de cerrar?",
-                    "Departamento",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (op == JOptionPane.YES_OPTION) {
-                dispose();
-            }
-        }
+            dispose();
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
@@ -169,14 +164,16 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
                 CallableStatement cstm;
 
                 if (e.getSource() == btn_agregar) {
-                    cstm = cnx.prepareCall("{CALL sp_agregar_departamento(?, ?)}");
+                    cstm = cnx.prepareCall("CALL sp_agregar_departamento(?, ?)");
+                  //cstm = cnx.prepareCall("{CALL sp_agregar_departamento(?, ?)}");  
                     cstm.setString(1, departamento.getIdDepartamento());
                     cstm.setString(2, departamento.getDepartamento());
                     cstm.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Departamento Registrado");
 
                 } else if (e.getSource() == btn_editar) {
-                    cstm = cnx.prepareCall("{CALL sp_actualizar_departamento(?, ?)}");
+                    cstm = cnx.prepareCall("CALL sp_actualizar_departamento(?, ?)");
+                  //cstm = cnx.prepareCall("{CALL sp_actualizar_departamento(?, ?)}");
                     cstm.setString(1, departamento.getIdDepartamento());
                     cstm.setString(2, departamento.getDepartamento());
                     cstm.executeUpdate();
@@ -185,7 +182,8 @@ public class DepartamentoCRUD extends JInternalFrame implements ActionListener {
                 } else if (e.getSource() == btn_borrar) {
                     int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de borrar el registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opc == JOptionPane.YES_OPTION) {
-                        cstm = cnx.prepareCall("{CALL sp_eliminar_departamento(?)}");
+                        cstm = cnx.prepareCall("CALL sp_eliminar_departamento(?)");
+                      //cstm = cnx.prepareCall("{CALL sp_eliminar_departamento(?)}");  
                         cstm.setString(1, departamento.getIdDepartamento());
                         cstm.executeUpdate();
                         JOptionPane.showMessageDialog(this, "Departamento Eliminado");
