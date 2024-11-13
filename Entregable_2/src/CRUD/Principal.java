@@ -1,4 +1,4 @@
-package CRUD;
+/*package CRUD;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -129,25 +129,25 @@ public class Principal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mi_clie) {
-            ClienteCRUD cliente = new ClienteCRUD();
+            cliente cliente = new cliente();
             AbrirFormulario(cliente);
         } else if (e.getSource() == mi_prod) {
-            ProductoCRUD producto = new ProductoCRUD();
+            Producto producto = new Producto();
             AbrirFormulario(producto);
         } else if (e.getSource() == mi_cat) {
-            CategoriaCRUD categoria = new CategoriaCRUD();
+            Categoria categoria = new Categoria();
             AbrirFormulario(categoria);
         } else if (e.getSource() == mi_marc) {
-            MarcaCRUD marca = new MarcaCRUD();
+            Marca marca = new Marca();
             AbrirFormulario(marca);
         }  else if (e.getSource() == mi_dep) {
-            DepartamentoCRUD departamento = new DepartamentoCRUD();
+            Departamento departamento = new Departamento();
             AbrirFormulario(departamento);
         } else if (e.getSource() == mi_prov) {
-            ProvinciaCRUD provincia = new ProvinciaCRUD();
+            Provincia provincia = new Provincia();
             AbrirFormulario(provincia);
         } else if (e.getSource() == mi_dist) {
-            DistritoCRUD distrito = new DistritoCRUD();
+            Distrito distrito = new Distrito();
             AbrirFormulario(distrito);
         }else if (e.getSource() == mi_pedi) {
             Pedido pedido = new Pedido();
@@ -171,4 +171,4 @@ public class Principal extends JFrame implements ActionListener {
         principal.setVisible(true);
     }
 
-}
+}*/

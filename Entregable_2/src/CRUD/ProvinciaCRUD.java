@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
+public class ProvinciaCRUD extends JFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_id_provincia, lbl_provincia, lbl_departamento;
     private JTextField txt_id_provincia, txt_provincia;
     private JComboBox<String> cb_departamento;
@@ -33,11 +33,7 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(500, 450);
-<<<<<<< HEAD
         this.setLocationRelativeTo(null); // Centrar la ventana
-=======
-        //this.setLocationRelativeTo(null);
->>>>>>> 224bb7453fe9abaec916c71e024d12dbd467f3fe
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar la aplicación al cerrar la ventana
     }
@@ -173,10 +169,6 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-<<<<<<< HEAD
-=======
-            if (e.getSource() == btn_cerrar) {
->>>>>>> 224bb7453fe9abaec916c71e024d12dbd467f3fe
             int op = JOptionPane.showConfirmDialog(null,
                     "¿Seguro de cerrar?",
                     "Provincia",
@@ -185,10 +177,6 @@ public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
             if (op == JOptionPane.YES_OPTION) {
                 dispose();
             }
-<<<<<<< HEAD
-=======
-        }
->>>>>>> 224bb7453fe9abaec916c71e024d12dbd467f3fe
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {

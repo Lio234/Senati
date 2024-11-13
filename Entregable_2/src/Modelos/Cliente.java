@@ -18,11 +18,11 @@ public class Cliente {
        
     }
 
-    public String getId_cliente() {
+    public String getIdCliente() {
         return this.id_cliente;
     }
 
-    public void setId_cliente(String id_cliente) {
+    public void setIdCliente(String id_cliente) {
         this.id_cliente = id_cliente;
     }
 

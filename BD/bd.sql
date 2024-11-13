@@ -8,24 +8,21 @@ create database Compuware;
 use Compuware;
 
 -- Crear la tabla de Departamentos
-CREATE TABLE
-    tb_departamento (
+CREATE TABLE tb_departamento(
         id_departamento CHAR(5) NOT NULL PRIMARY KEY,
         departamento VARCHAR(25) NOT NULL
     );
 
 -- Crear la tabla de Provincia
-CREATE TABLE
-    tb_provincia (
+CREATE TABLE tb_provincia (
         id_provincia CHAR(5) NOT NULL PRIMARY KEY,
         provincia VARCHAR(50) NOT NULL,
         id_departamento CHAR(5) NOT NULL,
         FOREIGN KEY (id_departamento) REFERENCES tb_departamento (id_departamento)
     );
-
+    
 -- Crear la tabla de Distrito
-CREATE TABLE
-    tb_distrito (
+CREATE TABLE tb_distrito (
         id_distrito CHAR(5) NOT NULL PRIMARY KEY,
         distrito VARCHAR(50) NOT NULL,
         id_provincia CHAR(5) NOT NULL,
@@ -33,8 +30,7 @@ CREATE TABLE
     );
 
 -- Crear la tabla de Cliente
-CREATE TABLE
-    tb_cliente (
+CREATE TABLE tb_cliente (
         id_cliente CHAR(5) NOT NULL PRIMARY KEY,
         nombre VARCHAR(20) NOT NULL,
         ap_paterno VARCHAR(20) NOT NULL,
@@ -95,14 +91,13 @@ CREATE TABLE
         FOREIGN KEY (id_producto) REFERENCES tb_producto (id_producto),
         FOREIGN KEY (id_pedido) REFERENCES tb_pedido (id_pedido)
     );
-
+    
 --Tabla de Usuarios
-CREATE TABLE
-    users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50) NOT NULL,
-        email VARCHAR(100) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    );
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+); 

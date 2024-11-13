@@ -13,7 +13,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-public class CategoriaCRUD extends JInternalFrame implements ActionListener {
+public class CategoriaCRUD extends JFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_1, lbl_2;
     private JTextField txt_id_categoria, txt_categoria;
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
@@ -33,7 +33,7 @@ public class CategoriaCRUD extends JInternalFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(430, 430); 
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -150,16 +150,7 @@ public class CategoriaCRUD extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_cerrar) {
-            if (e.getSource() == btn_cerrar) {
-            int op = JOptionPane.showConfirmDialog(null,
-                    "¿Seguro de cerrar?",
-                    "Categoria",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (op == JOptionPane.YES_OPTION) {
-                dispose();
-            }
-        }
+            dispose();
         } else if (e.getSource() == btn_nuevo) {
             LimpiarDatos();
         } else {
