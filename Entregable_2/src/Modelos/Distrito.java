@@ -5,7 +5,7 @@ public class Distrito {
     private String distrito;
     private String id_provincia;
 
-    
+    // Constructores
     public Distrito() { }
 
     public Distrito(String id_distrito, String distrito, String id_provincia) {
@@ -14,7 +14,7 @@ public class Distrito {
         this.id_provincia = id_provincia;
     }
 
-    
+    // Getters y Setters
     public String getIdDistrito() {
         return id_distrito;
     }

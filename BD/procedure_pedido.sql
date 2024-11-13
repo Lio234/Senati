@@ -1,15 +1,9 @@
 -- LISTADO DE PEDIDOS
 DELIMITER $$
 
-CREATE PROCEDURE sp_listar_pedidos()
+CREATE PROCEDURE sp_listar_pedido()
 BEGIN
     SELECT 
-<<<<<<< HEAD
-        p.id_pedido,
-        p.fecha,
-        p.total,
-        c.nombre AS cliente
-=======
         p.id_pedido, 
         c.nombre AS cliente,  -- Selecciona el nombre del cliente
         p.fecha, 
@@ -34,18 +28,14 @@ BEGIN
         dp.precio_unitario,  -- Precio unitario
         dp.cantidad,  -- Cantidad
         (dp.precio_unitario * dp.cantidad) AS precio_total  -- Precio total
->>>>>>> 098e874340846b9ff889c189fb6db166d669c397
     FROM tb_pedido p
     INNER JOIN tb_cliente c ON p.id_cliente = c.id_cliente
-    ORDER BY p.fecha DESC;
-END$$
+    INNER JOIN tb_detalle_pedido dp ON p.id_pedido = dp.id_pedido
+    INNER JOIN tb_producto prod ON dp.id_producto = prod.id_producto;
+END $$
 
 DELIMITER ;
 
-<<<<<<< HEAD
-call sp_listar_pedidos()
-=======
->>>>>>> 098e874340846b9ff889c189fb6db166d669c397
 
 -- FILTRADO DE PEDIDOS POR CLIENTE
 DELIMITER $$
@@ -65,8 +55,6 @@ END$$
 DELIMITER ;
 
 -- AGREGAR DATOS DE PEDIDO
-<<<<<<< HEAD
-=======
 
 DELIMITER $$
 
@@ -133,63 +121,61 @@ END $$
 DELIMITER ;
 
 -- ELIMINAR PEDIDOS Y DETALLES
->>>>>>> 098e874340846b9ff889c189fb6db166d669c397
 DELIMITER //
 
-CREATE PROCEDURE sp_guardarPedido(
-    IN p_idPedido CHAR(5),
-    IN p_fecha DATE,
-    IN p_total FLOAT,
-    IN p_idCliente CHAR(5)
-)
+CREATE PROCEDURE sp_eliminar_pedido_y_detalles(IN p_id_pedido VARCHAR(20))
 BEGIN
-    INSERT INTO tb_pedido (id_pedido, fecha, total, id_cliente)
-    VALUES (p_idPedido, p_fecha, p_total, p_idCliente);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+    -- Eliminar los detalles del pedido
+    DELETE FROM tb_detalle_pedido WHERE id_pedido = p_id_pedido;
+
+    -- Eliminar el pedido
+    DELETE FROM tb_pedido WHERE id_pedido = p_id_pedido;
+
+    COMMIT;
 END //
 
 DELIMITER ;
 
 
-CALL sp_insertar_pedido('PE004','2023-11-10', 500.00, 'C002');
-
--- EDITAR PEDIDO
 
 DELIMITER $$
 
-CREATE PROCEDURE sp_actualizar_pedido(
-    IN p_id_pedido CHAR(5),
-    IN p_fecha DATE,
-    IN p_total FLOAT,
-    IN p_id_cliente CHAR(5) 
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_obtener_pedido(
+    IN p_id_pedido CHAR(5)
 )
 BEGIN
-    UPDATE tb_pedido
-    SET fecha = p_fecha, total = p_total, id_cliente = p_id_cliente
-    WHERE id_pedido = p_id_pedido;
+    SELECT 
+        tb_pedido.id_pedido,
+        CONCAT(tb_cliente.id_cliente, ' - ', tb_cliente.nombre) AS cliente,
+        tb_pedido.fecha,
+        CONCAT(tb_producto.id_producto, ' - ', tb_producto.producto) AS producto,
+        tb_detalle_pedido.precio_unitario,
+        tb_detalle_pedido.cantidad,
+        tb_detalle_pedido.precio_subtotal AS precio_total
+    FROM 
+        tb_pedido
+    INNER JOIN 
+        tb_cliente ON tb_pedido.id_cliente = tb_cliente.id_cliente
+    INNER JOIN 
+        tb_detalle_pedido ON tb_pedido.id_pedido = tb_detalle_pedido.id_pedido
+    INNER JOIN 
+        tb_producto ON tb_detalle_pedido.id_producto = tb_producto.id_producto
+    WHERE 
+        tb_pedido.id_pedido = p_id_pedido;
 END$$
 
 DELIMITER ;
-CALL sp_actualizar_pedido('PE003', '2023-11-15', 600.00, 'C001');
 
-
--- ELIMINAR PEDIDO
-DELIMITER $$
-
-CREATE PROCEDURE sp_eliminar_pedido(IN p_id_pedido CHAR(5))
-BEGIN
-    -- Eliminar detalles asociados al pedido
-    DELETE FROM tb_detalle_pedido WHERE id_pedido = p_id_pedido;
-    
-    -- Eliminar el pedido de la tabla tb_pedido
-    DELETE FROM tb_pedido WHERE id_pedido = p_id_pedido;
-END$$
-
-DELIMITER ;
-
-<<<<<<< HEAD
-CALL sp_eliminar_pedido('');
-
-=======
 
 
 DELIMITER $$
@@ -214,4 +200,3 @@ END $$
 
 DELIMITER ;
 
->>>>>>> 098e874340846b9ff889c189fb6db166d669c397
