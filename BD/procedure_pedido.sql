@@ -14,7 +14,6 @@ END $$
 
 DELIMITER ;
 
-call sp_listar_pedido()
 
 -- LISTADO DE DETALLES
 
@@ -37,7 +36,6 @@ END $$
 
 DELIMITER ;
 
-CALL sp_listar_detalle();
 
 -- FILTRADO DE PEDIDOS POR CLIENTE
 DELIMITER $$
@@ -56,7 +54,6 @@ END$$
 
 DELIMITER ;
 
- call sp_filtrar_pedidos_por_cliente("C001");
 -- AGREGAR DATOS DE PEDIDO
 
 DELIMITER $$
@@ -91,16 +88,6 @@ BEGIN
 END $$
 
 DELIMITER ;
-CALL sp_guardar_pedido(
-    'C001',        -- p_id_cliente
-    '2024-11-12',  -- p_fecha
-    500.00,        -- p_total
-    'P001',        -- p_id_producto
-    5,             -- p_cantidad
-    100.00         -- p_precio_unitario
-);
-
-CALL sp_insertar_pedido('PE004','2023-11-10', 500.00, 'C002');
 
 -- EDITAR PEDIDO
 DELIMITER $$
@@ -156,7 +143,6 @@ END //
 
 DELIMITER ;
 
-CALL sp_eliminar_pedido_y_detalles('PE001');
 
 
 DELIMITER $$
@@ -190,7 +176,6 @@ END$$
 
 DELIMITER ;
 
-CALL sp_obtener_pedido('PE001');
 
 
 DELIMITER $$
@@ -215,4 +200,3 @@ END $$
 
 DELIMITER ;
 
-CALL AgregarProductoDetallePedido('PE001', 'P0002', 5, 100.00);
