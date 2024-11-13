@@ -46,9 +46,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_eliminar_cliente`(
     IN p_id_cliente CHAR(5)
 )
 BEGIN
-    DELETE FROM tb_cliente
+    DECLARE contador INT DEFAULT 0;
+
+    -- Contar registros asociados en tb_detalle_pedido
+    SELECT COUNT(*) INTO contador
+    FROM tb_pedido
     WHERE id_cliente = p_id_cliente;
+
+    -- Si existen registros, mostrar mensaje
+    IF contador > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No se puede eliminar el producto porque tiene registros asociados en tb_detalle_pedido.';
+    ELSE
+        -- Si no hay registros asociados, eliminar el producto
+        DELETE FROM tb_cliente
+        WHERE id_cliente = p_id_cliente;
+    END IF;
 END
+
 DELIMITER ;
 
 DELIMITER $$

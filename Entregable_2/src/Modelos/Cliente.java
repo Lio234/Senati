@@ -2,7 +2,7 @@ package Modelos;
 
 public class Cliente {
 
-    private String id;
+    private String id_cliente;
     private String nombre;
     private String ap_paterno;
     private String ap_materno;
@@ -14,16 +14,16 @@ public class Cliente {
     public Cliente(){
     }
 
-    public Cliente(String id, String nombre, String ap_paterno, String ap_materno, String direccion, String correo, String telefono, String id_distrito) {
+    public Cliente(String id_cliente, String nombre, String ap_paterno, String ap_materno, String direccion, String correo, String telefono, String id_distrito) {
        
     }
 
-    public String getId() {
-        return this.id;
+    public String getId_cliente() {
+        return this.id_cliente;
     }
 
-    public void setId(String id_cliente) {
-        this.id = id_cliente;
+    public void setId_cliente(String id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getNombre() {

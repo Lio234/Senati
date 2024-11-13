@@ -132,7 +132,7 @@ public class Principal extends JFrame implements ActionListener {
             ClienteCRUD cliente = new ClienteCRUD();
             AbrirFormulario(cliente);
         } else if (e.getSource() == mi_prod) {
-            Producto producto = new Producto();
+            ProductoCRUD producto = new ProductoCRUD();
             AbrirFormulario(producto);
         } else if (e.getSource() == mi_cat) {
             CategoriaCRUD categoria = new CategoriaCRUD();

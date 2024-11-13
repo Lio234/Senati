@@ -41,8 +41,8 @@ import javax.swing.table.TableColumnModel;
 
 public class ClienteCRUD extends JInternalFrame implements ActionListener {
 
-    private JLabel lbl_titulo, lbl_id, lbl_nombre, lbl_ap_paterno, lbl_ap_materno, lbl_direccion, lbl_correo, lbl_telefono, lbl_distrito;
-    private JTextField txt_id, txt_nombre, txt_ap_paterno, txt_ap_materno, txt_direccion, txt_correo, txt_telefono;
+    private JLabel lbl_titulo, lbl_id_cliente, lbl_nombre, lbl_ap_paterno, lbl_ap_materno, lbl_direccion, lbl_correo, lbl_telefono, lbl_distrito;
+    private JTextField txt_id_cliente, txt_nombre, txt_ap_paterno, txt_ap_materno, txt_direccion, txt_correo, txt_telefono;
     private JComboBox cbo_id_distrito;
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
     private JTable tb_cliente;
@@ -75,10 +75,10 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         lbl_titulo.setForeground(Color.BLUE);
         lbl_titulo.setBounds(10, 15, 300, 25);
 
-        lbl_id = new JLabel("ID Cliente");
-        lbl_id.setBounds(20, 50, 120, 25);
-        txt_id = new JTextField();
-        txt_id.setBounds(150, 50, 80, 25);
+        lbl_id_cliente = new JLabel("ID Cliente");
+        lbl_id_cliente.setBounds(20, 50, 120, 25);
+        txt_id_cliente = new JTextField();
+        txt_id_cliente.setBounds(150, 50, 80, 25);
 
         lbl_nombre = new JLabel("Nombres");
         lbl_nombre.setBounds(20, 80, 110, 25);
@@ -158,8 +158,8 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         scr_cliente.setBounds(10, 280, 390, 150);
 
         this.add(lbl_titulo);
-        this.add(lbl_id);
-        this.add(txt_id);
+        this.add(lbl_id_cliente);
+        this.add(txt_id_cliente);
         this.add(lbl_nombre);
         this.add(txt_nombre);
         this.add(lbl_ap_paterno);
@@ -183,7 +183,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         this.add(btn_cerrar);
 
         ControladorTxt ctxt = new ControladorTxt();
-        txt_id.addKeyListener(ctxt);
+        txt_id_cliente.addKeyListener(ctxt);
         txt_nombre.addKeyListener(ctxt);
         txt_ap_materno.addKeyListener(ctxt);
         txt_ap_paterno.addKeyListener(ctxt);
@@ -197,11 +197,11 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
     }
 
     private void LimpiarDatos() {
-        txt_id.setEditable(true);
+        txt_id_cliente.setEditable(true);
 
         tb_cliente.clearSelection();
 
-        txt_id.setText("");
+        txt_id_cliente.setText("");
         txt_nombre.setText("");
         txt_ap_paterno.setText("");
         txt_ap_materno.setText("");
@@ -209,7 +209,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         txt_correo.setText("");
         txt_telefono.setText("");
         cbo_id_distrito.setSelectedIndex(0);
-        txt_id.requestFocus();
+        txt_id_cliente.requestFocus();
     }
 
     private void MostrarDatos() {
@@ -335,7 +335,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
                 e.consume();
             } else if (e.getSource() == txt_nombre && txt_nombre.getText().length() == 20) {
                 e.consume();
-            } else if (e.getSource() == txt_id && txt_id.getText().length() == 5) {
+            } else if (e.getSource() == txt_id_cliente && txt_id_cliente.getText().length() == 5) {
                 e.consume();
             }
         }
@@ -352,7 +352,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
         public void mouseClicked(MouseEvent e) {
             int registro = tb_cliente.getSelectedRow();
 
-            txt_id.setEditable(false);
+            txt_id_cliente.setEditable(false);
 
             String id = (String) tb_cliente.getValueAt(registro, 0);
 
@@ -380,7 +380,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
                     String id_distrito = rs.getString("id_distrito");
 
                     // Actualizamos los campos de texto con los datos obtenidos
-                    txt_id.setText(id);
+                    txt_id_cliente.setText(id);
                     txt_nombre.setText(nombre);
                     txt_ap_paterno.setText(ap_paterno);
                     txt_ap_materno.setText(ap_materno);
@@ -403,7 +403,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
     }
 
     private boolean validarCampos() {
-        if (txt_id.getText().isEmpty() || txt_nombre.getText().isEmpty() || txt_ap_paterno.getText().isEmpty() || txt_ap_materno.getText().isEmpty() || txt_direccion.getText().isEmpty() || txt_correo.getText().isEmpty() || txt_telefono.getText().isEmpty()|| cbo_id_distrito.getSelectedIndex()==0) {
+        if (txt_id_cliente.getText().isEmpty() || txt_nombre.getText().isEmpty() || txt_ap_paterno.getText().isEmpty() || txt_ap_materno.getText().isEmpty() || txt_direccion.getText().isEmpty() || txt_correo.getText().isEmpty() || txt_telefono.getText().isEmpty()|| cbo_id_distrito.getSelectedIndex()==0) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos.");
             return false;
         }
@@ -431,7 +431,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
             }
 
             Cliente cliente = new Cliente();
-            cliente.setId(txt_id.getText());
+            cliente.setId_cliente(txt_id_cliente.getText());
             cliente.setNombre(txt_nombre.getText());
             cliente.setApPaterno(txt_ap_paterno.getText());
             cliente.setApMaterno(txt_ap_materno.getText());
@@ -457,7 +457,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
                 if (e.getSource() == btn_agregar) {
                     cad_sql = "{CALL sp_agregar_cliente( ?, ? , ? , ? , ? , ?, ? , ?)}";
                     cstmt = cnx.prepareCall(cad_sql);
-                    cstmt.setString(1, cliente.getId());
+                    cstmt.setString(1, cliente.getId_cliente());
                     cstmt.setString(2, cliente.getNombre());
                     cstmt.setString(3, cliente.getApPaterno());
                     cstmt.setString(4, cliente.getApMaterno());
@@ -471,7 +471,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
                 } else if (e.getSource() == btn_editar) {
                     cad_sql = "{CALL sp_actualizar_cliente(?, ? , ? , ? , ? , ?, ? , ?)}";
                     cstmt = cnx.prepareCall(cad_sql);
-                    cstmt.setString(1, cliente.getId());
+                    cstmt.setString(1, cliente.getId_cliente());
                     cstmt.setString(2, cliente.getNombre());
                     cstmt.setString(3, cliente.getApPaterno());
                     cstmt.setString(4, cliente.getApMaterno());
@@ -487,7 +487,7 @@ public class ClienteCRUD extends JInternalFrame implements ActionListener {
                     if (opc == JOptionPane.YES_OPTION) {
                         cad_sql = "{CALL sp_eliminar_cliente(?)}";
                         cstmt = cnx.prepareCall(cad_sql);
-                        cstmt.setString(1, cliente.getId());
+                        cstmt.setString(1, cliente.getId_cliente());
                         cstmt.executeUpdate();
                         JOptionPane.showMessageDialog(this, "Cliente Eliminada");
                     }
