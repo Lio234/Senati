@@ -57,3 +57,10 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE obtener_departamentos()
+BEGIN
+    SELECT id_departamento, departamento FROM tb_departamento;
+END 
+DELIMITER ;

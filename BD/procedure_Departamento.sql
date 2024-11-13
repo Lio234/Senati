@@ -53,3 +53,6 @@ BEGIN
     WHERE id_departamento = p_id_departamento;
 END$$
 DELIMITER ;
+
+
+

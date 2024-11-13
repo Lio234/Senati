@@ -6,24 +6,27 @@ import java.sql.SQLException;
 
 public class conexionSQL {
     private static final String CONTROLADOR = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=compuware;integratedSecurity=true;";
+    private static final String URL = "jdbc:sqlserver://DESKTOP-J1OGCI2:1433;database=compuware;" +
+                                      "user=sa;password=root;loginTimeout=30;";
+
     
     static {
         try {
             Class.forName(CONTROLADOR);
         } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar el controlador: " + e.getMessage());
+            System.out.println("Error al cargar el controlador");
         }
     }
 
     public Connection Conectar() {
         Connection cnx = null;
+
         try {
             cnx = DriverManager.getConnection(URL);
-            System.out.println("Conexión exitosa.");
         } catch (SQLException e) {
-            System.out.println("Error en la conexión: " + e.getMessage());
+            System.out.println("Error en la conexión");
         }
+
         return cnx;
     }
 }

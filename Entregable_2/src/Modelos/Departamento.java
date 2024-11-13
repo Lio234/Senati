@@ -4,17 +4,16 @@ public class Departamento {
     private String id_departamento;
     private String departamento;
 
-    // Constructor vacío
+    
     public Departamento() {
     }
 
-    // Constructor con parámetros
     public Departamento(String id_departamento, String departamento) {
         this.id_departamento = id_departamento;
         this.departamento = departamento;
     }
 
-    // Getters y Setters
+    
     public String getIdDepartamento() {
         return id_departamento;
     }

@@ -1,6 +1,7 @@
 package CRUD;
 
 import Conexion.conexionMYSQL;
+import Conexion.conexionSQL;
 import Modelos.Categoria;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class CategoriaCRUD extends JFrame implements ActionListener {
     private JScrollPane scr_categoria;
 
     private final conexionMYSQL cn = new conexionMYSQL();
+    //private final conexionSQL cn = new CategoriaCRUD();
 
     public CategoriaCRUD() {
         super("CRUD Categoría");
@@ -124,7 +126,8 @@ public class CategoriaCRUD extends JFrame implements ActionListener {
         modelo.setRowCount(0);
 
         try (Connection cnx = cn.Conectar(); 
-             CallableStatement cstmt = cnx.prepareCall("{CALL sp_obtener_categorias()}")) {
+             CallableStatement cstmt = cnx.prepareCall("CALL sp_obtener_categorias()")) {
+            //CallableStatement cstmt = cnx.prepareCall("{CALL sp_obtener_categorias()}")) {
             ResultSet rs = cstmt.executeQuery();
             while (rs.next()) {
                 modelo.addRow(new Object[] { rs.getString("id_categoria"), rs.getString("categoria") });
@@ -162,7 +165,8 @@ public class CategoriaCRUD extends JFrame implements ActionListener {
                 CallableStatement cstmt;
 
                 if (e.getSource() == btn_agregar) {
-                    cad_sql = "{CALL sp_agregar_categoria(?, ?)}";
+                    cad_sql = "CALL sp_agregar_categoria(?, ?)";
+                  //cad_sql = "{CALL sp_agregar_categoria(?, ?)}";
                     cstmt = cnx.prepareCall(cad_sql);
                     cstmt.setString(1, categoria.getIdCategoria());
                     cstmt.setString(2, categoria.getCategoria());
@@ -170,7 +174,8 @@ public class CategoriaCRUD extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Categoría Registrada");
 
                 } else if (e.getSource() == btn_editar) {
-                    cad_sql = "{CALL sp_actualizar_categoria(?, ?)}";
+                    cad_sql = "CALL sp_actualizar_categoria(?, ?)";
+                  //cad_sql = "{CALL sp_actualizar_categoria(?, ?)}";    
                     cstmt = cnx.prepareCall(cad_sql);
                     cstmt.setString(1, categoria.getIdCategoria());
                     cstmt.setString(2, categoria.getCategoria());
@@ -180,7 +185,8 @@ public class CategoriaCRUD extends JFrame implements ActionListener {
                 } else if (e.getSource() == btn_borrar) {
                     int opc = JOptionPane.showConfirmDialog(this, "¿Seguro de borrar el registro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opc == JOptionPane.YES_OPTION) {
-                        cad_sql = "{CALL sp_eliminar_categoria(?)}";
+                        cad_sql = "CALL sp_eliminar_categoria(?)";
+                      //cad_sql = "{CALL sp_eliminar_categoria(?)}";  
                         cstmt = cnx.prepareCall(cad_sql);
                         cstmt.setString(1, categoria.getIdCategoria());
                         cstmt.executeUpdate();

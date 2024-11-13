@@ -1,8 +1,7 @@
 package CRUD;
 
 import Conexion.conexionMYSQL;
-import Modelos.Distrito;
-import Modelos.Provincia;
+import Conexion.conexionSQL;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,6 +19,8 @@ public class DistritoCRUD extends JFrame implements ActionListener {
     private JScrollPane scr_distrito;
 
     private final conexionMYSQL cn = new conexionMYSQL();
+  //private final conexionSQL cn = new conexionMYSQL();
+  
     private final HashMap<String, String> provinciaMap = new HashMap<>(); // Almacenar id y nombre de la provincia
     private final HashMap<String, String> departamentoMap = new HashMap<>(); // Almacenar id y nombre de departamento
 
@@ -96,25 +97,19 @@ public class DistritoCRUD extends JFrame implements ActionListener {
         tb_distrito.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = tb_distrito.getSelectedRow();
-                txt_id_distrito.setText(tb_distrito.getValueAt(row, 0).toString());
-                txt_distrito.setText(tb_distrito.getValueAt(row, 1).toString());
+                if (row != -1) {
+                    txt_id_distrito.setText(tb_distrito.getValueAt(row, 0).toString());
+                    txt_distrito.setText(tb_distrito.getValueAt(row, 1).toString());
 
-                // Obtener el nombre de la provincia y departamento desde la tabla
-                String provinciaNombre = tb_distrito.getValueAt(row, 2).toString();
-                String departamentoNombre = tb_distrito.getValueAt(row, 3).toString();
+                    String provinciaNombre = tb_distrito.getValueAt(row, 2).toString();
+                    String departamentoNombre = tb_distrito.getValueAt(row, 3).toString();
+                    cb_provincia.setSelectedItem(provinciaNombre);
+                    cb_departamento.setSelectedItem(departamentoNombre);
 
-                // Seleccionar la provincia en el JComboBox de provincias
-                cb_provincia.setSelectedItem(provinciaNombre);
-
-                // Seleccionar el departamento en el JComboBox de departamentos
-                cb_departamento.setSelectedItem(departamentoNombre);
-
-                // Obtener el id_departamento desde el departamento seleccionado
-                String idDepartamento = departamentoMap.get(departamentoNombre);
-
-                // Cargar provincias basadas en el id_departamento seleccionado
-                if (idDepartamento != null) {
-                    LlenarComboProvincias(idDepartamento); // Llenar el combo de provincias de acuerdo al departamento
+                    String idDepartamento = departamentoMap.get(departamentoNombre);
+                    if (idDepartamento != null) {
+                        LlenarComboProvincias(idDepartamento); // Llenar provincias
+                    }
                 }
             }
         });
@@ -139,11 +134,32 @@ public class DistritoCRUD extends JFrame implements ActionListener {
         this.add(scr_distrito);
     }
 
-    // Llenar combo de Departamentos
-    private void LlenarComboDepartamentos() {
+    private void EliminarDistrito(String idDistrito) {
+    try (Connection cnx = cn.Conectar()) {
+        CallableStatement stmt = cnx.prepareCall("CALL sp_eliminar_distrito(?)");
+      //CallableStatement stmt = cnx.prepareCall("{CALL sp_eliminar_distrito(?)}");
+        stmt.setInt(1, Integer.parseInt(idDistrito));
+
+        int filasAfectadas = stmt.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(this, "Distrito eliminado correctamente.");
+            MostrarDatos();  // Actualizar la tabla
+            LimpiarDatos();  // Limpiar los campos
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró el distrito con el ID proporcionado.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar el distrito: " + e.getMessage());
+    }
+}
+
+
+private void LlenarComboDepartamentos() {
         try (Connection cnx = cn.Conectar()) {
-            Statement stmt = cnx.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id_departamento, departamento FROM tb_departamento");
+            CallableStatement stmt = cnx.prepareCall("CALL sp_mostrar_departamentos()");
+          //CallableStatement stmt = cnx.prepareCall("{CALL sp_mostrar_departamentos()}");
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 String id = rs.getString("id_departamento");
@@ -156,12 +172,13 @@ public class DistritoCRUD extends JFrame implements ActionListener {
         }
     }
 
-    // Llenar combo de Provincias según el Departamento seleccionado
+    // Llenar combo de Provincias según el Departamento seleccionado usando el procedimiento almacenado
     private void LlenarComboProvincias(String id_departamento) {
         cb_provincia.removeAllItems(); // Limpiar el JComboBox antes de llenarlo
 
         try (Connection cnx = cn.Conectar()) {
-            PreparedStatement stmt = cnx.prepareStatement("SELECT id_provincia, provincia FROM tb_provincia WHERE id_departamento = ?");
+            CallableStatement stmt = cnx.prepareCall("CALL sp_mostrar_provincias_por_departamento(?)");
+          //CallableStatement stmt = cnx.prepareCall("{CALL sp_mostrar_provincias_por_departamento(?)}");  
             stmt.setString(1, id_departamento);
             ResultSet rs = stmt.executeQuery();
 
@@ -186,77 +203,115 @@ public class DistritoCRUD extends JFrame implements ActionListener {
 
     // Mostrar los distritos en la tabla usando JOIN
     private void MostrarDatos() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[]{"ID Distrito", "Distrito", "Provincia", "Departamento"});
-        try (Connection cnx = cn.Conectar()) {
-            Statement stmt = cnx.createStatement();
-            // Usamos JOIN para combinar las tablas y obtener los nombres de provincia y departamento
-            ResultSet rs = stmt.executeQuery(
-                "SELECT d.id_distrito, d.distrito, p.provincia, dep.departamento " +
-                "FROM tb_distrito d " +
-                "JOIN tb_provincia p ON d.id_provincia = p.id_provincia " +
-                "JOIN tb_departamento dep ON p.id_departamento = dep.id_departamento"
-            );
+    DefaultTableModel modelo = new DefaultTableModel();
+    modelo.setColumnIdentifiers(new Object[]{"ID Distrito", "Distrito", "Provincia", "Departamento"});
 
-            while (rs.next()) {
-                String idDistrito = rs.getString("id_distrito");
-                String distrito = rs.getString("distrito");
-                String provincia = rs.getString("provincia");
-                String departamento = rs.getString("departamento");
+    try (Connection cnx = cn.Conectar()) {
+        CallableStatement stmt = cnx.prepareCall("CALL sp_mostrar_distritos()");
+      //CallableStatement stmt = cnx.prepareCall("{CALL sp_mostrar_distritos()}");
+        ResultSet rs = stmt.executeQuery();
 
-                modelo.addRow(new Object[]{idDistrito, distrito, provincia, departamento});
-            }
-            tb_distrito.setModel(modelo);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los distritos: " + e.getMessage());
+        while (rs.next()) {
+            String idDistrito = rs.getString("id_distrito");
+            String distrito = rs.getString("distrito");
+            String provincia = rs.getString("provincia");
+            String departamento = rs.getString("departamento");
+            modelo.addRow(new Object[]{idDistrito, distrito, provincia, departamento});
         }
+
+        tb_distrito.setModel(modelo);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar los datos: " + e.getMessage());
     }
+}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btn_cerrar) {
-            dispose();
-        } else if (e.getSource() == btn_nuevo) {
-            LimpiarDatos();
-        } else if (e.getSource() == btn_agregar) {
-            if (validarCampos()) {
-                String id_Provincia = provinciaMap.get(cb_provincia.getSelectedItem());
-                String id_Departamento = departamentoMap.get(cb_departamento.getSelectedItem());
 
-                Distrito distrito = new Distrito();
-                distrito.setIdDistrito(txt_id_distrito.getText());
-                distrito.setDistrito(txt_distrito.getText());
-                distrito.setIdProvincia(id_Provincia);
-
-                try (Connection cnx = cn.Conectar()) {
-                    PreparedStatement ps = cnx.prepareStatement(
-                            "INSERT INTO tb_distrito (id_distrito, distrito, id_provincia) VALUES (?, ?, ?)");
-                    ps.setString(1, distrito.getIdDistrito());
-                    ps.setString(2, distrito.getDistrito());
-                    ps.setString(3, distrito.getIdProvincia());
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Distrito Registrado");
-                    MostrarDatos();
-                    LimpiarDatos();
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(this, "Error al realizar la operación: " + ex.getMessage());
-                }
-            }
-        }
-    }
-
-    // Validar campos
+    // Validar campos antes de insertar
     private boolean validarCampos() {
         if (txt_id_distrito.getText().isEmpty() || txt_distrito.getText().isEmpty() ||
             cb_provincia.getSelectedIndex() == -1 || cb_departamento.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar completos.");
             return false;
         }
+        try {
+            Integer.parseInt(txt_id_distrito.getText()); // Verificar si el ID es numérico
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser numérico.");
+            return false;
+        }
         return true;
     }
 
+    // Agregar nuevo distrito
+    private void AgregarDistrito() {
+    if (validarCampos()) {
+        String id_Provincia = provinciaMap.get(cb_provincia.getSelectedItem());
+        String id_Departamento = departamentoMap.get(cb_departamento.getSelectedItem());
+
+        try (Connection cnx = cn.Conectar()) {
+            CallableStatement stmt = cnx.prepareCall("CALL sp_insertar_distrito(?, ?, ?)");
+          //CallableStatement stmt = cnx.prepareCall("{CALL sp_insertar_distrito(?, ?, ?)}");
+            stmt.setInt(1, Integer.parseInt(txt_id_distrito.getText()));
+            stmt.setString(2, txt_distrito.getText());
+            stmt.setInt(3, Integer.parseInt(id_Provincia));
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Distrito agregado correctamente.");
+            MostrarDatos();
+            LimpiarDatos();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar el distrito: " + e.getMessage());
+        }
+    }
+}
+
+
+    // Manejar eventos de botones
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == btn_nuevo) {
+            LimpiarDatos();
+        } else if (e.getSource() == btn_agregar) {
+            AgregarDistrito();
+        } else if (e.getSource() == btn_borrar) {
+            String idDistrito = txt_id_distrito.getText();
+            if (!idDistrito.isEmpty()) {
+                EliminarDistrito(idDistrito);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un distrito para eliminar.");
+            }
+        } else if (e.getSource() == btn_editar) {
+            EditarDistrito();
+        } else if (e.getSource() == btn_cerrar) {
+            System.exit(0);
+        }
+    }
+
+    // Editar un distrito seleccionado
+    private void EditarDistrito() {
+    if (validarCampos()) {
+        String id_Provincia = provinciaMap.get(cb_provincia.getSelectedItem());
+        String id_Departamento = departamentoMap.get(cb_departamento.getSelectedItem());
+
+        try (Connection cnx = cn.Conectar()) {
+            CallableStatement stmt = cnx.prepareCall("CALL sp_actualizar_distrito(?, ?, ?)");
+          //CallableStatement stmt = cnx.prepareCall("{CALL sp_actualizar_distrito(?, ?, ?)}");
+            stmt.setInt(1, Integer.parseInt(txt_id_distrito.getText()));
+            stmt.setString(2, txt_distrito.getText());
+            stmt.setInt(3, Integer.parseInt(id_Provincia));
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Distrito actualizado correctamente.");
+            MostrarDatos();
+            LimpiarDatos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el distrito: " + ex.getMessage());
+        }
+    }
+}
+
+
     public static void main(String[] args) {
-        DistritoCRUD frm = new DistritoCRUD();
-        frm.setVisible(true);
+        new DistritoCRUD().setVisible(true);
     }
 }
