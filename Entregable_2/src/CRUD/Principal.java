@@ -16,10 +16,10 @@ public class Principal extends JFrame implements ActionListener {
     private JDesktopPane dsk_principal;
     private JMenuBar mb_principal;
     private JMenu mn_clientes, mn_productos, mn_pedido, mn_lugares, mn_reportes, mn_opciones;
-    private JMenuItem mi_clie, mi_prod, mi_marc, mi_cat, mi_dep, mi_dist, mi_prov, mi_pedi, mi_report1, mi_report2, mi_info, mi_salir;
+    private JMenuItem mi_clie, mi_prod, mi_marc, mi_cat, mi_dep, mi_prov, mi_dist, mi_pedi, mi_report1, mi_report2, mi_info, mi_salir;
     private JSeparator sep_opc;
 
-    private Principal() {
+    public Principal() {
         super();
         IniciarFormulario();
         IniciarControles();
@@ -96,6 +96,7 @@ public class Principal extends JFrame implements ActionListener {
         mn_opciones.add(sep_opc);
         mn_opciones.add(mi_salir);
 
+        // Add menus to the menu bar
         mb_principal.add(mn_clientes);
         mb_principal.add(mn_productos);
         mb_principal.add(mn_lugares);
@@ -109,7 +110,6 @@ public class Principal extends JFrame implements ActionListener {
     }
 
     public void AbrirFormulario(JInternalFrame frm) {
-
         JInternalFrame[] arr_iframe = dsk_principal.getAllFrames();
         boolean abierto = false;
 
@@ -120,10 +120,11 @@ public class Principal extends JFrame implements ActionListener {
                 break;
             }
         }
+
         if (!abierto) {
             dsk_principal.add(frm);
             frm.setLocation((dsk_principal.getWidth() - frm.getWidth()) / 2, (dsk_principal.getHeight() - frm.getHeight()) / 2);
-            frm.show();
+            frm.setVisible(true);  // Usar setVisible en lugar de show()
         }
     }
 
@@ -165,12 +166,10 @@ public class Principal extends JFrame implements ActionListener {
         } else if (e.getSource() == mi_salir) {
             System.exit(0);
         }
-
     }
 
     public static void main(String[] args) {
         Principal principal = new Principal();
         principal.setVisible(true);
     }
-
 }
