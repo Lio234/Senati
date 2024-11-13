@@ -12,7 +12,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
-public class MarcaCRUD extends JFrame implements ActionListener {
+public class MarcaCRUD extends JInternalFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_1, lbl_2;
     private JTextField txt_id_marca, txt_marca;
     private JButton btn_nuevo, btn_agregar, btn_editar, btn_borrar, btn_cerrar;
@@ -32,7 +32,7 @@ public class MarcaCRUD extends JFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(430, 430); 
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

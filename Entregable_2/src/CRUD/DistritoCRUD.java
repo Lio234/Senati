@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.HashMap;
 
-public class DistritoCRUD extends JFrame implements ActionListener {
+public class DistritoCRUD extends JInternalFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_id_distrito, lbl_distrito, lbl_departamento, lbl_provincia;
     private JTextField txt_id_distrito, txt_distrito;
     private JComboBox<String> cb_departamento, cb_provincia;
@@ -35,7 +35,7 @@ public class DistritoCRUD extends JFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(600, 500);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false); // Para evitar que el usuario cambie el tamaño de la ventana
