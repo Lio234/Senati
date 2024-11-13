@@ -2,10 +2,8 @@ package CRUD;
 
 import Conexion.conexionMYSQL;
 import Modelos.MPedido;
-<<<<<<< HEAD
-=======
+
 import Modelos.Detalle_Pedido;
->>>>>>> 098e874340846b9ff889c189fb6db166d669c397
 import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.PreparedStatement;
 import Modelos.Detalle_Pedido;
