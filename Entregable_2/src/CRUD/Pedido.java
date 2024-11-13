@@ -2,10 +2,10 @@ package CRUD;
 
 import Conexion.conexionMYSQL;
 import Modelos.MPedido;
-import Modelos.Detalle_Pedido;
+import Modelos.DetallePedido;
 import com.mysql.jdbc.CallableStatement;
 import com.mysql.jdbc.PreparedStatement;
-import Modelos.Detalle_Pedido;
+import Modelos.DetallePedido;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
@@ -43,18 +43,31 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-
 public class Pedido extends JInternalFrame implements ActionListener {
 
+    // Etiquetas para identificar campos en el formulario
     private JLabel lblIdPedido, lblFecha, lblCantidad, lblClientes, lblProducto, lblcostouni, lblsubtotal, lbltotal;
+
+    // Campos de texto para entrada de datos
     private JTextField txtIdPedido, txtcantidad, txtcostouni, txtsubtotal, txttotal;
+
+    // Selector de fecha para el campo de fecha
     private JDateChooser dateChooser;
+
+    // Combobox para selección de cliente y producto
     private JComboBox<String> cmbClientes, cmbProducto;
+
+    // Botones para varias acciones del formulario
     private JButton btnGuardar, btnCerrar, btnNuevo, btnEditar, btnEliminar, btnFiltrar, btnCambiarVista, btnAgregarProducto;
+
+    // Tabla para mostrar los pedidos y el modelo de datos asociado
     private JTable tblPedidos;
     private DefaultTableModel modeloPedidos;
+
+    // Booleano para controlar la vista de detalle de pedidos
     private boolean vistaDetalle = false;
 
+    // Constructor de la clase: inicializa el formulario y los controles
     public Pedido() {
         super();
         iniciarFormulario();
@@ -66,6 +79,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         cargarProductos();
     }
 
+    // Método para configurar las propiedades básicas del formulario
     private void iniciarFormulario() {
         setTitle("Pedido");
         setSize(500, 600);
@@ -74,7 +88,9 @@ public class Pedido extends JInternalFrame implements ActionListener {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    // Método para inicializar y configurar todos los controles en el formulario
     private void iniciarControles() {
+        // Inicialización de etiquetas
         lblIdPedido = new JLabel("ID Pedido:");
         lblFecha = new JLabel("Fecha:");
         lblClientes = new JLabel("Clientes:");
@@ -84,6 +100,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         lblsubtotal = new JLabel("Subtotal:");
         lbltotal = new JLabel("Total:");
 
+        // Definición de las posiciones de cada etiqueta en el formulario
         lblIdPedido.setBounds(20, 30, 80, 25);
         lblFecha.setBounds(20, 70, 80, 25);
         lblClientes.setBounds(20, 110, 80, 25);
@@ -93,6 +110,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         lblsubtotal.setBounds(20, 490, 80, 25);
         lbltotal.setBounds(200, 490, 80, 25);
 
+        // Inicialización de campos de texto y configuración de sus propiedades
         txtIdPedido = new JTextField();
         txtcantidad = new JTextField();
         txtcostouni = new JTextField();
@@ -105,20 +123,26 @@ public class Pedido extends JInternalFrame implements ActionListener {
         txtsubtotal.setBounds(100, 490, 70, 25);
         txttotal.setBounds(250, 490, 50, 25);
 
+        // Hacer algunos campos no editables
         txtcostouni.setEditable(false);
         txtsubtotal.setEditable(false);
         txttotal.setEditable(false);
 
+        // Configuración del selector de fecha
         dateChooser = new JDateChooser();
         dateChooser.setBounds(100, 70, 200, 25);
         dateChooser.setDateFormatString("yyyy/MM/dd");
+        dateChooser.getDateEditor().setEnabled(false);  // Solo permite selección con el calendario
 
+        // Inicialización de comboboxes para clientes y productos
         cmbClientes = new JComboBox<>();
         cmbProducto = new JComboBox<>();
 
+        // Configuración de las posiciones de los comboboxes
         cmbClientes.setBounds(100, 110, 200, 25);
         cmbProducto.setBounds(100, 150, 200, 25);
 
+        // Configuración de la tabla para mostrar pedidos
         modeloPedidos = new DefaultTableModel();
         tblPedidos = new JTable(modeloPedidos);
         modeloPedidos.addColumn("ID Pedido");
@@ -129,6 +153,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(tblPedidos);
         scrollPane.setBounds(20, 320, 450, 150);
 
+        // Inicialización y configuración de los botones
         btnGuardar = new JButton("Guardar");
         btnCerrar = new JButton("Cerrar");
         btnNuevo = new JButton("Nuevo");
@@ -147,6 +172,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         btnCambiarVista.setBounds(320, 270, 100, 30);
         btnAgregarProducto.setBounds(200, 270, 100, 30);
 
+        // Añadir listeners para manejar acciones de los botones
         btnGuardar.addActionListener(this);
         btnCerrar.addActionListener(this);
         btnNuevo.addActionListener(this);
@@ -156,9 +182,14 @@ public class Pedido extends JInternalFrame implements ActionListener {
         btnCambiarVista.addActionListener(this);
         btnAgregarProducto.addActionListener(this);
 
+        // Validar que el campo de cantidad solo permita números
         txtcantidad.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();  // Si el carácter no es un dígito, cancelar el evento
+                }
             }
 
             @Override
@@ -167,10 +198,11 @@ public class Pedido extends JInternalFrame implements ActionListener {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                actualizarSubtotal();
+                actualizarSubtotal();  // Actualizar el subtotal cuando se ingresa una nueva cantidad
             }
         });
 
+        // Evento para obtener el total cuando se presiona Enter en el campo de ID Pedido
         txtIdPedido.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -188,64 +220,84 @@ public class Pedido extends JInternalFrame implements ActionListener {
             }
         });
 
-        add(lblIdPedido); add(txtIdPedido);        
-        add(lblFecha);add(dateChooser);        
-        add(lblCantidad); add(txtcantidad);        
-        add(lblClientes);  add(cmbClientes);      
-        add(lblProducto);add(cmbProducto);     
-        add(lblcostouni);add(txtcostouni);       
-        add(lblsubtotal);add(txtsubtotal);
-        add(lbltotal); add(txttotal);
-        
-        //BOTONES
-        add(btnGuardar); add(btnCerrar);  add(btnNuevo);add(btnEditar); add(btnEliminar);add(btnFiltrar); add(btnCambiarVista); add(btnAgregarProducto); add(scrollPane);
+        // Agregar controles al formulario
+        add(lblIdPedido);
+        add(txtIdPedido);
+        add(lblFecha);
+        add(dateChooser);
+        add(lblCantidad);
+        add(txtcantidad);
+        add(lblClientes);
+        add(cmbClientes);
+        add(lblProducto);
+        add(cmbProducto);
+        add(lblcostouni);
+        add(txtcostouni);
+        add(lblsubtotal);
+        add(txtsubtotal);
+        add(lbltotal);
+        add(txttotal);
+
+        // Añadir botones y tabla al formulario
+        add(btnGuardar);
+        add(btnCerrar);
+        add(btnNuevo);
+        add(btnEditar);
+        add(btnEliminar);
+        add(btnFiltrar);
+        add(btnCambiarVista);
+        add(btnAgregarProducto);
+        add(scrollPane);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Detecta el botón que fue presionado y llama al método correspondiente
         if (e.getSource() == btnCerrar) {
-            dispose();
+            dispose();  // Cierra la ventana actual
         } else if (e.getSource() == btnNuevo) {
-            limpiarDatos();
+            limpiarDatos();  // Limpia los campos de entrada
         } else if (e.getSource() == btnFiltrar) {
-            filtrarPedidosPorCliente();
+            filtrarPedidos();  // Filtra pedidos según el cliente seleccionado
         } else if (e.getSource() == btnGuardar) {
-            guardarPedido();
+            guardarPedido();  // Guarda un nuevo pedido o actualiza uno existente
         } else if (e.getSource() == btnEditar) {
-            editarPedido();
+            editarPedido();  // Edita el pedido seleccionado
         } else if (e.getSource() == btnEliminar) {
-            eliminarPedido();
+            eliminarPedido();  // Elimina el pedido seleccionado
         } else if (e.getSource() == btnCambiarVista) {
-            cambiarVista();
-        }else if (e.getSource() == btnAgregarProducto){
-            agregarProductoAlDetallePedido();
+            cambiarVista();  // Cambia entre la vista general y la vista de detalle
+        } else if (e.getSource() == btnAgregarProducto) {
+            agregarProductoAlDetallePedido();  // Agrega un producto al detalle del pedido
         }
     }
 
+// Clase interna para gestionar eventos de clic en la tabla de pedidos
     private class ControladorClickPedido extends MouseAdapter {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            int registro = tblPedidos.getSelectedRow();  // Selecciona la fila de la tabla
+            // Obtiene la fila seleccionada en la tabla
+            int registro = tblPedidos.getSelectedRow();
 
-            // Deshabilitar el campo ID del pedido ya que es solo de lectura
+            // Deshabilita el campo de ID del pedido (solo lectura)
             txtIdPedido.setEditable(false);
 
-            // Recuperamos el ID del pedido seleccionado
+            // Obtiene el ID del pedido seleccionado
             String idPedido = (String) tblPedidos.getValueAt(registro, 0);
 
-            // Consulta SQL para obtener el pedido y sus detalles
-            String cadSql = "CALL sp_obtener_pedido(?)";  // Llamada al procedimiento almacenado para obtener detalles del pedido
+            // Llamada al procedimiento almacenado para obtener detalles del pedido
+            String cadSql = "CALL sp_obtener_pedido(?)";
 
             try (Connection cnx = new conexionMYSQL().Conectar()) {
 
                 java.sql.CallableStatement cstm = cnx.prepareCall(cadSql);
                 cstm.setString(1, idPedido);
 
-                ResultSet rs = cstm.executeQuery();  // Ejecutamos la consulta y obtenemos los resultados
+                ResultSet rs = cstm.executeQuery();
 
                 if (rs.next()) {
-                    // Recuperamos los datos del pedido desde el ResultSet
+                    // Recupera los datos del pedido y rellena los campos correspondientes
                     String clienteId = rs.getString("id_cliente");
                     Date fecha = rs.getDate("fecha");
                     double costoUnitario = rs.getDouble("costo_unitario");
@@ -253,9 +305,8 @@ public class Pedido extends JInternalFrame implements ActionListener {
                     double subtotal = rs.getDouble("subtotal");
                     double total = rs.getDouble("total");
 
-                    // Rellenamos los campos con los datos obtenidos
                     txtIdPedido.setText(idPedido);
-                    cmbClientes.setSelectedItem(clienteId);  // Asumiendo que el JComboBox contiene el ID del cliente
+                    cmbClientes.setSelectedItem(clienteId);  // Selecciona el cliente en el JComboBox
                     dateChooser.setDate(fecha);
                     txtcantidad.setText(String.valueOf(cantidad));
                     txtcostouni.setText(String.valueOf(costoUnitario));
@@ -263,14 +314,16 @@ public class Pedido extends JInternalFrame implements ActionListener {
                     txttotal.setText(String.valueOf(total));
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();  // Manejo de excepciones
+                ex.printStackTrace();  // Imprime la excepción en caso de error
             }
         }
     }
 
+// Busca el total de un pedido específico por su ID
     private void buscarTotalPorIdPedido() {
         String idPedido = txtIdPedido.getText();
 
+        // Si no hay ID, limpia el campo de total
         if (idPedido.isEmpty()) {
             txttotal.setText("");
             return;
@@ -283,6 +336,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
             pstm.setString(1, idPedido);
             ResultSet rs = pstm.executeQuery();
 
+            // Si se encuentra el pedido, muestra el total; si no, muestra un mensaje de error
             if (rs.next()) {
                 float total = rs.getFloat("total");
                 txttotal.setText(String.valueOf(total));
@@ -295,6 +349,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+// Calcula el subtotal en base a la cantidad y el costo unitario
     private void actualizarSubtotal() {
         try {
             float precioUnitario = Float.parseFloat(txtcostouni.getText());
@@ -302,13 +357,15 @@ public class Pedido extends JInternalFrame implements ActionListener {
             float subtotal = precioUnitario * cantidad;
             txtsubtotal.setText(String.valueOf(subtotal));
         } catch (NumberFormatException e) {
-            txtsubtotal.setText("");  // Limpia el subtotal si el campo de cantidad o precio unitario no es válido
+            txtsubtotal.setText("");  // Limpia el subtotal si el campo es inválido
         }
     }
 
+// Cambia entre la vista general de pedidos y la vista de detalle
     private void cambiarVista() {
         modeloPedidos.setRowCount(0); // Limpiar la tabla
         if (vistaDetalle) {
+            // Cambiar a vista general
             modeloPedidos.setColumnCount(0);
             modeloPedidos.addColumn("ID Pedido");
             modeloPedidos.addColumn("ID Cliente");
@@ -317,16 +374,19 @@ public class Pedido extends JInternalFrame implements ActionListener {
             cargarPedidos();
             btnCambiarVista.setText("Ver Detalle");
         } else {
+            // Cambiar a vista de detalle
             cargarVistaDetalle();
             btnCambiarVista.setText("Ver Pedidos");
         }
-        vistaDetalle = !vistaDetalle;
+        vistaDetalle = !vistaDetalle;  // Alternar entre vistas
     }
 
+// Carga los datos detallados del pedido (incluyendo cliente y productos)
     private void cargarVistaDetalle() {
         modeloPedidos.setRowCount(0);  // Limpiar la tabla
-        modeloPedidos.setColumnCount(0);  // Limpiar las columnas
+        modeloPedidos.setColumnCount(0);  // Limpiar columnas previas
 
+        // Define las columnas para la vista de detalle
         modeloPedidos.addColumn("Codigo Pedido");
         modeloPedidos.addColumn("Nombre del Cliente");
         modeloPedidos.addColumn("Producto");
@@ -334,15 +394,16 @@ public class Pedido extends JInternalFrame implements ActionListener {
         modeloPedidos.addColumn("Cantidad");
         modeloPedidos.addColumn("Precio Total");
 
-        String sql = "CALL sp_listar_detalle();";  // Llamada al procedimiento almacenado
+        String sql = "CALL sp_listar_detalle();";  // Procedimiento almacenado para obtener detalles
 
         try (Connection cnx = new conexionMYSQL().Conectar(); CallableStatement cstm = (CallableStatement) cnx.prepareCall(sql); ResultSet rs = cstm.executeQuery()) {
 
+            // Rellena la tabla con los detalles de cada pedido
             while (rs.next()) {
                 modeloPedidos.addRow(new Object[]{
                     rs.getString("id_pedido"),
-                    rs.getString("cliente"), // Aquí se muestra el nombre del cliente
-                    rs.getString("producto"), // Aquí se muestra el nombre del producto
+                    rs.getString("cliente"), // Nombre del cliente
+                    rs.getString("producto"), // Nombre del producto
                     rs.getFloat("precio_unitario"),
                     rs.getInt("cantidad"),
                     rs.getFloat("precio_total") // Calculado como precio_unitario * cantidad
@@ -353,14 +414,17 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+// Carga la lista de clientes desde la base de datos al ComboBox
     private void cargarClientes() {
         String sql = "SELECT id_cliente, nombre FROM tb_cliente";
         try (Connection cnx = new conexionMYSQL().Conectar(); PreparedStatement pstm = (PreparedStatement) cnx.prepareStatement(sql); ResultSet rs = pstm.executeQuery()) {
-            cmbClientes.removeAllItems();
+
+            cmbClientes.removeAllItems();  // Limpia las opciones previas del ComboBox
             cmbClientes.addItem("Seleccione un cliente");
 
+            // Rellena el ComboBox con los datos de cada cliente en formato "Código - Nombre"
             while (rs.next()) {
-                String cliente = rs.getString("id_cliente") + " - " + rs.getString("nombre");  // Formato "Código - Nombre"
+                String cliente = rs.getString("id_cliente") + " - " + rs.getString("nombre");
                 cmbClientes.addItem(cliente);
             }
         } catch (SQLException e) {
@@ -368,26 +432,28 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+    // Método para cargar los productos en el comboBox de productos
     private void cargarProductos() {
         String sql = "SELECT id_producto, producto FROM tb_producto";
         try (Connection cnx = new conexionMYSQL().Conectar(); PreparedStatement pstm = (PreparedStatement) cnx.prepareStatement(sql); ResultSet rs = pstm.executeQuery()) {
 
+            // Limpiar el comboBox y agregar opción inicial
             cmbProducto.removeAllItems();
             cmbProducto.addItem("Seleccione un producto");
 
-            // Llenar el combo con productos
+            // Llenar el comboBox con los productos obtenidos de la base de datos
             while (rs.next()) {
                 String producto = rs.getString("id_producto") + " - " + rs.getString("producto");
                 cmbProducto.addItem(producto);
             }
 
-            // Agregar el ActionListener al combo para actualizar el precio unitario
+            // Agregar el ActionListener al comboBox para actualizar el precio unitario al seleccionar un producto
             cmbProducto.addActionListener(e -> {
                 if (cmbProducto.getSelectedIndex() > 0) {  // Verifica que no sea la opción "Seleccione un producto"
                     String seleccionado = cmbProducto.getSelectedItem().toString();
                     String idProducto = seleccionado.split(" - ")[0];  // Obtener solo el ID del producto
 
-                    // Consultar el precio unitario del producto seleccionado
+                    // Consultar y actualizar el precio unitario del producto seleccionado
                     actualizarPrecioUnitario(idProducto);
                 } else {
                     txtcostouni.setText("");  // Limpia el campo si no hay un producto seleccionado
@@ -399,7 +465,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
-// Método para consultar y actualizar el precio unitario
+// Método para consultar y actualizar el precio unitario del producto seleccionado
     private void actualizarPrecioUnitario(String idProducto) {
         String sql = "SELECT costo FROM tb_producto WHERE id_producto = ?";
         try (Connection cnx = new conexionMYSQL().Conectar(); PreparedStatement pstm = (PreparedStatement) cnx.prepareStatement(sql)) {
@@ -417,6 +483,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+// Método para cargar los pedidos en la tabla
     private void cargarPedidos() {
         String sql = "SELECT p.id_pedido, c.nombre AS cliente, p.fecha "
                 + "FROM tb_pedido p "
@@ -443,6 +510,7 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+// Método para calcular el total del pedido sumando los precios de los detalles
     private float calcularTotalPedido(String idPedido) {
         String sql = "SELECT SUM(dp.precio_unitario * dp.cantidad) AS total "
                 + "FROM tb_detalle_pedido dp "
@@ -460,7 +528,9 @@ public class Pedido extends JInternalFrame implements ActionListener {
         return 0;
     }
 
+// Método para guardar el pedido y sus detalles en la base de datos
     private void guardarPedido() {
+        // Obtener los datos necesarios para el pedido y su detalle
         String clienteSeleccionado = (String) cmbClientes.getSelectedItem();
         String[] clientePartes = clienteSeleccionado.split(" - ");
         String idCliente = clientePartes[0];  // Obtener solo el ID del cliente
@@ -496,7 +566,8 @@ public class Pedido extends JInternalFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al guardar el pedido: " + e.getMessage());
         }
     }
-    
+
+// Método para agregar un producto al detalle del pedido
     private void agregarProductoAlDetallePedido() {
         // Obtener el ID del pedido y del producto desde los campos de la interfaz de usuario
         String idPedido = txtIdPedido.getText();
@@ -528,7 +599,8 @@ public class Pedido extends JInternalFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al agregar el producto al detalle del pedido: " + e.getMessage());
         }
     }
-    
+
+// Método para actualizar el total del pedido en la base de datos
     private void actualizarTotalPedido(String idPedido) {
         String sql = "SELECT SUM(dp.precio_unitario * dp.cantidad) AS total "
                 + "FROM tb_detalle_pedido dp "
@@ -552,11 +624,10 @@ public class Pedido extends JInternalFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Error al actualizar el total del pedido: " + e.getMessage());
         }
     }
-    
-    
 
+// Método para editar el pedido y su detalle en la base de datos
     private void editarPedido() {
-        // Obtener los datos del pedido principal
+        // Obtener los datos del pedido principal y del detalle seleccionado
         String idPedido = txtIdPedido.getText();  // Obtener el id_pedido de la interfaz
         String clienteSeleccionado = (String) cmbClientes.getSelectedItem();
         String[] clientePartes = clienteSeleccionado.split(" - ");
@@ -612,158 +683,172 @@ public class Pedido extends JInternalFrame implements ActionListener {
         }
     }
 
+    // Método para eliminar un pedido seleccionado en la tabla de pedidos
     private void eliminarPedido() {
-        int fila = tblPedidos.getSelectedRow(); // Obtener la fila seleccionada
+        int fila = tblPedidos.getSelectedRow(); // Obtener la fila seleccionada en la tabla
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un pedido para eliminar.");
             return;
         }
 
-        String idPedido = (String) modeloPedidos.getValueAt(fila, 0); // Obtener el id_pedido de la fila seleccionada
+        // Obtener el ID del pedido de la fila seleccionada en la tabla
+        String idPedido = (String) modeloPedidos.getValueAt(fila, 0);
 
+        // Confirmar la eliminación del pedido
         int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este pedido y sus detalles?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
         if (confirmacion != JOptionPane.YES_OPTION) {
             return;
         }
 
-        String sql = "{CALL sp_eliminar_pedido_y_detalles(?)}"; // Llamada al procedimiento almacenado
+        // Llamar al procedimiento almacenado para eliminar el pedido y sus detalles
+        String sql = "{CALL sp_eliminar_pedido_y_detalles(?)}";
 
         try (Connection cnx = new conexionMYSQL().Conectar(); CallableStatement cstm = (CallableStatement) cnx.prepareCall(sql)) {
-            cstm.setString(1, idPedido); // Establecer el parámetro id_pedido en el procedimiento
-            cstm.executeUpdate(); // Ejecutar el procedimiento
+            cstm.setString(1, idPedido); // Pasar el ID del pedido como parámetro
+            cstm.executeUpdate(); // Ejecutar el procedimiento de eliminación
 
             JOptionPane.showMessageDialog(null, "Pedido y sus detalles eliminados con éxito");
 
-            limpiarDatos();
-            cargarPedidos();
+            limpiarDatos(); // Limpiar los campos de datos
+            cargarPedidos(); // Recargar los pedidos para actualizar la tabla
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el pedido y sus detalles: " + e.getMessage());
         }
     }
 
+// Método para limpiar los campos de datos en la interfaz
     private void limpiarDatos() {
-        txtIdPedido.setText("");
-        txtcantidad.setText("");
-        txtcostouni.setText("");
-        txtsubtotal.setText("");
-        txttotal.setText("");
-        dateChooser.setDate(null);
-        cmbClientes.setSelectedIndex(0);
-        cmbProducto.setSelectedIndex(0);
+        txtIdPedido.setText(""); // Limpiar el campo de ID de pedido
+        txtcantidad.setText(""); // Limpiar el campo de cantidad
+        txtcostouni.setText(""); // Limpiar el campo de costo unitario
+        txtsubtotal.setText(""); // Limpiar el campo de subtotal
+        txttotal.setText(""); // Limpiar el campo de total
+        dateChooser.setDate(null); // Limpiar el selector de fecha
+        cmbClientes.setSelectedIndex(0); // Restablecer el comboBox de clientes
+        cmbProducto.setSelectedIndex(0); // Restablecer el comboBox de productos
     }
 
-    private void filtrarPedidosPorCliente() {
+// Método para filtrar los pedidos ya sea por cliente o por ID de pedido
+    private void filtrarPedidos() {
         String cliente = (String) cmbClientes.getSelectedItem();
-        if (cliente != null && !cliente.equals("Seleccione un cliente")) {
-            String sql = "SELECT * FROM tb_pedido WHERE id_cliente = (SELECT id_cliente FROM tb_cliente WHERE nombre = ?)";
-            try (Connection cnx = new conexionMYSQL().Conectar(); PreparedStatement pstm = (PreparedStatement) cnx.prepareStatement(sql)) {
-                pstm.setString(1, cliente);
-                ResultSet rs = pstm.executeQuery();
-                modeloPedidos.setRowCount(0);
+        String idPedido = txtIdPedido.getText().trim();
 
-                while (rs.next()) {
+        String sql = "{CALL sp_filtrar_pedidos(?, ?)}";
+        try (Connection cnx = new conexionMYSQL().Conectar(); CallableStatement cstm = (CallableStatement) cnx.prepareCall(sql)) {
+            // Si no se ingresa un cliente, se pasa una cadena vacía, de lo contrario, el nombre del cliente
+            if (cliente.isEmpty()) {
+                cstm.setString(1, "");  // Pasa una cadena vacía si el cliente no se selecciona
+            } else {
+                cstm.setString(1, cliente);  // Cliente
+            }
+
+            // Si no se ingresa un idPedido, se pasa una cadena vacía, de lo contrario, el idPedido
+            if (idPedido.isEmpty()) {
+                cstm.setString(2, "");  // Pasa una cadena vacía si no se ingresa un idPedido
+            } else {
+                cstm.setString(2, idPedido);  // id_pedido
+            }
+
+            ResultSet rs = cstm.executeQuery();
+            modeloPedidos.setRowCount(0);  // Limpiar la tabla
+
+            while (rs.next()) {
+                if (idPedido.isEmpty()) {
+                    // Si se está filtrando por cliente, mostramos los pedidos generales
                     modeloPedidos.addRow(new Object[]{
                         rs.getString("id_pedido"),
                         rs.getString("id_cliente"),
                         rs.getDate("fecha"),
                         rs.getFloat("total")
                     });
+                } else {
+                    // Si se está filtrando por id_pedido, mostramos los detalles del pedido
+                    modeloPedidos.addRow(new Object[]{
+                        rs.getString("id_pedido"),
+                        rs.getString("id_producto"),
+                        rs.getString("producto"),
+                        rs.getInt("cantidad"),
+                        rs.getFloat("precio_unitario"),
+                        rs.getFloat("subtotal")
+                    });
                 }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al filtrar pedidos: " + e.getMessage());
             }
-        } else {
-            cargarPedidos();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al filtrar pedidos: " + e.getMessage());
         }
     }
 
+// Método para asociar el evento de clic del botón al método de filtrado
+    private void agregarEventoBotonFiltrar() {
+        btnFiltrar.addActionListener(e -> filtrarPedidos()); // Asocia el evento de clic al método filtrarPedidos
+    }
+
+// Método para agregar un evento de selección de fila en la tabla de pedidos
     private void agregarEventoFilaSeleccionada() {
         tblPedidos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (tblPedidos.getSelectedRow() != -1) {
-                    cargarDatosSeleccionados();
+                    cargarDatosSeleccionados(); // Cargar los datos del pedido seleccionado
                 }
             }
         });
     }
 
+// Método para cargar los datos del pedido seleccionado en la interfaz
     private void cargarDatosSeleccionados() {
         int fila = tblPedidos.getSelectedRow();
         if (fila != -1) {
-            // Obtener el ID del pedido desde la tabla
-            String idPedido = (String) modeloPedidos.getValueAt(fila, 0);
+            String idPedido = (String) modeloPedidos.getValueAt(fila, 0); // Obtener el ID del pedido
 
-            // Llamar al procedimiento almacenado para obtener los detalles del pedido
-            String sql = "{CALL sp_obtener_pedido(?)}"; // Llamada al procedimiento almacenado
+            String sql = "{CALL sp_obtener_pedido(?)}"; // Procedimiento almacenado para obtener los detalles del pedido
             try (Connection cnx = new conexionMYSQL().Conectar(); CallableStatement cstm = (CallableStatement) cnx.prepareCall(sql)) {
-
-                // Establecer el parámetro para el procedimiento almacenado
-                cstm.setString(1, idPedido);
-
-                // Ejecutar la consulta y obtener el resultado
+                cstm.setString(1, idPedido); // Pasar el ID del pedido como parámetro
                 ResultSet rs = cstm.executeQuery();
 
                 float total = 0; // Inicializar el total
 
+                // Cargar los datos obtenidos en los campos correspondientes
                 while (rs.next()) {
-                    // Cargar el ID de Pedido
                     txtIdPedido.setText(rs.getString("id_pedido"));
-
-                    // Cargar el Cliente
-                    String cliente = rs.getString("cliente");
-                    cmbClientes.setSelectedItem(cliente);
-
-                    // Cargar la Fecha
-                    Date fecha = rs.getDate("fecha");
-                    dateChooser.setDate(fecha);
-
-                    // Cargar la Cantidad
-                    int cantidad = rs.getInt("cantidad");
-                    txtcantidad.setText(String.valueOf(cantidad));
-
-                    // Cargar el Producto
-                    String producto = rs.getString("producto");
-                    cmbProducto.setSelectedItem(producto);
-
-                    // Cargar el Precio Unitario
+                    cmbClientes.setSelectedItem(rs.getString("cliente"));
+                    dateChooser.setDate(rs.getDate("fecha"));
+                    txtcantidad.setText(String.valueOf(rs.getInt("cantidad")));
+                    cmbProducto.setSelectedItem(rs.getString("producto"));
                     float precioUnitario = rs.getFloat("precio_unitario");
                     txtcostouni.setText(String.valueOf(precioUnitario));
 
-                    // Calcular y cargar el subtotal
-                    float subtotal = precioUnitario * cantidad;
+                    float subtotal = precioUnitario * rs.getInt("cantidad");
                     txtsubtotal.setText(String.valueOf(subtotal));
-
-                    // Sumar al total
-                    total += subtotal;
+                    total += subtotal; // Sumar al total general
                 }
 
-                // Cargar el Total
-                txttotal.setText(String.valueOf(total));
-
+                txttotal.setText(String.valueOf(total)); // Mostrar el total general
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error al cargar los datos del pedido: " + e.getMessage());
             }
         }
     }
 
+// Método para agregar un evento de doble clic para eliminar un pedido en la tabla de pedidos
     private void agregarEventoEliminarFila() {
         tblPedidos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2 && tblPedidos.getSelectedRow() != -1) {
-                    confirmarEliminar();
+                    confirmarEliminar(); // Llamar a confirmar eliminación al hacer doble clic
                 }
             }
         });
     }
 
+// Método para confirmar la eliminación del pedido seleccionado
     private void confirmarEliminar() {
         int fila = tblPedidos.getSelectedRow();
         if (fila >= 0) {
             int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar este pedido?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
-                eliminarPedido();
+                eliminarPedido(); // Llamar al método de eliminación si se confirma
             }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un pedido para eliminar.");
