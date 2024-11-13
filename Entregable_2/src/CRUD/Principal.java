@@ -27,7 +27,7 @@ public class Principal extends JFrame implements ActionListener {
 
     public void IniciarFormulario() {
         this.setTitle("Aplicación Principal");
-        this.setSize(700, 600);
+        this.setSize(700, 700);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
