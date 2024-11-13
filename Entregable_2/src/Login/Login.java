@@ -1,5 +1,6 @@
 package Login;
 
+import CRUD.Principal;
 import CRUD.prueba;
 import Conexion.conexionMYSQL;
 import javax.swing.*;
@@ -111,7 +112,7 @@ public class Login extends JFrame {
 
     private void abrirDashboard() {
         this.setVisible(false);
-        prueba pr = new prueba ();
+        Principal pr = new Principal();
         pr.setVisible(true);
         JOptionPane.showMessageDialog(this, "Bienvenido al Dashboard");
     }
