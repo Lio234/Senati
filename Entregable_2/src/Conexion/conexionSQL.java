@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class conexionSQL {
     private static final String CONTROLADOR = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String URL = "jdbc:sqlserver://DESKTOP-J1OGCI2:1433;database=compuware;" +
+    private static final String URL = "jdbc:sqlserver://DESKTOP-RS1428U:1433;database=compuware;" +
                                       "user=sa;password=root;loginTimeout=30;";
 
     

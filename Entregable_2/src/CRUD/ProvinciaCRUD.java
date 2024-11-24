@@ -12,7 +12,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.HashMap;
 
-public class ProvinciaCRUD extends JFrame implements ActionListener {
+public class ProvinciaCRUD extends JInternalFrame implements ActionListener {
     private JLabel lbl_titulo, lbl_id_provincia, lbl_provincia, lbl_departamento;
     private JTextField txt_id_provincia, txt_provincia;
     private JComboBox<String> cb_departamento;
@@ -35,7 +35,7 @@ public class ProvinciaCRUD extends JFrame implements ActionListener {
 
     private void IniciarFormulario() {
         this.setSize(500, 450);
-        this.setLocationRelativeTo(null); // Centrar la ventana
+        //this.setLocationRelativeTo(null); // Centrar la ventana
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar la aplicación al cerrar la ventana
     }
