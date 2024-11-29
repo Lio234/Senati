@@ -9,6 +9,8 @@ namespace app_compuware.Data
             public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
             { }
             public DbSet<Categoria> Categoria { get; set; }
+            public DbSet<Marca> Marca { get; set; }
+
         }
     
 }
