@@ -1,0 +1,4 @@
+# Ignorar carpetas de Visual Studio
+.vs/
+.vscode/
+*.vspscc
