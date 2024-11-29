@@ -186,3 +186,4 @@ C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\obj\Debug\net9.0\co
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\obj\Debug\net9.0\compressed\2qld0h42bp-m9qm4tazc0.gz
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\obj\Debug\net9.0\compressed\hgu03r9l5g-jjsuc0puko.gz
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\obj\Debug\net9.0\compressed\kgqbeke5og-9vr69e8ynj.gz
+C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\obj\Debug\net9.0\compressed\jflcuaa178-g1b6f8dtmb.gz

@@ -61,6 +61,7 @@ C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstr
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\font-awesome\css\all.css
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\font-awesome\js\solid.min.js
+C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\css\landy.css
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\font-awesome\css\v4-font-face.css
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\jquery\dist\jquery.slim.min.js
@@ -107,6 +108,7 @@ C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\font-aw
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
 C:\Users\vtr\source\repos\Senati\app-compuware\app-compuware\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\css\landy.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js

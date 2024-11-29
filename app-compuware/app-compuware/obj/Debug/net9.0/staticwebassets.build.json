@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4cJMYP7QVJNrJ8PiCYBkkKjNIzTXcQztjJMkJ7afMHU=",
+  "Hash": "ppCbsq0QahrTZ42+3u7F/ugywYuZqhFOdgMqPPMIzfc=",
   "Source": "app-compuware",
   "BasePath": "_content/app-compuware",
   "Mode": "Default",
@@ -1340,6 +1340,27 @@
       "OriginalItemSpec": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\lib\\font-awesome\\js\\solid.min.js"
     },
     {
+      "Identity": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jflcuaa178-g1b6f8dtmb.gz",
+      "SourceId": "app-compuware",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/app-compuware",
+      "RelativePath": "css/landy#[.{fingerprint=g1b6f8dtmb}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\landy.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "ggfwvii9yz",
+      "Integrity": "wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\landy.css"
+    },
+    {
       "Identity": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jw5si6an4j-0j3bgjxly4.gz",
       "SourceId": "app-compuware",
       "SourceType": "Discovered",
@@ -2388,6 +2409,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\app-compuware.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\landy.css",
+      "SourceId": "app-compuware",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\",
+      "BasePath": "_content/app-compuware",
+      "RelativePath": "css/landy#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "g1b6f8dtmb",
+      "Integrity": "nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\landy.css"
     },
     {
       "Identity": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\site.css",
@@ -5525,6 +5567,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-DnBE+8M52aOWWghIjenWSUXkEDe6IfSVOkwewjqJmPg="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.css",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jflcuaa178-g1b6f8dtmb.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000509683996"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.css",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\landy.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.css.gz",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jflcuaa178-g1b6f8dtmb.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jflcuaa178-g1b6f8dtmb.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000509683996"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\wwwroot\\css\\landy.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css.gz",
+      "AssetFile": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\Debug\\net9.0\\compressed\\jflcuaa178-g1b6f8dtmb.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU="
         }
       ]
     },

@@ -301,6 +301,304 @@
       ]
     },
     {
+      "Route": "css/landy.css",
+      "AssetFile": "css/landy.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000509683996"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.css",
+      "AssetFile": "css/landy.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.css.gz",
+      "AssetFile": "css/landy.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU="
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css",
+      "AssetFile": "css/landy.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000509683996"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css",
+      "AssetFile": "css/landy.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nONybEcCD37V72961mrzNx47Iz95QhtC+fuh2NnySx0="
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css"
+        }
+      ]
+    },
+    {
+      "Route": "css/landy.g1b6f8dtmb.css.gz",
+      "AssetFile": "css/landy.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1961"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 13:51:30 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g1b6f8dtmb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wIKhZ37s86DUWT9AYYpk9zPItdYl3OU8Hw8W0+4fOiU="
+        },
+        {
+          "Name": "label",
+          "Value": "css/landy.css.gz"
+        }
+      ]
+    },
+    {
       "Route": "css/site.b9sayid5wm.css",
       "AssetFile": "css/site.css.gz",
       "Selectors": [
