@@ -52,6 +52,17 @@ namespace app_compuware.Controllers
                 tmp_marca = (from mar in _context.Marca
                              where mar.id_marca == marca.id_marca
                              select mar).FirstOrDefault();
+                if (tmp_marca == null)
+                {
+                    _context.Marca.Add(marca);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    tmp_marca.id_marca = marca.id_marca;
+                    tmp_marca.marca = marca.marca;
+                    _context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
