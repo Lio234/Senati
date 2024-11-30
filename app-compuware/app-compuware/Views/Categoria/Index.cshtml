@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<!-- Modal para Agregar/Editar Categoría -->
+
 <div class="modal" tabindex="-1" id="modalCategoria">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -62,8 +62,15 @@
         </div>
     </div>
 </div>
+<a asp-action="ExportarPDF" class="btn btn-primary">
+    <i class="fas fa-file-pdf"></i> Exportar PDF
+</a>
+<a asp-action="ExportarExcel" class="btn btn-success">
+    <i class="fas fa-file-excel"></i> Exportar a Excel
+</a>
 
-<!-- Modal para Confirmar Eliminación de Categoría -->
+
+
 <div class="modal" tabindex="-1" id="modalEliminar">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using app_compuware.Data;
+using QuestPDF.Infrastructure;
+
+QuestPDF.Settings.License = LicenseType.Community;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
