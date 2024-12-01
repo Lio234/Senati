@@ -11,6 +11,8 @@ namespace app_compuware.Data
             public DbSet<Categoria> Categoria { get; set; }
             public DbSet<Marca> Marca { get; set; }
 
-        }
+            public DbSet<Cliente> Cliente { get; set; }
+
+    }
     
 }
