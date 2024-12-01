@@ -13,6 +13,8 @@ namespace app_compuware.Data
 
             public DbSet<Cliente> Cliente { get; set; }
 
+        public DbSet<Distrito> Distrito { get; set; }
+
     }
     
 }

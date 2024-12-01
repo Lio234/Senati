@@ -34,11 +34,11 @@ namespace app_compuware.Models
         [StringLength(30)]
         public string telefono { get; set; }
 
-        [Required(ErrorMessage = "Seleccione un distrito.")]
+        [Required(ErrorMessage = "Seleccione un distrito")]
         public string id_distrito { get; set; }
-
         // Relación con Distrito
         [ForeignKey("id_distrito")]
         public Distrito distrito { get; set; }
-    }
+    }   
 }
+
