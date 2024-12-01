@@ -2,7 +2,7 @@
 CREATE DATABASE compuware;
 
 
-USE compuware;
+USE compuwaree;
 
 
 CREATE TABLE tb_departamento (
@@ -156,3 +156,140 @@ EXEC sp_listar_marca;
 
 
 
+CREATE PROCEDURE sp_consultar_producto
+    @id_producto VARCHAR(5)
+AS
+BEGIN
+    SELECT 
+        p.id_producto,
+        p.producto,
+        p.costo,
+        p.ganancia,
+        m.marca,
+        c.categoria
+    FROM 
+        tb_producto p
+    INNER JOIN 
+        tb_marca m ON p.id_marca = m.id_marca
+    INNER JOIN 
+        tb_categoria c ON p.id_categoria = c.id_categoria
+    WHERE 
+        p.id_producto = @id_producto;
+END;
+
+CREATE PROCEDURE sp_listar_productos
+AS
+BEGIN
+    SELECT 
+        p.id_producto,
+        p.producto,
+        p.costo,
+        p.ganancia,
+        m.marca,
+        c.categoria
+    FROM 
+        tb_producto p
+    INNER JOIN 
+        tb_marca m ON p.id_marca = m.id_marca
+    INNER JOIN 
+        tb_categoria c ON p.id_categoria = c.id_categoria
+    ORDER BY 
+        p.producto;
+END;
+
+CREATE PROCEDURE sp_consultar_clientes
+    @id_cliente VARCHAR(5)
+AS
+BEGIN
+    SELECT 
+        c.id_cliente,
+        c.nombre,
+        c.ap_paterno,
+        c.ap_materno,
+        c.direccion,
+        c.correo,
+        c.telefono,
+        c.id_distrito -- Se mantiene solo el ID del distrito
+    FROM 
+        tb_cliente c
+    WHERE 
+        c.id_cliente = @id_cliente;
+END;
+
+
+CREATE PROCEDURE sp_listar_clientes
+AS
+BEGIN
+    SELECT 
+        c.id_cliente,
+        c.nombre,
+        c.ap_paterno,
+        c.ap_materno,
+        c.direccion,
+        c.telefono,
+        c.correo,
+        d.distrito  -- Obtener el nombre del distrito en lugar del id
+    FROM tb_cliente c
+    INNER JOIN tb_distrito d ON c.id_distrito = d.id_distrito; -- JOIN con la tabla tb_distrito
+END
+
+
+
+EXEC sp_listar_clientes;
+EXEC sp_consultar_clientes 'C001';
+
+    DROP PROCEDURE sp_consultar_clientes;
+	DROP PROCEDURE sp_listar_clientes;
+
+
+
+INSERT INTO tb_departamento (id_departamento, departamento)
+VALUES 
+    ('D001', 'Lima'),
+    ('D002', 'Cusco'),
+    ('D003', 'Arequipa');
+
+
+
+INSERT INTO tb_provincia (id_provincia, provincia, id_departamento)
+VALUES 
+    ('P001', 'Lima', 'D001'),
+    ('P002', 'Huarochirí', 'D001'),
+    ('P003', 'Cusco', 'D002'),
+    ('P004', 'Urubamba', 'D002'),
+    ('P005', 'Arequipa', 'D003');
+
+	INSERT INTO tb_distrito (id_distrito, distrito, id_provincia)
+VALUES 
+    ('T001', 'Miraflores', 'P001'),
+    ('T002', 'San Isidro', 'P001'),
+    ('T003', 'Chaclacayo', 'P002'),
+    ('T004', 'San Sebastián', 'P003'),
+    ('T005', 'Ollantaytambo', 'P004'),
+    ('T006', 'Cayma', 'P005');
+
+	INSERT INTO tb_cliente (id_cliente, nombre, ap_paterno, ap_materno, direccion, correo, telefono, id_distrito)
+VALUES 
+    ('C001', 'Juan', 'Pérez', 'García', 'Av. Arequipa 1234', 'juan.perez@example.com', '987654321', 'T001'),
+    ('C002', 'María', 'Lopez', 'Hernandez', 'Calle Lima 456', 'maria.lopez@example.com', '987123456', 'T002'),
+    ('C003', 'Luis', 'Castro', 'Vargas', 'Jr. Cusco 789', 'luis.castro@example.com', '987987987', 'T004'),
+    ('C004', 'Ana', 'Torres', 'Ramirez', 'Av. Arequipa 321', 'ana.torres@example.com', '987654987', 'T006');
+
+	INSERT INTO tb_marca (id_marca, marca)
+VALUES 
+    ('M001', 'Samsung'),
+    ('M002', 'LG'),
+    ('M003', 'Sony');
+
+	INSERT INTO tb_categoria (id_categoria, categoria)
+VALUES 
+    ('C001', 'Electrodomésticos'),
+    ('C002', 'Televisores'),
+    ('C003', 'Celulares');
+
+	INSERT INTO tb_producto (id_producto, producto, costo, ganancia, id_marca, id_categoria)
+VALUES 
+    ('P001', 'Refrigeradora', 1200, 300, 'M001', 'C001'),
+    ('P002', 'Televisor 4K', 1500, 400, 'M003', 'C002'),
+    ('P003', 'Smartphone Galaxy', 800, 200, 'M001', 'C003'),
+    ('P004', 'Lavadora', 1000, 250, 'M002', 'C001');
