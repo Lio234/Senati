@@ -17,7 +17,6 @@ namespace app_compuware.Models
         [Display(Name = "Departamento")]
         public String departamento { get; set; }
 
-        // Propiedad de navegación
-        public ICollection<Provincia> Provincias { get; set; }
+
     }
 }

@@ -12,7 +12,8 @@ namespace app_compuware.Data
         public DbSet<Marca> Marca { get; set; }
 
         public DbSet<Cliente> Cliente { get; set; }
-
+        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Provincia> Provincia { get; set; }
         public DbSet<Distrito> Distrito { get; set; }
         public DbSet<Pedido> Pedido { get; set; }
 

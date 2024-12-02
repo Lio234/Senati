@@ -19,14 +19,14 @@ namespace app_compuware.Controllers
 
         public IActionResult Index()
         {
-            // Obtener los clientes desde la base de datos
-            var clientes = _context.Cliente.ToList(); // Aquí "_context" es el DbContext de la base de datos
+            
+            var clientes = _context.Cliente.ToList(); 
             ViewBag.Clientes = clientes;
 
             return View();
         }
 
-        // Acción para obtener los pedidos
+        
         public IActionResult Listar()
         {
             var pedidos = (from c in _context.Pedido

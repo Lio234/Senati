@@ -1,0 +1,233 @@
+﻿@model app_compuware.Models.Distrito
+
+@{
+    ViewData["Title"] = "Gestión de Distritos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section EstiloDT {
+    <link rel="stylesheet" href="~/lib/datatable/css/jquery.dataTables.min.css" />
+}
+
+<h1>Gestión de Distritos</h1>
+<hr />
+
+<div class="container">
+    <div class="row mb-3">
+    </div>
+
+    <div class="row">
+        <table id="tb_distrito" class="table table-bordered table-striped display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(dis => dis.id_distrito)</th>
+                    <th>@Html.DisplayNameFor(dis => dis.distrito)</th>
+                    <th>@Html.DisplayNameFor(dis => dis.id_provincia)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para agregar o editar distritos -->
+<div class="modal" tabindex="-1" id="modalDistrito">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Nuevo Distrito</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formDistrito" method="post">
+                    <div class="mb-3">
+                        <label for="id_distrito" class="form-label">ID Distrito</label>
+                        <input type="text" class="form-control" id="id_distrito" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="distrito" class="form-label">Nombre Distrito</label>
+                        <input type="text" class="form-control" id="distrito" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_provincia" class="form-label">Provincia</label>
+                        <select id="id_provincia" class="form-control" required>
+                            <option value="">Seleccione una provincia</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveDistrito">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para confirmar eliminación -->
+<div class="modal" tabindex="-1" id="modalEliminar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este Distrito?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" id="btnEliminarConfirmado">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="ExportarPDF" class="btn btn-primary">
+    <i class="fas fa-file-pdf"></i> Exportar PDF
+</a>
+
+<a asp-action="ExportarExcel" class="btn btn-success">
+    <i class="fas fa-file-excel"></i> Exportar a Excel
+</a>
+
+@section Scripts {
+    <script src="~/lib/datatable/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatable/js/dataTables.buttons.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tb_distrito").DataTable({
+                "ajax": {
+                    "url": "@Url.Action("Listar", "Distrito")",
+                    "type": "GET",
+                    "dataType": "json"
+                },
+                "columns": [
+                    { "data": "id_distrito" },
+                    { "data": "distrito" },
+                    { "data": "id_provincia" },
+                    {
+                        "data": "id_distrito",
+                        "render": function (data) {
+                            return "<button class='btn btn-outline-success' type='button' onclick='AbrirRegistroDistrito(\"" + data + "\")'><i class='far fa-edit'></i> Editar</button>" +
+                                "<button class='btn btn-outline-danger' type='button' onclick='EliminarDistrito(\"" + data + "\")'><i class='far fa-trash-alt'></i> Borrar</button>";
+                        }
+                    }
+                ],
+                "order": [[1, "asc"]],
+                dom: "Bfrtip",
+                buttons: [
+                    {
+                        text: "Registrar Distrito",
+                        attr: { class: "btn btn-outline-primary" },
+                        action: function () {
+                            AbrirRegistroDistrito("");
+                        }
+                    }
+                ]
+            });
+        });
+
+        function AbrirRegistroDistrito(id_distrito) {
+            if (id_distrito !== "") {
+                $.ajax({
+                    url: "@Url.Action("Consultar", "Distrito")" + "?id_distrito=" + id_distrito,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $("#id_distrito").val(data.id_distrito).attr("readonly", true);
+                            $("#distrito").val(data.distrito);
+                            $("#id_provincia").val(data.id_provincia);
+                        }
+                    }
+                });
+
+                $(".modal-title").text("Editar Distrito");
+                $("#btnSaveDistrito").html("<i class='fas fa-save'></i> Guardar cambios");
+            } else {
+                $("#id_distrito").attr("readonly", false).val("");
+                $("#distrito").val("");
+                $("#id_provincia").empty().append('<option value="">Seleccione una provincia</option>');
+
+                $.ajax({
+                    url: "@Url.Action("ListarProvincias", "Distrito")",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (index, provincia) {
+                                $("#id_provincia").append(
+                                    `<option value="${provincia.id_provincia}">${provincia.provincia}</option>`
+                                );
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert("Error al cargar las provincias.");
+                    }
+                });
+
+                $(".modal-title").text("Agregar Distrito");
+                $("#btnSaveDistrito").html("<i class='fas fa-save'></i> Guardar datos");
+            }
+
+            $("#modalDistrito").modal("show");
+        }
+
+        $("#btnSaveDistrito").click(function () {
+            let distrito = {
+                "id_distrito": $("#id_distrito").val(),
+                "distrito": $("#distrito").val(),
+                "id_provincia": $("#id_provincia").val()
+            };
+
+            $.ajax({
+                url: "@Url.Action("Grabar", "Distrito")",
+                type: "POST",
+                data: JSON.stringify(distrito),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.resultado) {
+                        $("#tb_distrito").DataTable().ajax.reload();
+                        $("#modalDistrito").modal("hide");
+                    } else {
+                        alert("No se pudo guardar la información.");
+                    }
+                },
+                error: function () {
+                    alert("Error al guardar la información.");
+                }
+            });
+        });
+
+        let distritoAEliminar = "";
+
+        function EliminarDistrito(id_distrito) {
+            distritoAEliminar = id_distrito;
+            $("#modalEliminar").modal("show");
+        }
+
+        $("#btnEliminarConfirmado").click(function () {
+            $.ajax({
+                url: "@Url.Action("Borrar", "Distrito")",
+                type: "POST",
+                data: { id_distrito: distritoAEliminar },
+                success: function (data) {
+                    if (data.resultado) {
+                        $("#tb_distrito").DataTable().ajax.reload();
+                        $("#modalEliminar").modal("hide");
+                    } else {
+                        alert("No se pudo eliminar el Distrito.");
+                    }
+                },
+                error: function () {
+                    alert("Error al eliminar el Distrito.");
+                }
+            });
+        });
+    </script>
+}

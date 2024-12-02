@@ -7,25 +7,19 @@ namespace app_compuware.Models
     public class Distrito
     {
         [Key]
-        [Required(ErrorMessage = "Escriba un codigo valido")]
-        [MinLength(5, ErrorMessage = "Escriba un codigo mas corto")]
-        [Display(Name = "Id distrito")]
-        public String id_distrito { get; set; }
+        [Required]
+        [StringLength(5)]
+        public string id_distrito { get; set; }
 
-        [Required(ErrorMessage = "Escriba su distrito")]
-        [StringLength(30)]
-        [Display(Name = "Distrito")]
-        public String distrito { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string distrito { get; set; }
 
-        [Required(ErrorMessage = "Seleccione una provincia.")]
-        [Display(Name = "Id Provincia")]
+        [Required]
+        [StringLength(5)]
         public string id_provincia { get; set; }
 
-        // Relación con Provincia
         [ForeignKey("id_provincia")]
-        public Provincia provincia { get; set; }
-
-        // Propiedad de navegación
-        public ICollection<Cliente> Clientes { get; set; }
+        public Provincia Provincia { get; set; }
     }
 }

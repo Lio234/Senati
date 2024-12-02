@@ -3466,23 +3466,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Leo\\.nuget\\packages\\": {},
+    "C:\\Users\\vtr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\app-compuware.csproj",
+      "projectUniqueName": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\app-compuware.csproj",
       "projectName": "app-compuware",
-      "projectPath": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\app-compuware.csproj",
-      "packagesPath": "C:\\Users\\Leo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\obj\\",
+      "projectPath": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\app-compuware.csproj",
+      "packagesPath": "C:\\Users\\vtr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Leo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vtr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
