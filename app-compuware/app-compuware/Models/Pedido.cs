@@ -22,6 +22,8 @@ namespace app_compuware.Models
         public double total { get; set; }
 
         [Required(ErrorMessage = "Seleccione un Cliente")]
+        [Display(Name = "Cliente")]
+
         public string id_cliente { get; set; }
         [ForeignKey("id_cliente")]
         public Cliente cliente { get; set; }

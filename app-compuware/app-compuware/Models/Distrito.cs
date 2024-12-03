@@ -8,15 +8,22 @@ namespace app_compuware.Models
     {
         [Key]
         [Required]
+        [MinLength(50, ErrorMessage = "Escriba un Codigo")]
         [StringLength(5)]
+        [Display(Name = "Id Distrito")]
+
         public string id_distrito { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(50, ErrorMessage = "Escriba un Distrito")]
+        [Display(Name = "Distrito")]
+
         public string distrito { get; set; }
 
         [Required]
-        [StringLength(5)]
+        [MinLength(50, ErrorMessage = "Escriba codigo de departamento")]
+        [Display(Name = "Id provincia")]
+
         public string id_provincia { get; set; }
 
         [ForeignKey("id_provincia")]

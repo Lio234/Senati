@@ -18,14 +18,14 @@ namespace app_compuware.Models
         public String provincia { get; set; }
 
         [Required(ErrorMessage = "Seleccione un departamento.")]
-        [Display(Name = "Id Departamento")]
+        [Display(Name = "Departamento")]
         public string id_departamento { get; set; }
 
         // Relación con Departamento
         [ForeignKey("id_departamento")]
-        public Categoria departamento { get; set; }
+        public string departamento { get; set; }
 
         // Propiedad de navegación
-        public ICollection<Distrito> Distritos { get; set; }
+        public ICollection<Departamento> Departamento { get; set; }
     }
 }

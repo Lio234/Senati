@@ -1,82 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\",
+  "WorkspaceRootPath": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\distritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\distritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\distrito\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\distrito\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\provinciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\provinciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\departamentocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\departamentocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\provincia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\provincia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\cliente\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\cliente\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\departamento\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\departamento\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\models\\distrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\distrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\models\\provincia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\models\\provincia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\provincia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\marcacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\marcacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\models\\distrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\distrito.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\categoriacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\categoriacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\vtr\\source\\repos\\senati\\app-compuware\\app-compuware\\views\\pedido\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\views\\pedido\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\pedido\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|c:\\users\\leo\\documents\\github\\senati\\app-compuware\\app-compuware\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8076307D-FD5F-4F81-A1BF-F62C62E25DA5}|app-compuware\\app-compuware.csproj|solutionrelative:app-compuware\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,252 +38,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Cliente\\Index.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Cliente\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Cliente\\Index.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Cliente\\Index.cshtml",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T14:14:38.546Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Distrito\\Index.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Distrito\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Distrito\\Index.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Distrito\\Index.cshtml",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAAwNAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T14:03:36.076Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Provincia.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Provincia.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Models\\Provincia.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Provincia.cs",
-              "RelativeToolTip": "app-compuware\\Models\\Provincia.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:46:54.48Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Distrito.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Distrito.cs",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Distrito.cs",
               "RelativeDocumentMoniker": "app-compuware\\Models\\Distrito.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Distrito.cs",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Distrito.cs",
               "RelativeToolTip": "app-compuware\\Models\\Distrito.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:46:49.683Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DistritoController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\DistritoController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\DistritoController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\DistritoController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\DistritoController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:49:41.044Z",
+              "WhenOpened": "2024-12-03T03:26:29.057Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ProvinciaController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\ProvinciaController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\ProvinciaController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\ProvinciaController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\ProvinciaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "app-compuware\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Cliente.cs",
+              "RelativeToolTip": "app-compuware\\Models\\Cliente.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwDMAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:56:26.443Z",
+              "WhenOpened": "2024-12-03T03:24:55.905Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MarcaController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\MarcaController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\MarcaController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\MarcaController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\MarcaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:47:04.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 1,
               "Title": "Pedido.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Pedido.cs",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Pedido.cs",
               "RelativeDocumentMoniker": "app-compuware\\Models\\Pedido.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Pedido.cs",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Pedido.cs",
               "RelativeToolTip": "app-compuware\\Models\\Pedido.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T01:54:04.919Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PedidoController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\PedidoController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\PedidoController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\PedidoController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\PedidoController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T01:32:10.317Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DepartamentoController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\DepartamentoController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\DepartamentoController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\DepartamentoController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\DepartamentoController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:54:15.355Z",
+              "WhenOpened": "2024-12-03T03:24:29.438Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Provincia\\Index.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Provincia\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Provincia\\Index.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Provincia\\Index.cshtml",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAAL0AAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Views\\Pedido\\Index.cshtml",
+              "RelativeDocumentMoniker": "app-compuware\\Views\\Pedido\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Views\\Pedido\\Index.cshtml",
+              "RelativeToolTip": "app-compuware\\Views\\Pedido\\Index.cshtml",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T13:57:26.36Z",
+              "WhenOpened": "2024-12-03T03:24:00.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "app-compuware\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "app-compuware\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAACcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T03:21:57.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Provincia.cs",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Provincia.cs",
+              "RelativeDocumentMoniker": "app-compuware\\Models\\Provincia.cs",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Models\\Provincia.cs",
+              "RelativeToolTip": "app-compuware\\Models\\Provincia.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAApwBQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T03:20:18.859Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Departamento\\Index.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Departamento\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Departamento\\Index.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Departamento\\Index.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAC0AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T13:56:00.919Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAADEAAAB7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T02:30:39.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "app-compuware\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Leo\\Documents\\GitHub\\Senati\\app-compuware\\app-compuware\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "app-compuware\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:54:28.279Z",
+              "WhenOpened": "2024-12-03T02:54:36.056Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\ClienteController.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAIwBMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T00:42:25.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CategoriaController.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\CategoriaController.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Controllers\\CategoriaController.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Controllers\\CategoriaController.cs",
-              "RelativeToolTip": "app-compuware\\Controllers\\CategoriaController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T02:33:39.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Departamento.cs",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Departamento.cs",
-              "RelativeDocumentMoniker": "app-compuware\\Models\\Departamento.cs",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Models\\Departamento.cs",
-              "RelativeToolTip": "app-compuware\\Models\\Departamento.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T13:46:40.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\appsettings.json",
-              "RelativeDocumentMoniker": "app-compuware\\appsettings.json",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\appsettings.json",
-              "RelativeToolTip": "app-compuware\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-02T02:30:24.897Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Pedido\\Index.cshtml",
-              "RelativeDocumentMoniker": "app-compuware\\Views\\Pedido\\Index.cshtml",
-              "ToolTip": "C:\\Users\\vtr\\source\\repos\\Senati\\app-compuware\\app-compuware\\Views\\Pedido\\Index.cshtml",
-              "RelativeToolTip": "app-compuware\\Views\\Pedido\\Index.cshtml",
-              "ViewState": "AgIAAOYAAAAAAAAAAAAiwM8AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T01:38:03.828Z"
             }
           ]
         }
