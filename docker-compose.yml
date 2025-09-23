@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  # Backend Laravel
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: always
+    volumes:
+      - ./backend:/var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DB_CONNECTION=pgsql
+      DB_HOST=postgres
+      DB_PORT=5432
+      DB_DATABASE=magus
+      DB_USERNAME=magus_user
+      DB_PASSWORD=secret
+      AWS_ACCESS_KEY_ID=dummy
+      AWS_SECRET_ACCESS_KEY=dummy
+      AWS_DEFAULT_REGION=us-east-1
+      DYNAMODB_ENDPOINT=http://dynamodb:8000
+
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: magus
+      POSTGRES_USER: magus_user
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  # DynamoDB Local para desarrollo
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    restart: always
+    ports:
+      - "8001:8000"
+    command: -jar DynamoDBLocal.jar -sharedDb
+
+  # Adminer 
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
