@@ -1,0 +1,17 @@
+[2025-09-22 04:21:50] local.ERROR: Command "route:" is ambiguous.
+Did you mean one of these?
+    route:cache Create a route cache file for faster route registration
+    route:clear Remove the route cache file
+    route:list  List all registered routes. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"route:\" is ambiguous.
+Did you mean one of these?
+    route:cache Create a route cache file for faster route registration
+    route:clear Remove the route cache file
+    route:list  List all registered routes. at C:\\Users\\Leonardo\\backend\\vendor\\symfony\\console\\Application.php:784)
+[stacktrace]
+#0 C:\\Users\\Leonardo\\backend\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->find('route:')
+#1 C:\\Users\\Leonardo\\backend\\vendor\\symfony\\console\\Application.php(194): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Users\\Leonardo\\backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\Leonardo\\backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\Leonardo\\backend\\artisan(16): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#5 {main}
+"} 
